@@ -35,7 +35,7 @@ const FAQS = [
     a: "Yes, a valid driver's license is required to rent and operate a golf cart in San Pedro to comply with local regulations and ensure safety.",
   },
   {
-    q: 'Is free hotel or Airbnb delivery included with my golf cart rental?',
+    q: 'Do you deliver golf carts to hotels or Airbnbs for free?',
     a: 'Yes. Every Scorpion Golf Cart rental includes free delivery and pickup anywhere in San Pedro, including hotels, resorts, and Airbnb accommodations.',
   },
   {
@@ -51,8 +51,8 @@ const FAQS = [
     a: 'Absolutely. All our golf carts are regularly serviced, cleaned, and inspected to ensure a reliable and comfortable experience while exploring San Pedro.',
   },
   {
-    q: 'How can I contact Scorpion Golf Cart Rental during my rental?',
-    a: 'Our local team is available 24/7 via WhatsApp, phone, or email to assist you before, during, and after your rental.',
+    q: 'What payment methods do you accept?',
+    a: 'We accept cash and all major credit and debit cards for your convenience.',
   },
 ];
 
