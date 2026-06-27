@@ -108,7 +108,7 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
             <div className="space-y-3">
               {[
                 { icon: 'verified_user', label: 'Insured Fleet' },
-                { icon: 'electric_car', label: 'Fully Charged' },
+                { icon: 'local_gas_station', label: 'Full Tank' },
                 { icon: 'support_agent', label: '24/7 Support' },
               ].map(({ icon, label }) => (
                 <div key={icon} className="flex items-center gap-2">

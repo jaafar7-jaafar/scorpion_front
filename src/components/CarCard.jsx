@@ -57,7 +57,7 @@ export default function CarCard({ car, onBookNow }) {
         {/* Badge */}
         {car.badge && (
           <div className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-secondary text-xs font-semibold flex items-center gap-1">
-            <span className="material-symbols-outlined text-[15px]">electric_bolt</span>
+            <span className="material-symbols-outlined text-[15px]">bolt</span>
             {car.badge}
           </div>
         )}

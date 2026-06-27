@@ -156,11 +156,11 @@ export default function HomePage({ onBookNow }) {
                 <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-3">Premium Performance</span>
                 <h2 className="font-serif text-3xl font-bold text-primary mb-4">Quiet. Powerful. Efficient.</h2>
                 <p className="text-zinc-500 max-w-md leading-relaxed">
-                  Our all-electric fleet features the latest lithium-ion technology, ensuring whisper-quiet operation and extended range across even the most challenging terrains.
+                  Our meticulously maintained fleet is built for smooth, reliable performance — ready to take you anywhere in San Pedro in comfort and style.
                 </p>
               </div>
               <div className="absolute bottom-[-10%] right-[-5%] w-1/2 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
-                <span className="material-symbols-outlined text-primary" style={{ fontSize: '240px' }}>electric_rickshaw</span>
+                <span className="material-symbols-outlined text-primary" style={{ fontSize: '240px' }}>directions_car</span>
               </div>
             </div>
 
@@ -199,7 +199,7 @@ export default function HomePage({ onBookNow }) {
             <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Our Fleet</span>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">Featured Carts</h2>
             <p className="text-zinc-500 max-w-xl mx-auto leading-relaxed">
-              Discover our curated selection of high-performance electric golf cars designed for the perfect round.
+              Discover our curated selection of premium golf carts designed for the perfect ride around San Pedro.
             </p>
           </div>
 

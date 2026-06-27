@@ -20,7 +20,7 @@ Promise.all([
     document.fonts.ready,
     new Promise((resolve) => setTimeout(resolve, 4000)),
   ]),
-  new Promise((resolve) => setTimeout(resolve, 3000)),
+  new Promise((resolve) => setTimeout(resolve, 2000)),
 ]).then(() => {
   root.render(
     <React.StrictMode>

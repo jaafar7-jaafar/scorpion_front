@@ -66,7 +66,7 @@ export default function AboutPage({ onBookNow }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { icon: 'workspace_premium', title: 'Excellence', desc: 'We accept nothing less than the best — in our fleet, our service, and our results.' },
-              { icon: 'eco', title: 'Sustainability', desc: 'Our all-electric fleet reduces carbon emissions without sacrificing performance.' },
+              { icon: 'eco', title: 'Responsibility', desc: 'We keep our fleet well-maintained and our practices responsible, without ever sacrificing performance.' },
               { icon: 'handshake', title: 'Integrity', desc: 'Honest pricing, transparent terms, and no surprises — ever.' },
               { icon: 'favorite', title: 'Passion', desc: 'We love the game as much as you do. That passion shows in everything we do.' },
             ].map(({ icon, title, desc }) => (

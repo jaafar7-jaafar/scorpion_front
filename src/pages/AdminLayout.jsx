@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const navItems = [
-  { to: '/admin/cars', icon: 'electric_rickshaw', label: 'Manage Carts' },
+  { to: '/admin/cars', icon: 'directions_car', label: 'Manage Carts' },
   { to: '/admin/reviews', icon: 'star', label: 'Reviews' },
   { to: '/admin/addresses', icon: 'location_on', label: 'Addresses' },
   { to: '/admin/seats', icon: 'airline_seat_recline_normal', label: 'Seat Options' },

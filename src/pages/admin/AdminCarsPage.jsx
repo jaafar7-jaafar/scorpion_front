@@ -167,7 +167,7 @@ export default function AdminCarsPage() {
           style={{ boxShadow: '0 4px 12px rgba(1,45,29,0.05)' }}>
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Cars</p>
-            <span className="material-symbols-outlined text-primary text-[18px]">electric_rickshaw</span>
+            <span className="material-symbols-outlined text-primary text-[18px]">directions_car</span>
           </div>
           <p className="font-serif text-2xl font-bold text-primary">{cars.length}</p>
         </div>
@@ -213,7 +213,7 @@ export default function AdminCarsPage() {
                             <img src={thumb} alt={car.name} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center">
-                              <span className="material-symbols-outlined text-zinc-300 text-2xl">electric_rickshaw</span>
+                              <span className="material-symbols-outlined text-zinc-300 text-2xl">directions_car</span>
                             </div>
                           )}
                         </div>
@@ -252,7 +252,7 @@ export default function AdminCarsPage() {
           </table>
           {cars.length === 0 && (
             <div className="text-center py-16 text-zinc-400">
-              <span className="material-symbols-outlined text-5xl block mb-3">electric_rickshaw</span>
+              <span className="material-symbols-outlined text-5xl block mb-3">directions_car</span>
               <p>No cars yet. Add your first one!</p>
             </div>
           )}
@@ -290,7 +290,7 @@ export default function AdminCarsPage() {
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} className="input-field resize-none" />
               </Field>
               <Field label="Badge Label" hint="Shows on car image (optional)">
-                <input type="text" placeholder="e.g. Premium Electric" value={form.badge}
+                <input type="text" placeholder="e.g. Premium" value={form.badge}
                   onChange={(e) => setForm((f) => ({ ...f, badge: e.target.value }))} className="input-field" />
               </Field>
               <Field label="Seat Category" required hint="Appears as a filter button on the Cars page">

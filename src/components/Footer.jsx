@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="text-lg font-bold text-primary font-serif">Scorpion Golf Cart Rental</div>
           <p className="text-zinc-500 text-sm leading-relaxed">
-            Redefining leisure with premium electric mobility since 2012. Join the movement towards a greener, more elegant course experience.
+            Redefining leisure with premium golf cart rentals since 2012. Explore San Pedro in comfort and style.
           </p>
           <p className="text-xs text-zinc-400">
             Built by{' '}

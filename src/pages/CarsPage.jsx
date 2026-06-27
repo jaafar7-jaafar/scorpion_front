@@ -44,7 +44,7 @@ export default function CarsPage({ onBookNow }) {
           <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Our Fleet</span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary">Luxury Cart Gallery</h1>
           <p className="text-zinc-500 text-lg max-w-2xl leading-relaxed">
-            Discover our curated collection of high-performance electric golf cars, designed for the perfect balance of elegance and precision on the greens.
+            Discover our curated collection of high-performance golf carts, designed for the perfect balance of elegance and comfort in San Pedro.
           </p>
         </div>
 
