@@ -78,11 +78,11 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-4"
       style={{ backgroundColor: 'rgba(1,45,29,0.45)', backdropFilter: 'blur(8px)' }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl flex flex-col md:flex-row"
+      <div className="bg-white w-full max-w-4xl max-h-[93vh] sm:max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-2xl flex flex-col md:flex-row"
         style={{ boxShadow: '0 32px 64px -12px rgba(1,45,29,0.3)' }}
       >
         {/* Left panel */}
@@ -122,6 +122,10 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
 
         {/* Right: form */}
         <div className="flex-1 p-6 md:p-8 relative overflow-y-auto">
+          {/* Drag handle — visible only on mobile to signal bottom sheet */}
+          <div className="flex justify-center mb-4 sm:hidden">
+            <div className="w-10 h-1 rounded-full bg-zinc-200" />
+          </div>
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-zinc-400 hover:text-primary transition-colors"

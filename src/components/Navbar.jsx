@@ -26,10 +26,17 @@ export default function Navbar({ onBookNow }) {
         scrolled ? 'bg-white/95 backdrop-blur-md shadow-nav' : 'bg-white/95 backdrop-blur-sm'
       } border-b border-zinc-100`}
     >
-      <div className="max-w-container mx-auto px-6 sm:px-8 flex items-center justify-between py-4">
+      <div className="max-w-container mx-auto px-6 sm:px-8 flex items-center justify-between py-3">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold font-serif text-primary select-none">
-          Scorpion Golf Cart Rental
+        <Link to="/" className="flex items-center gap-2.5 select-none min-w-0">
+          <img
+            src="/scorpionlogo.png"
+            alt="Scorpion Golf Cart Rental"
+            className="h-10 w-auto object-contain shrink-0"
+          />
+          <span className="hidden md:block text-xl font-bold font-serif text-primary leading-tight whitespace-nowrap">
+            Scorpion Golf Cart Rental
+          </span>
         </Link>
 
         {/* Desktop Links */}
@@ -56,7 +63,7 @@ export default function Navbar({ onBookNow }) {
         <div className="flex items-center gap-3">
           <button
             onClick={onBookNow}
-            className="bg-primary text-white px-5 py-2 rounded-lg font-sans font-semibold text-sm tracking-wide hover:bg-secondary transition-all duration-200 shadow-md shadow-primary/20 hover:-translate-y-0.5 active:scale-95"
+            className="bg-primary text-white px-4 py-2 md:px-5 rounded-lg font-sans font-semibold text-sm tracking-wide hover:bg-secondary transition-all duration-200 shadow-md shadow-primary/20 hover:-translate-y-0.5 active:scale-95"
           >
             Book Now
           </button>

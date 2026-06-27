@@ -113,7 +113,7 @@ export default function HomePage({ onBookNow }) {
               <span className="font-semibold text-sm">{avgRating}/5 from {reviewCount}+ reviews</span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Experience the <br />Course in{' '}
               <em className="font-normal not-italic" style={{ fontStyle: 'italic' }}>Style</em>
             </h1>
@@ -150,7 +150,7 @@ export default function HomePage({ onBookNow }) {
         <div className="max-w-container mx-auto px-6 sm:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Large card */}
-            <div className="md:col-span-7 bg-white p-10 rounded-2xl border border-zinc-100 flex flex-col justify-between group overflow-hidden relative"
+            <div className="md:col-span-7 bg-white p-6 md:p-10 rounded-2xl border border-zinc-100 flex flex-col justify-between group overflow-hidden relative"
               style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
               <div className="relative z-10">
                 <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-3">Premium Performance</span>
@@ -165,7 +165,7 @@ export default function HomePage({ onBookNow }) {
             </div>
 
             {/* Dark card */}
-            <div className="md:col-span-5 bg-primary-container p-10 rounded-2xl flex flex-col justify-center">
+            <div className="md:col-span-5 bg-primary-container p-6 md:p-10 rounded-2xl flex flex-col justify-center">
               <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center mb-5">
                 <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
               </div>
@@ -181,7 +181,7 @@ export default function HomePage({ onBookNow }) {
               { icon: 'air', title: 'Climate Control', desc: 'Integrated fan systems for warm days.' },
               { icon: 'map', title: 'Smart GPS', desc: 'Integrated course navigation for all 18 holes.' },
             ].map(({ icon, title, desc }) => (
-              <div key={icon} className="md:col-span-4 bg-white p-8 rounded-2xl border border-zinc-100 text-center"
+              <div key={icon} className="md:col-span-4 bg-white p-5 md:p-8 rounded-2xl border border-zinc-100 text-center"
                 style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
                 <span className="material-symbols-outlined text-primary block mb-4" style={{ fontSize: '48px', fontVariationSettings: "'FILL' 0" }}>{icon}</span>
                 <h3 className="font-serif text-lg font-semibold text-primary mb-1">{title}</h3>
@@ -224,7 +224,7 @@ export default function HomePage({ onBookNow }) {
       {/* ── Stats Banner ─────────────────────────────────────────────────── */}
       <section className="py-16 bg-primary">
         <div className="max-w-container mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center text-white">
             {[
               { value: '500+', label: 'Happy Clients' },
               { value: '12+', label: 'Years Experience' },
