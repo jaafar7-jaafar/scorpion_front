@@ -9,22 +9,24 @@ function hideSplash() {
   const el = document.getElementById('splash');
   if (!el) return;
   el.classList.add('out');
-  setTimeout(() => el.remove(), 650);
+  setTimeout(() => el.remove(), 750);
 }
 
-// Wait for the icon font to be ready before first render so icons are never blank.
-// Hard cap of 4 s so visitors in countries where Google/CDNs are blocked
-// are never stranded on the splash screen indefinitely.
-// Text fonts (Noto Serif / Manrope) are loaded async and don't block this.
-Promise.race([
-  document.fonts.ready,
-  new Promise((resolve) => setTimeout(resolve, 4000)),
+// Two conditions must BOTH be met before hiding the splash:
+//   1. Icon font is ready (or 4 s timeout — unblocks visitors in restricted countries)
+//   2. At least 3 seconds have passed so the splash is always visible long enough
+Promise.all([
+  Promise.race([
+    document.fonts.ready,
+    new Promise((resolve) => setTimeout(resolve, 4000)),
+  ]),
+  new Promise((resolve) => setTimeout(resolve, 3000)),
 ]).then(() => {
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
-  // Let React paint its first frame, then fade the splash out
+  // Let React commit its first frame, then fade the splash out
   requestAnimationFrame(() => requestAnimationFrame(hideSplash));
 });
