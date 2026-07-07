@@ -240,6 +240,54 @@ export default function HomePage({ onBookNow }) {
         </div>
       </section>
 
+      {/* ── Our Rates ─────────────────────────────────────────────────────── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-container mx-auto px-6 sm:px-8">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Pricing</span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">Our Rates</h2>
+            <p className="text-zinc-500 mt-3 max-w-sm mx-auto text-sm leading-relaxed">
+              Simple, transparent pricing with no hidden fees.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {[
+              { seats: '4-Seater', price: '$35' },
+              { seats: '6-Seater', price: '$65' },
+            ].map(({ seats, price }) => (
+              <div
+                key={seats}
+                className="bg-white rounded-2xl border border-zinc-100 p-8 flex flex-col items-center text-center gap-5 transition-all duration-300 hover:-translate-y-1"
+                style={{ boxShadow: '0 4px 24px rgba(1,45,29,0.07)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 12px 36px rgba(1,45,29,0.13)')}
+                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 4px 24px rgba(1,45,29,0.07)')}
+              >
+                <div className="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary" style={{ fontSize: '30px', fontVariationSettings: "'FILL' 1" }}>
+                    airline_seat_recline_normal
+                  </span>
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-primary">{seats}</h3>
+                <div>
+                  <p className="text-xs text-secondary font-semibold uppercase tracking-widest mb-1">Starting from</p>
+                  <div className="flex items-end justify-center gap-1">
+                    <span className="font-serif text-5xl font-bold text-primary">{price}</span>
+                    <span className="text-zinc-400 text-base mb-1.5">/day</span>
+                  </div>
+                </div>
+                <button
+                  onClick={onBookNow}
+                  className="mt-1 w-full py-3 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-secondary transition-all duration-200 active:scale-95"
+                >
+                  Book Now
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Supported Locations / Partner Slider ─────────────────────────── */}
       <section className="py-14 bg-surface">
         <div className="max-w-container mx-auto px-6 sm:px-8 text-center mb-8">
