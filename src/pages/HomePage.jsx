@@ -5,6 +5,9 @@ import { MOCK_CARS, MOCK_REVIEWS } from '../utils/mockData';
 import { resolveImageUrl } from '../utils/imageUrl';
 import CarCard from '../components/CarCard';
 import ReviewsSection from '../components/ReviewsSection';
+import Seo from '../components/Seo';
+
+const BUSINESS_ID = 'https://www.scorpiongolfcarts.com/#business';
 
 const PARTNERS = [
   {
@@ -58,6 +61,7 @@ const FAQS = [
 
 export default function HomePage({ onBookNow }) {
   const [cars, setCars] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState('4.9');
   const [reviewCount, setReviewCount] = useState(200);
   const [faqOpen, setFaqOpen] = useState(null);
@@ -75,23 +79,65 @@ export default function HomePage({ onBookNow }) {
           const avg = (data.reduce((s, rv) => s + rv.rating, 0) / data.length).toFixed(1);
           setAvgRating(avg);
           setReviewCount(data.length);
+          setReviews(data);
         }
       })
       .catch(() => {
         const avg = (MOCK_REVIEWS.reduce((s, rv) => s + rv.rating, 0) / MOCK_REVIEWS.length).toFixed(1);
         setAvgRating(avg);
         setReviewCount(MOCK_REVIEWS.length);
+        setReviews(MOCK_REVIEWS);
       });
   }, []);
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
+  const ratingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': BUSINESS_ID,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: avgRating,
+      reviewCount: reviewCount,
+    },
+    review: reviews.slice(0, 8).map((rv) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: rv.name || 'Guest' },
+      reviewRating: { '@type': 'Rating', ratingValue: rv.rating, bestRating: 5 },
+      reviewBody: rv.comment,
+    })),
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+      <Seo
+        title="Golf Cart Rental San Pedro, Belize | Free Delivery – Scorpion Golf Carts"
+        description="Rent a premium golf cart in San Pedro, Belize with free hotel & Airbnb delivery. Trusted by travelers from Belize, Canada & the USA. Book online or WhatsApp +501 600-7672."
+        path="/"
+        keywords="golf cart rental San Pedro Belize, Ambergris Caye golf cart rental, rent golf cart Belize, golf cart delivery hotel Airbnb San Pedro, San Pedro Belize transportation"
+      >
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(ratingSchema)}</script>
+      </Seo>
+
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS0aUXluexP4zCSD634ns6tn8hrur8oepJovvnDUYRcThcPiPr4GimlIp7mXPyGYAGppfSo93uafAhvF7KWZPWzvXXum5iSQva7OZW9WZX5nWASNeof3o0s-V3Cs5iEzeCqiU224txpn-36Fbds707aIbblhld-5iptjUDY5QwZacwpEIZYC4FSDx6PLRrqVQZ9Vn6QSe_LVKo4qP5RPkIv_s0WJJkBqqixm4Nwa3R6oIObRe_M3DXTEAgZ8HGXo3-hhbb2LoNPxHm"
-            alt="Luxury golf car on fairway"
+            src="/images/hero-home.jpg"
+            alt="Luxury golf cart rental on a fairway in San Pedro, Belize"
+            width="512"
+            height="512"
+            fetchpriority="high"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.82)' }}
           />

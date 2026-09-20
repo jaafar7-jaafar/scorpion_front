@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
@@ -33,6 +34,7 @@ function App() {
   const openBooking = (car = null) => { setSelectedCar(car); setBookingOpen(true); };
 
   return (
+    <HelmetProvider>
     <AuthProvider>
       <BrowserRouter>
         <Routes>
@@ -52,6 +54,7 @@ function App() {
         <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} selectedCar={selectedCar} />
       </BrowserRouter>
     </AuthProvider>
+    </HelmetProvider>
   );
 }
 

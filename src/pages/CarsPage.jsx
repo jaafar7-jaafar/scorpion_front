@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCars } from '../api';
 import { MOCK_CARS } from '../utils/mockData';
 import CarCard from '../components/CarCard';
+import Seo from '../components/Seo';
 
 export default function CarsPage({ onBookNow }) {
   const [cars, setCars] = useState([]);
@@ -38,6 +39,12 @@ export default function CarsPage({ onBookNow }) {
 
   return (
     <div className="pt-20 min-h-screen bg-surface">
+      <Seo
+        title="Golf Cart Fleet & Rental Rates — 4 & 6-Seater | San Pedro, Belize"
+        description="Browse our fleet of 4 and 6-seater golf carts for rent in San Pedro, Belize. Transparent daily rates, free delivery, and easy online booking for your Ambergris Caye trip."
+        path="/cars"
+        keywords="golf cart rental rates San Pedro, 4 seater golf cart Belize, 6 seater golf cart rental, Ambergris Caye golf cart fleet"
+      />
       <div className="max-w-container mx-auto px-6 sm:px-8 py-12">
         {/* Header */}
         <div className="mb-10 space-y-3">

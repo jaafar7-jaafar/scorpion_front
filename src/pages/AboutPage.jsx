@@ -1,14 +1,23 @@
 import React from 'react';
+import Seo from '../components/Seo';
 
 export default function AboutPage({ onBookNow }) {
   return (
     <div className="pt-20 min-h-screen bg-surface">
+      <Seo
+        title="About Scorpion Golf Carts | Trusted Golf Cart Rental Since 2012 — San Pedro, Belize"
+        description="Scorpion Golf Cart Rental has served San Pedro, Belize since 2012 with premium, well-maintained carts and white-glove service for visitors from Belize, Canada, and the USA."
+        path="/about"
+        keywords="Scorpion Golf Cart Rental, San Pedro Belize golf cart company, trusted golf cart rental Belize"
+      />
       {/* Hero */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs6KvsXyjmnBFAkotAaHq7fhX4gHR9XljkROvR35xIq67sQcdoVrcwqzUXj8m2E0T-jo79CIxb-BecWTiAqN8vSAAbXp8r9lRB_A4X65L87PO3nCIMhTXwt74XI1FUTvaLlNx1efKjOZO_dvV0EJd9K_cphoDwe9YaiAyLA44UKyxn-i4HujJ-SPd7uli2JOo_2ygD8wXx4uDw3kTrBwrkHDqG71yvDYyvpd_oVFQhZSvejML7Op7c4u4VA1BhDsMcyQv_rqNcq0Ef"
-            alt="Golf course"
+            src="/images/hero-about.jpg"
+            alt="Scorpion Golf Carts fleet in San Pedro, Belize"
+            width="512"
+            height="512"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.45)' }}
           />
@@ -48,8 +57,11 @@ export default function AboutPage({ onBookNow }) {
           <div className="rounded-2xl overflow-hidden"
             style={{ boxShadow: '0 16px 40px rgba(1,45,29,0.12)' }}>
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQVadqyOncZj1Qi5JR5kYgob-KOEi_2otJ4ILIHVCo9soB95B06lsMgwWlWhmpbCPd0DweeOibioIwKON5KnZC7f7upCzz2D8ucW52khP7fzMRZZlWPDKRlv5pjIhJ5msnqq9T5ZFgHF8VWyw5zPZoVRJc_13ZxdidkjbNAw-P6yBsS-IT6toKnX2KcqiLP3eQpmg4onQt8GbAaK5F8xaWLwqk20UBPPo4g4uk9v8AzhOi12suPNnnM7OeWw50O0knp9qKpfFMyCf6"
-              alt="Luxury golf car"
+              src="/images/story-about.jpg"
+              alt="Scorpion Golf Carts — premium rental fleet in San Pedro, Belize"
+              width="512"
+              height="512"
+              loading="lazy"
               className="w-full h-80 object-cover"
             />
           </div>
