@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { resolveImageUrl } from '../utils/imageUrl';
 
 export default function CarCard({ car, onBookNow }) {
   const [imgIdx, setImgIdx] = useState(0);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
   const touchX = useRef(null);
 
   const images = Array.isArray(car.images)
@@ -49,10 +51,23 @@ export default function CarCard({ car, onBookNow }) {
               src={img ? resolveImageUrl(img) : placeholder}
               alt={car.name}
               draggable={false}
-              className="w-full h-full object-cover"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (img) setLightboxSrc(resolveImageUrl(img));
+              }}
+              className={`w-full h-full object-contain ${img ? 'cursor-zoom-in' : ''}`}
             />
           </div>
         ))}
+
+        {/* Zoom hint on hover — purely visual, doesn't intercept clicks */}
+        {total > 0 && (
+          <div className="absolute inset-0 z-[5] flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors duration-200 pointer-events-none">
+            <span className="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-90 transition-opacity duration-200 [text-shadow:0_1px_4px_rgba(0,0,0,0.5)]">
+              zoom_in
+            </span>
+          </div>
+        )}
 
         {/* Badge */}
         {car.badge && (
@@ -119,6 +134,29 @@ export default function CarCard({ car, onBookNow }) {
           Book Now
         </button>
       </div>
+
+      {/* ── Fullscreen image popup — view only, no side effects ─────────── */}
+      {lightboxSrc && createPortal(
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 sm:p-8"
+          onClick={() => setLightboxSrc(null)}
+        >
+          <button
+            onClick={() => setLightboxSrc(null)}
+            aria-label="Close"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+          >
+            <span className="material-symbols-outlined text-2xl">close</span>
+          </button>
+          <img
+            src={lightboxSrc}
+            alt={car.name}
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+          />
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
