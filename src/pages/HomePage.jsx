@@ -5,6 +5,7 @@ import { MOCK_CARS, MOCK_REVIEWS } from '../utils/mockData';
 import { resolveImageUrl } from '../utils/imageUrl';
 import CarCard from '../components/CarCard';
 import ReviewsSection from '../components/ReviewsSection';
+import ServiceAreaSection from '../components/ServiceAreaSection';
 import Seo from '../components/Seo';
 
 const BUSINESS_ID = 'https://www.scorpiongolfcarts.com/#business';
@@ -216,9 +217,12 @@ export default function HomePage({ onBookNow }) {
                 <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
               </div>
               <h3 className="font-serif text-2xl font-semibold text-primary mb-3">Fleet Standards</h3>
-              <p className="text-primary/70 leading-relaxed">
+              <p className="text-primary/70 leading-relaxed mb-3">
                 Every cart undergoes a rigorous 48-point inspection before it joins our elite rental inventory.
               </p>
+              <Link to="/about" className="text-secondary font-semibold text-sm hover:underline">
+                Learn about our story →
+              </Link>
             </div>
 
             {/* Three feature cards */}
@@ -390,6 +394,8 @@ export default function HomePage({ onBookNow }) {
           </div>
         </div>
       </section>
+
+      <ServiceAreaSection />
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="py-20 bg-white">

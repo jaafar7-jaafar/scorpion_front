@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 
 export default function AboutPage({ onBookNow }) {
@@ -9,7 +10,16 @@ export default function AboutPage({ onBookNow }) {
         description="Scorpion Golf Cart Rental has served San Pedro, Belize since 2012 with premium, well-maintained carts and white-glove service for visitors from Belize, Canada, and the USA."
         path="/about"
         keywords="Scorpion Golf Cart Rental, San Pedro Belize golf cart company, trusted golf cart rental Belize"
-      />
+      >
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scorpiongolfcarts.com/' },
+            { '@type': 'ListItem', position: 2, name: 'About', item: 'https://www.scorpiongolfcarts.com/about' },
+          ],
+        })}</script>
+      </Seo>
       {/* Hero */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -44,7 +54,10 @@ export default function AboutPage({ onBookNow }) {
               Scorpion Golf Cart Rental was founded by a group of passionate golfers who believed the on-course experience deserved the same level of refinement as the game itself. What started as a small fleet of two cars has grown into a premium rental operation trusted by clubs, resorts, and private clients across the region.
             </p>
             <p className="text-zinc-500 leading-relaxed mb-6">
-              Every car in our fleet is hand-selected, maintained to exacting standards, and delivered with white-glove service. We don't just rent golf cars — we craft experiences.
+              Every car in our fleet is hand-selected, maintained to exacting standards, and delivered with white-glove service. We don't just rent golf cars — we craft experiences.{' '}
+              <Link to="/cars" className="text-secondary font-semibold hover:underline">
+                Explore our full fleet
+              </Link>.
             </p>
             <button
               onClick={onBookNow}

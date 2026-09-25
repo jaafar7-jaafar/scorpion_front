@@ -44,7 +44,16 @@ export default function CarsPage({ onBookNow }) {
         description="Browse our fleet of 4 and 6-seater golf carts for rent in San Pedro, Belize. Transparent daily rates, free delivery, and easy online booking for your Ambergris Caye trip."
         path="/cars"
         keywords="golf cart rental rates San Pedro, 4 seater golf cart Belize, 6 seater golf cart rental, Ambergris Caye golf cart fleet"
-      />
+      >
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scorpiongolfcarts.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Carts', item: 'https://www.scorpiongolfcarts.com/cars' },
+          ],
+        })}</script>
+      </Seo>
       <div className="max-w-container mx-auto px-6 sm:px-8 py-12">
         {/* Header */}
         <div className="mb-10 space-y-3">
