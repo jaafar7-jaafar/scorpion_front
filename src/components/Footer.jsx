@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { trackEvent, trackAdsConversion } from '../utils/analytics';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   const handleWhatsAppClick = () => {
@@ -52,6 +53,10 @@ export default function Footer() {
             WhatsApp Us
           </a>
           <p className="text-zinc-400 text-xs">Available daily 8am – 10pm</p>
+          <div className="pt-1">
+            <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Follow Us</p>
+            <SocialLinks />
+          </div>
         </div>
       </div>
 
