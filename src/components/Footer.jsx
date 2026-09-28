@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { trackEvent, trackAdsConversion } from '../utils/analytics';
 
 export default function Footer() {
+  const handleWhatsAppClick = () => {
+    trackEvent('whatsapp_click', { location: 'footer' });
+    trackAdsConversion(process.env.REACT_APP_GADS_CONVERSION_LABEL_WHATSAPP);
+  };
+
   return (
     <footer className="bg-zinc-50 border-t border-zinc-200 mt-auto">
       <div className="max-w-container mx-auto px-6 sm:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -39,6 +45,7 @@ export default function Footer() {
             href="https://wa.me/5016007672?text=Hi%20I%20am%20interested%20in%20renting%20a%20golf%20car"
             target="_blank"
             rel="noreferrer"
+            onClick={handleWhatsAppClick}
             className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
           >
             <span className="material-symbols-outlined text-[18px]">chat</span>

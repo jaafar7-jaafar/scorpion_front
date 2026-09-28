@@ -1,11 +1,18 @@
 import React from 'react';
+import { trackEvent, trackAdsConversion } from '../utils/analytics';
 
 export default function WhatsAppButton() {
+  const handleClick = () => {
+    trackEvent('whatsapp_click', { location: 'floating_button' });
+    trackAdsConversion(process.env.REACT_APP_GADS_CONVERSION_LABEL_WHATSAPP);
+  };
+
   return (
     <a
       href="https://wa.me/5016007672?text=Hi%20I%20am%20interested%20in%20renting%20a%20golf%20car"
       target="_blank"
       rel="noreferrer"
+      onClick={handleClick}
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-200 active:scale-95"
       aria-label="Chat on WhatsApp"
     >

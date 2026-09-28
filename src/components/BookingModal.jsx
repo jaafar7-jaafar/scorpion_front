@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAddresses, getSeats, submitBooking } from '../api';
 import { MOCK_ADDRESSES, MOCK_SEATS } from '../utils/mockData';
+import { trackEvent, trackAdsConversion } from '../utils/analytics';
 
 const initialForm = {
   fullName: '',
@@ -65,6 +66,8 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
       };
       await submitBooking(payload);
       setSuccess(true);
+      trackEvent('booking_submit', { car_name: selectedCar?.name || 'unspecified' });
+      trackAdsConversion(process.env.REACT_APP_GADS_CONVERSION_LABEL_BOOKING);
     } catch (err) {
       if (err.response) {
         setError(err.response.data?.message || 'Failed to send booking request. Please try again.');
@@ -88,8 +91,11 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
         {/* Left panel */}
         <div className="hidden md:flex md:w-2/5 relative bg-primary overflow-hidden flex-col">
           <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQie2n9aV1Z9HBHoUE0qhlP20niFEyUO9H3i_97SbdcWATpmluuVenAH6vBfpK2C-Odkbll-F0zYQjBEks_pZcAeAh9zGZV_1xwBuxAG48TeP78ecDxlRXzNpqOFCRJTbDe1YQXBe8xWY4dQHn9NNKZ32doybvFPN-2YjhRjN44c288SxZYb5MTKpEHIPfSKdmJbhX0NkNKY7FldWILi7Cp4k2TLXtxpKrFkn-zRnezKIxv0QIgliwwHc2dVuhoQs7A5Ik1wZ24A6V"
-            alt="Golf car interior"
+            src="/images/booking-panel.jpg"
+            alt="Scorpion Golf Carts booking"
+            width="512"
+            height="512"
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           />
           <div className="relative z-10 p-8 flex flex-col h-full justify-between text-white">

@@ -112,6 +112,9 @@
         src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
       }
     </style>
+    <!-- API origin: speeds up the cars/reviews fetch that fires on first render -->
+    <link rel="preconnect" href="https://api.scorpiongolfcarts.com" crossorigin />
+
     <!-- Text fonts: loaded async so a blocked Google connection never causes a black screen -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

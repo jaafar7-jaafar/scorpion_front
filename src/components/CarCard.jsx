@@ -51,6 +51,8 @@ export default function CarCard({ car, onBookNow }) {
               src={img ? resolveImageUrl(img) : placeholder}
               alt={car.name}
               draggable={false}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
               onClick={(e) => {
                 e.stopPropagation();
                 if (img) setLightboxSrc(resolveImageUrl(img));
