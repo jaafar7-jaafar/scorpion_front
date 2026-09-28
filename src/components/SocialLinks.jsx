@@ -20,7 +20,7 @@ function TikTokIcon() {
 const SOCIALS = [
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/scorpiongolfcatrs',
+    href: 'https://www.instagram.com/scorpiongolfcarts',
     Icon: InstagramIcon,
     background: 'radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)',
   },
