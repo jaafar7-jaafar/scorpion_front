@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SocialLinks from './SocialLinks';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -79,7 +80,7 @@ export default function Navbar({ onBookNow }) {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-zinc-100 px-6 pb-4 flex flex-col gap-3">
+        <div className="md:hidden bg-white border-t border-zinc-100 px-6 pb-5 flex flex-col gap-3">
           {navLinks.map((l) => {
             const active = location.pathname === l.to;
             return (
@@ -94,6 +95,12 @@ export default function Navbar({ onBookNow }) {
               </Link>
             );
           })}
+
+          {/* Socials — centered pill row, visually distinct from the link list above */}
+          <div className="flex flex-col items-center gap-2.5 pt-4 mt-1">
+            <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-widest">Follow Us</span>
+            <SocialLinks className="gap-4" size="lg" />
+          </div>
         </div>
       )}
     </nav>
