@@ -17,7 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node scripts/prerender.cjs && node scripts/check-seo.cjs",
+    "check:seo": "node scripts/check-seo.cjs",
+    "check:smoke": "node scripts/smoke-build.cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -40,6 +42,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.3",
+    "@babel/preset-react": "^7.28.5",
+    "jsdom": "^16.7.0",
     "@tailwindcss/postcss": "^4.2.4",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.13",

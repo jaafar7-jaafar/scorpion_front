@@ -1,14 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { getCars, getReviews } from '../api';
-import { MOCK_CARS, MOCK_REVIEWS } from '../utils/mockData';
+import { getCars } from '../api';
 import { resolveImageUrl } from '../utils/imageUrl';
 import CarCard from '../components/CarCard';
 import ReviewsSection from '../components/ReviewsSection';
 import ServiceAreaSection from '../components/ServiceAreaSection';
 import Seo from '../components/Seo';
-
-const BUSINESS_ID = 'https://www.scorpiongolfcarts.com/#business';
 
 const PARTNERS = [
   {
@@ -36,7 +33,7 @@ const PARTNERS = [
 const FAQS = [
   {
     q: "Do I need a driver's license to rent a golf cart in San Pedro, Belize?",
-    a: "Yes, a valid driver's license is required to rent and operate a golf cart in San Pedro to comply with local regulations and ensure safety.",
+    a: "Bring a valid driver's license and confirm driver eligibility and rental requirements with our team before booking.",
   },
   {
     q: 'Do you deliver golf carts to hotels or Airbnbs for free?',
@@ -62,83 +59,29 @@ const FAQS = [
 
 export default function HomePage({ onBookNow }) {
   const [cars, setCars] = useState([]);
-  const [reviews, setReviews] = useState([]);
-  const [avgRating, setAvgRating] = useState('4.9');
-  const [reviewCount, setReviewCount] = useState(200);
   const [faqOpen, setFaqOpen] = useState(null);
   const answerRefs = useRef([]);
 
   useEffect(() => {
     getCars()
       .then((r) => setCars(r.data.slice(0, 3)))
-      .catch(() => setCars(MOCK_CARS.slice(0, 3)));
+      .catch(() => setCars([]));
 
-    getReviews()
-      .then((r) => {
-        const data = r.data;
-        if (data.length) {
-          const avg = (data.reduce((s, rv) => s + rv.rating, 0) / data.length).toFixed(1);
-          setAvgRating(avg);
-          setReviewCount(data.length);
-          setReviews(data);
-        }
-      })
-      .catch(() => {
-        const avg = (MOCK_REVIEWS.reduce((s, rv) => s + rv.rating, 0) / MOCK_REVIEWS.length).toFixed(1);
-        setAvgRating(avg);
-        setReviewCount(MOCK_REVIEWS.length);
-        setReviews(MOCK_REVIEWS);
-      });
   }, []);
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQS.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
-
-  const ratingSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': BUSINESS_ID,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: avgRating,
-      reviewCount: reviewCount,
-    },
-    review: reviews.slice(0, 8).map((rv) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: rv.name || 'Guest' },
-      reviewRating: { '@type': 'Rating', ratingValue: rv.rating, bestRating: 5 },
-      reviewBody: rv.comment,
-    })),
-  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Seo
-        title="Golf Cart Rental San Pedro, Belize | Free Delivery – Scorpion Golf Carts"
-        description="Rent a premium golf cart in San Pedro, Belize with free hotel & Airbnb delivery. Trusted by travelers from Belize, Canada & the USA. Book online or WhatsApp +501 600-7672."
-        path="/"
-        keywords="golf cart rental San Pedro Belize, Ambergris Caye golf cart rental, rent golf cart Belize, golf cart delivery hotel Airbnb San Pedro, San Pedro Belize transportation"
-      >
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(ratingSchema)}</script>
-      </Seo>
+      <Seo />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="/images/hero-home.jpg"
-            alt="Luxury golf cart rental on a fairway in San Pedro, Belize"
+            alt="Golf cart ready for an island rental"
             width="512"
             height="512"
-            fetchpriority="high"
+            fetchPriority="high"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.82)' }}
           />
@@ -147,25 +90,12 @@ export default function HomePage({ onBookNow }) {
 
         <div className="relative z-10 max-w-container mx-auto px-6 sm:px-8 w-full py-20">
           <div className="max-w-2xl text-white">
-            {/* Rating badge */}
-            <div className="flex items-center gap-2 mb-6 bg-white/10 backdrop-blur-md w-fit px-4 py-2 rounded-full border border-white/20">
-              <div className="flex">
-                {[1,2,3,4,5].map((s) => (
-                  <span key={s} className="material-symbols-outlined text-[#c1ecd4]"
-                    style={{ fontVariationSettings: "'FILL' 1", fontSize: '16px' }}>
-                    {s <= 4 ? 'star' : 'star_half'}
-                  </span>
-                ))}
-              </div>
-              <span className="font-semibold text-sm">{avgRating}/5 from {reviewCount}+ reviews</span>
-            </div>
-
+            <p className="text-primary-fixed font-semibold mb-5">San Pedro, Ambergris Caye, Belize</p>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Experience the <br />Course in{' '}
-              <em className="font-normal not-italic" style={{ fontStyle: 'italic' }}>Style</em>
+              Golf Cart Rental in<br />San Pedro, Belize
             </h1>
             <p className="text-lg text-white/85 mb-10 max-w-lg leading-relaxed">
-              Elevate your game with the ultimate luxury leisure fleet. Precision engineering meets sophisticated design for the modern golfer.
+              Explore Ambergris Caye at your own pace. Choose a 4 or 6-seater golf cart and arrange delivery to your hotel, resort, or Airbnb with Scorpion Golf Cart Rental.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
@@ -218,7 +148,7 @@ export default function HomePage({ onBookNow }) {
               </div>
               <h3 className="font-serif text-2xl font-semibold text-primary mb-3">Fleet Standards</h3>
               <p className="text-primary/70 leading-relaxed mb-3">
-                Every cart undergoes a rigorous 48-point inspection before it joins our elite rental inventory.
+                Our carts are regularly serviced and checked to help you explore San Pedro comfortably. Ask our team which option suits your plans.
               </p>
               <Link to="/about" className="text-secondary font-semibold text-sm hover:underline">
                 Learn about our story →
@@ -227,9 +157,9 @@ export default function HomePage({ onBookNow }) {
 
             {/* Three feature cards */}
             {[
-              { icon: 'chair', title: 'Plush Interiors', desc: 'Marine-grade leather seating for four.' },
-              { icon: 'air', title: 'Climate Control', desc: 'Integrated fan systems for warm days.' },
-              { icon: 'map', title: 'Smart GPS', desc: 'Integrated course navigation for all 18 holes.' },
+              { icon: 'chair', title: 'Seating for Your Group', desc: 'Choose a 4 or 6-seater for your island stay.' },
+              { icon: 'chat', title: 'Easy Booking Requests', desc: 'Send your dates online or ask us on WhatsApp.' },
+              { icon: 'map', title: 'Accommodation Delivery', desc: 'Arrange pickup at your hotel, resort, or Airbnb.' },
             ].map(({ icon, title, desc }) => (
               <div key={icon} className="md:col-span-4 bg-white p-5 md:p-8 rounded-2xl border border-zinc-100 text-center"
                 style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
@@ -276,10 +206,10 @@ export default function HomePage({ onBookNow }) {
         <div className="max-w-container mx-auto px-6 sm:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center text-white">
             {[
-              { value: '500+', label: 'Happy Clients' },
-              { value: '12+', label: 'Years Experience' },
-              { value: '24', label: 'Premium Carts' },
-              { value: '4.9★', label: 'Average Rating' },
+              { value: '4 & 6', label: 'Passenger Seat Options' },
+              { value: 'San Pedro', label: 'Ambergris Caye, Belize' },
+              { value: 'Delivery', label: 'To Your Accommodation' },
+              { value: 'WhatsApp', label: 'Booking & Rental Questions' },
             ].map(({ value, label }) => (
               <div key={label}>
                 <div className="font-serif text-3xl md:text-4xl font-bold text-primary-fixed mb-1">{value}</div>
@@ -396,6 +326,7 @@ export default function HomePage({ onBookNow }) {
       </section>
 
       <ServiceAreaSection />
+      <section className="py-12 bg-white"><div className="max-w-container mx-auto px-6 sm:px-8"><h2 className="font-serif text-2xl font-bold text-primary mb-3">Planning your Ambergris Caye stay?</h2><p className="text-zinc-500 leading-relaxed">Read our <Link to="/san-pedro-golf-cart-rental-guide" className="text-secondary font-semibold underline">San Pedro golf cart rental guide</Link> for help choosing seating, arranging pickup, and preparing your booking. For availability and delivery questions, <Link to="/contact" className="text-secondary font-semibold underline">contact our local rental team</Link>.</p></div></section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="py-20 bg-white">

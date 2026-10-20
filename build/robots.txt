@@ -1,4 +1,5 @@
 User-agent: *
-Disallow: /admin/
+# Admin pages use noindex metadata and X-Robots-Tag. Allow crawling so bots
+# can read that directive; robots.txt is not an access-control mechanism.
 
 Sitemap: https://www.scorpiongolfcarts.com/sitemap.xml

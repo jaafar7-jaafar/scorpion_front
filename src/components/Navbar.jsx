@@ -6,6 +6,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Carts', to: '/cars' },
   { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 export default function Navbar({ onBookNow }) {

@@ -4,7 +4,7 @@ import { adminLogin as apiAdminLogin } from '../api';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('admin_token'));
+  const [token, setToken] = useState(() => typeof window === 'undefined' ? null : localStorage.getItem('admin_token'));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

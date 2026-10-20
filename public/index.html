@@ -2,234 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/scorpionlogo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/scorpionlogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#012d1d" />
-
-    <!-- Google Search Console verification -->
+    <link rel="icon" href="%PUBLIC_URL%/scorpionlogo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/scorpionlogo.png" />
     <meta name="google-site-verification" content="Dw8HXYjyERYYduBW27a_QzGW4xMR1FHxEeB11A0a978" />
-
-    <!-- Primary SEO -->
-    <title>Golf Cart Rental San Pedro, Belize | Free Delivery – Scorpion Golf Carts</title>
-    <meta name="description" content="Rent a premium golf cart in San Pedro, Belize with free hotel &amp; Airbnb delivery. Trusted by travelers from Belize, Canada &amp; the USA. Book online or WhatsApp +501 600-7672." />
-    <meta name="keywords" content="golf cart rental San Pedro Belize, Ambergris Caye golf cart rental, rent golf cart Belize, golf cart delivery hotel Airbnb San Pedro, San Pedro Belize transportation" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.scorpiongolfcarts.com/" />
-
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.scorpiongolfcarts.com/" />
-    <meta property="og:site_name" content="Scorpion Golf Cart Rental" />
-    <meta property="og:title" content="Golf Cart Rental San Pedro, Belize | Free Delivery – Scorpion Golf Carts" />
-    <meta property="og:description" content="Rent a premium golf cart in San Pedro, Belize with free hotel &amp; Airbnb delivery. Trusted by travelers from Belize, Canada &amp; the USA. Book online or WhatsApp +501 600-7672." />
-    <meta property="og:image" content="https://www.scorpiongolfcarts.com/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Golf Cart Rental San Pedro, Belize | Scorpion Golf Carts" />
-    <meta name="twitter:description" content="Rent a premium golf cart in San Pedro, Belize with free hotel &amp; Airbnb delivery. Trusted by travelers from Belize, Canada &amp; the USA." />
-    <meta name="twitter:image" content="https://www.scorpiongolfcarts.com/og-image.jpg" />
-
-    <!-- JSON-LD: Local Business -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://www.scorpiongolfcarts.com/#business",
-      "name": "Scorpion Golf Cart Rental",
-      "description": "Premium golf cart rentals in San Pedro, Belize. Free hotel and Airbnb delivery, reliable service, competitive rates, and 24/7 customer support.",
-      "url": "https://www.scorpiongolfcarts.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.scorpiongolfcarts.com/scorpionlogo.png"
-      },
-      "image": "https://www.scorpiongolfcarts.com/og-image.jpg",
-      "telephone": "+501-600-7672",
-      "email": "info@scorpiongolfcarts.com",
-      "sameAs": [
-        "https://www.instagram.com/scorpiongolfcarts",
-        "https://vt.tiktok.com/ZSbr3pfYX/"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "San Pedro",
-        "addressRegion": "Belize District",
-        "addressCountry": "BZ"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 17.9175,
-        "longitude": -87.9658
-      },
-      "openingHours": "Mo-Su 08:00-22:00",
-      "priceRange": "$$",
-      "currenciesAccepted": "USD, BZD",
-      "paymentAccepted": "Cash, Credit Card",
-      "areaServed": {
-        "@type": "City",
-        "name": "San Pedro, Ambergris Caye"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Golf Cart Rental Fleet",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Product",
-              "name": "2-Seat Golf Cart Rental"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Product",
-              "name": "4-Seat Golf Cart Rental"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Product",
-              "name": "6-Seat Golf Cart Rental"
-            }
-          }
-        ]
-      }
-    }
-    </script>
-
-    <!-- Preload icon font: browser fetches woff2 immediately during HTML parsing,
-         before any JS/CSS is processed — icons are ready when React first renders -->
+    <!-- Page metadata and visible content are rendered from React at build time. -->
     <link rel="preload" href="%PUBLIC_URL%/fonts/material-symbols-outlined.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Inline @font-face binds the font name to the preloaded file right away -->
     <style>
       @font-face {
-        font-family: 'Material Symbols Outlined';
-        font-style: normal;
-        font-weight: 100 700;
-        font-display: block;
-        src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
+        font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: 100 700;
+        font-display: block; src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
       }
     </style>
-    <!-- API origin: speeds up the cars/reviews fetch that fires on first render -->
-    <link rel="preconnect" href="https://salmon-alpaca-939907.hostingersite.com" crossorigin />
-
-    <!-- Text fonts: loaded async so a blocked Google connection never causes a black screen -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
-
-    <!-- Splash screen — painted instantly from raw HTML before any JS or React runs -->
-    <style>
-      #splash {
-        position: fixed; inset: 0; z-index: 9999;
-        background: radial-gradient(ellipse at 50% 42%, #024a30 0%, #012d1d 62%, #010f0a 100%);
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        opacity: 0;
-        animation: sp-fadein 0.5s ease forwards;
-        transition: opacity 0.7s ease;
-      }
-      #splash.out { opacity: 0; pointer-events: none; }
-
-      /* ── Logo ring area ── */
-      #splash-center {
-        position: relative; width: 190px; height: 190px;
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 30px;
-      }
-      .sp-ring {
-        position: absolute; border-radius: 50%;
-        border: 1px solid rgba(193,236,212,0.13);
-        border-top-color: rgba(193,236,212,0.45);
-        animation: sp-spin 7s linear infinite;
-      }
-      .sp-ring:nth-child(1) { inset: 0; }
-      .sp-ring:nth-child(2) {
-        inset: -22px;
-        border-color: rgba(193,236,212,0.06);
-        border-top-color: rgba(193,236,212,0.2);
-        animation-duration: 13s;
-        animation-direction: reverse;
-      }
-      /* Glowing dot that travels around ring 1 */
-      .sp-ring:nth-child(1)::after {
-        content: '';
-        position: absolute; top: -3px; left: 50%; transform: translateX(-50%);
-        width: 6px; height: 6px; background: #c1ecd4;
-        border-radius: 50%; box-shadow: 0 0 8px 2px rgba(193,236,212,0.6);
-      }
-      #splash-logo {
-        width: 112px; height: 112px; object-fit: contain;
-        position: relative; z-index: 1;
-        animation: sp-pulse 2.8s ease-in-out infinite;
-        filter: drop-shadow(0 0 20px rgba(193,236,212,0.22));
-      }
-
-      /* ── Text ── */
-      #splash-brand {
-        margin: 0 0 5px;
-        color: rgba(193,236,212,0.88);
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: 17px; letter-spacing: 0.1em;
-        animation: sp-up 0.7s 0.4s ease both;
-      }
-      #splash-sub {
-        margin: 0 0 30px;
-        color: rgba(193,236,212,0.36);
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
-        animation: sp-up 0.7s 0.55s ease both;
-      }
-
-      /* ── Progress bar ── */
-      #splash-bar-track {
-        width: 148px; height: 2px;
-        background: rgba(193,236,212,0.1);
-        border-radius: 999px; overflow: hidden;
-        animation: sp-up 0.4s 0.6s ease both;
-      }
-      #splash-bar {
-        height: 100%;
-        background: linear-gradient(to right, #c1ecd4, #2b694d);
-        border-radius: 999px;
-        width: 0;
-        animation: sp-progress 2.8s 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) both;
-      }
-
-      /* ── Keyframes ── */
-      @keyframes sp-fadein { to { opacity: 1; } }
-      @keyframes sp-up {
-        from { opacity: 0; transform: translateY(9px); }
-        to   { opacity: 1; transform: none; }
-      }
-      @keyframes sp-pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(0.955); filter: drop-shadow(0 0 28px rgba(193,236,212,0.38)); }
-      }
-      @keyframes sp-spin { to { transform: rotate(360deg); } }
-      @keyframes sp-progress { to { width: 100%; } }
-    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="splash" role="status" aria-label="Loading Scorpion Golf Cart Rental">
-      <div id="splash-center">
-        <div class="sp-ring" aria-hidden="true"></div>
-        <div class="sp-ring" aria-hidden="true"></div>
-        <img id="splash-logo" src="/scorpionlogo.png" alt="Scorpion Golf Cart Rental" />
-      </div>
-      <p id="splash-brand">Scorpion Golf Cart Rental</p>
-      <p id="splash-sub">San Pedro &middot; Belize</p>
-      <div id="splash-bar-track" aria-hidden="true">
-        <div id="splash-bar"></div>
-      </div>
-    </div>
     <div id="root"></div>
+    <noscript><p>To request a golf cart without JavaScript, call <a href="tel:+5016007672">+501 600-7672</a> or <a href="https://wa.me/5016007672">message Scorpion Golf Cart Rental on WhatsApp</a>.</p></noscript>
   </body>
 </html>

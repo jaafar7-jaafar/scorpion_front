@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getReviews, createReview } from '../api';
-import { MOCK_REVIEWS } from '../utils/mockData';
 import StarRating from './StarRating';
 
 export default function ReviewsSection() {
@@ -9,11 +8,13 @@ export default function ReviewsSection() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState('');
+  const [loadError, setLoadError] = useState(false);
 
   const fetchReviews = () => {
     getReviews()
-      .then((r) => setReviews(r.data))
-      .catch(() => setReviews(MOCK_REVIEWS));
+      .then((r) => { setReviews(r.data); setLoadError(false); })
+      .catch(() => setLoadError(true));
   };
 
   useEffect(() => { fetchReviews(); }, []);
@@ -25,21 +26,17 @@ export default function ReviewsSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
       await createReview({ ...form, name: form.name || 'Guest' });
       fetchReviews();
-    } catch {
-      // Add locally for demo
-      setReviews((prev) => [
-        { id: Date.now(), name: form.name || 'Guest', rating: form.rating, comment: form.comment, created_at: new Date().toISOString() },
-        ...prev,
-      ]);
-    } finally {
-      setLoading(false);
       setSubmitted(true);
       setForm({ name: '', rating: 5, comment: '' });
-      setShowForm(false);
       setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      setError('Your review could not be saved. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +48,7 @@ export default function ReviewsSection() {
           <div>
             <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Testimonials</span>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">What Our Guests Say</h2>
-            <div className="flex items-center gap-3 mt-4">
+            {reviews.length > 0 && <div className="flex items-center gap-3 mt-4">
               <div className="flex">
                 {[1,2,3,4,5].map((s) => (
                   <span key={s} className="material-symbols-outlined text-amber-400 text-xl"
@@ -62,7 +59,7 @@ export default function ReviewsSection() {
               </div>
               <span className="text-primary font-bold text-lg">{avgRating}</span>
               <span className="text-zinc-400 text-sm">/ 5 ({reviews.length} reviews)</span>
-            </div>
+            </div>}
           </div>
           <button
             onClick={() => setShowForm((o) => !o)}
@@ -78,6 +75,7 @@ export default function ReviewsSection() {
           <div className="bg-white rounded-2xl border border-zinc-100 p-6 mb-10"
             style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
             <h3 className="font-serif text-xl font-semibold text-primary mb-4">Share Your Experience</h3>
+            {error && <p role="alert" className="text-error mb-4">{error}</p>}
             {submitted ? (
               <div className="flex items-center gap-3 text-secondary py-2">
                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
@@ -131,7 +129,7 @@ export default function ReviewsSection() {
         {reviews.length === 0 ? (
           <div className="text-center py-16 text-zinc-400">
             <span className="material-symbols-outlined text-5xl block mb-3">rate_review</span>
-            <p>No reviews yet. Be the first!</p>
+            <p>{loadError ? 'Reviews are temporarily unavailable. Please try again later.' : 'No reviews yet. Be the first!'}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

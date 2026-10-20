@@ -19,8 +19,16 @@ export function initAnalytics() {
   window.gtag = gtag;
 
   gtag('js', new Date());
-  gtag('config', GA_ID, { anonymize_ip: true });
+  // RouteEffects sends one initial and subsequent SPA page view.
+  gtag('config', GA_ID, { send_page_view: false });
   if (ADS_ID) gtag('config', ADS_ID);
+}
+
+export function trackPageView(pathname) {
+  trackEvent('page_view', {
+    page_location: `${window.location.origin}${pathname}`,
+    page_title: document.title,
+  });
 }
 
 // Generic GA4 event (shows up in GA4 reports regardless of Ads setup)

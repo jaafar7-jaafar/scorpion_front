@@ -1,0 +1,21 @@
+import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
+import Breadcrumbs from '../components/Breadcrumbs';
+
+export default function RentalGuidePage({ onBookNow }) {
+  return (
+    <article className="pt-28 pb-20 bg-surface">
+      <Seo />
+      <div className="max-w-3xl mx-auto px-6 sm:px-8 space-y-8">
+        <Breadcrumbs current="San Pedro Golf Cart Rental Guide" />
+        <header><h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-5">San Pedro Golf Cart Rental Guide</h1><p className="text-zinc-600 text-lg leading-relaxed">Planning a stay on Ambergris Caye, Belize? Before reserving a golf cart in San Pedro, match your seating, rental dates, and pickup arrangements to your trip. This guide explains what to prepare and what to confirm with our team.</p></header>
+        <section className="space-y-3"><h2 className="font-serif text-2xl font-bold text-primary">Choose a 4 or 6-seater for your group</h2><p className="text-zinc-600 leading-relaxed">Start with the number of people who will ride together. A 4-seater may suit a couple or a smaller group; a 6-seater provides more passenger seats for a larger group. Ask about luggage space separately, particularly if you plan to use the cart on arrival or departure day.</p><p><Link to="/cars" className="text-secondary font-semibold underline">Browse our golf cart fleet</Link> and request the seating you need. Availability is confirmed by our team after your inquiry.</p></section>
+        <section className="space-y-3"><h2 className="font-serif text-2xl font-bold text-primary">Compare the full rental quote</h2><p className="text-zinc-600 leading-relaxed">Share your pickup and return dates and times for a quote that covers your stay. Before confirming, ask which currency the quote uses, whether taxes are included, and how fuel, deposits, damage responsibility, late returns, and cancellation are handled. Check the total for your dates rather than relying only on a starting daily rate.</p></section>
+        <section className="space-y-3"><h2 className="font-serif text-2xl font-bold text-primary">Arrange hotel, resort, or Airbnb delivery</h2><p className="text-zinc-600 leading-relaxed">Send the name and location of your accommodation in San Pedro, plus a contact number we can reach during your trip. For an Airbnb, share clear arrival instructions. Confirm delivery coverage, the meeting point, and timing before you travel. If you would like to meet near the San Pedro airstrip or a water taxi arrival point, ask our team to confirm the arrangement.</p></section>
+        <section className="space-y-3"><h2 className="font-serif text-2xl font-bold text-primary">Prepare your driver and booking details</h2><ul className="list-disc pl-6 space-y-2 text-zinc-600"><li>Your full name and a working email or WhatsApp number.</li><li>Your travel dates, pickup time, and return time.</li><li>Your group size and preferred cart seating.</li><li>Your accommodation and requested meeting location.</li><li>A valid driver's license; confirm driver eligibility and any additional documents with our team.</li></ul></section>
+        <section className="space-y-3"><h2 className="font-serif text-2xl font-bold text-primary">Ask about your planned island routes</h2><p className="text-zinc-600 leading-relaxed">Tell us where you plan to go from your accommodation. Ask about current road conditions, permitted routes, parking, and the suitability of the cart for your plans. Conditions can change, so check with our team before setting off, especially for longer journeys on Ambergris Caye.</p></section>
+        <section className="bg-white border border-zinc-100 rounded-2xl p-7 space-y-4"><h2 className="font-serif text-2xl font-bold text-primary">Request your San Pedro golf cart rental</h2><p className="text-zinc-600">Send your dates and accommodation to check availability. An online request starts the booking process; our team will contact you to confirm the details.</p><button onClick={onBookNow} className="bg-primary text-white px-6 py-3 rounded-xl font-semibold">Request Availability</button><p><Link to="/contact" className="text-secondary font-semibold underline">Call or WhatsApp our team</Link> if you have a question before booking.</p></section>
+      </div>
+    </article>
+  );
+}

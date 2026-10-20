@@ -5,21 +5,7 @@ import Seo from '../components/Seo';
 export default function AboutPage({ onBookNow }) {
   return (
     <div className="pt-20 min-h-screen bg-surface">
-      <Seo
-        title="About Scorpion Golf Carts | Trusted Golf Cart Rental Since 2012 — San Pedro, Belize"
-        description="Scorpion Golf Cart Rental has served San Pedro, Belize since 2012 with premium, well-maintained carts and white-glove service for visitors from Belize, Canada, and the USA."
-        path="/about"
-        keywords="Scorpion Golf Cart Rental, San Pedro Belize golf cart company, trusted golf cart rental Belize"
-      >
-        <script type="application/ld+json">{JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scorpiongolfcarts.com/' },
-            { '@type': 'ListItem', position: 2, name: 'About', item: 'https://www.scorpiongolfcarts.com/about' },
-          ],
-        })}</script>
-      </Seo>
+      <Seo />
       {/* Hero */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -28,6 +14,7 @@ export default function AboutPage({ onBookNow }) {
             alt="Scorpion Golf Carts fleet in San Pedro, Belize"
             width="512"
             height="512"
+            fetchPriority="high"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.45)' }}
           />
@@ -36,10 +23,10 @@ export default function AboutPage({ onBookNow }) {
         <div className="relative z-10 max-w-container mx-auto px-6 sm:px-8 text-white text-center">
           <span className="text-primary-fixed font-semibold text-sm uppercase tracking-widest block mb-3">About Us</span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-            Driven by Passion, <br />Defined by Quality
+            Scorpion Golf Cart Rental<br />in San Pedro, Belize
           </h1>
           <p className="text-white/80 max-w-xl mx-auto text-lg leading-relaxed">
-            Since 2012, Scorpion Golf Cart Rental has been setting the standard for luxury golf car rentals — where every ride feels like a first-class experience.
+            Explore San Pedro and Ambergris Caye with a golf cart that suits your group, your accommodation, and your travel plans.
           </p>
         </div>
       </section>
@@ -49,12 +36,12 @@ export default function AboutPage({ onBookNow }) {
         <div className="max-w-container mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
             <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-3">Our Story</span>
-            <h2 className="font-serif text-3xl font-bold text-primary mb-5">A Legacy Built on the Greens</h2>
+            <h2 className="font-serif text-3xl font-bold text-primary mb-5">Golf Cart Rentals for Your Island Stay</h2>
             <p className="text-zinc-500 leading-relaxed mb-4">
-              Scorpion Golf Cart Rental was founded by a group of passionate golfers who believed the on-course experience deserved the same level of refinement as the game itself. What started as a small fleet of two cars has grown into a premium rental operation trusted by clubs, resorts, and private clients across the region.
+              Scorpion Golf Cart Rental serves visitors staying in San Pedro on Ambergris Caye, Belize. Our service helps you arrange a cart for your stay, whether you are traveling as a couple, with family, or with friends.
             </p>
             <p className="text-zinc-500 leading-relaxed mb-6">
-              Every car in our fleet is hand-selected, maintained to exacting standards, and delivered with white-glove service. We don't just rent golf cars — we craft experiences.{' '}
+              Choose from 4 and 6-seater options and tell us your arrival dates and accommodation. Our team will confirm availability and help coordinate delivery and pickup.{' '}
               <Link to="/cars" className="text-secondary font-semibold hover:underline">
                 Explore our full fleet
               </Link>.
@@ -93,7 +80,7 @@ export default function AboutPage({ onBookNow }) {
               { icon: 'workspace_premium', title: 'Excellence', desc: 'We accept nothing less than the best — in our fleet, our service, and our results.' },
               { icon: 'eco', title: 'Responsibility', desc: 'We keep our fleet well-maintained and our practices responsible, without ever sacrificing performance.' },
               { icon: 'handshake', title: 'Integrity', desc: 'Honest pricing, transparent terms, and no surprises — ever.' },
-              { icon: 'favorite', title: 'Passion', desc: 'We love the game as much as you do. That passion shows in everything we do.' },
+              { icon: 'favorite', title: 'Passion', desc: 'We enjoy helping visitors make the most of their time in San Pedro.' },
             ].map(({ icon, title, desc }) => (
               <div key={icon} className="bg-white rounded-2xl p-7 border border-zinc-100 text-center"
                 style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.05)' }}>
@@ -113,7 +100,7 @@ export default function AboutPage({ onBookNow }) {
         <div className="max-w-container mx-auto px-6 sm:px-8 text-center text-white">
           <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Ready to Experience the Difference?</h2>
           <p className="text-white/75 max-w-lg mx-auto mb-8 leading-relaxed">
-            Join hundreds of satisfied clients who have elevated their on-course experience with Scorpion Golf Cart Rental.
+            Tell us your travel dates, group size, and where you are staying. We will help you arrange your San Pedro golf cart rental.
           </p>
           <button
             onClick={onBookNow}

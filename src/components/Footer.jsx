@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="text-lg font-bold text-primary font-serif">Scorpion Golf Cart Rental</div>
           <p className="text-zinc-500 text-sm leading-relaxed">
-            Redefining leisure with premium golf cart rentals since 2012. Explore San Pedro in comfort and style.
+            Golf cart rentals in San Pedro, Ambergris Caye, Belize. Choose a cart for your group and arrange delivery to your accommodation.
           </p>
           <p className="text-xs text-zinc-400">
             Built by{' '}
@@ -37,6 +37,8 @@ export default function Footer() {
           <Link to="/" className="text-zinc-500 hover:text-primary transition-colors text-sm">Home</Link>
           <Link to="/cars" className="text-zinc-500 hover:text-primary transition-colors text-sm">Our Fleet</Link>
           <Link to="/about" className="text-zinc-500 hover:text-primary transition-colors text-sm">About Us</Link>
+          <Link to="/san-pedro-golf-cart-rental-guide" className="text-zinc-500 hover:text-primary transition-colors text-sm">San Pedro Rental Guide</Link>
+          <Link to="/contact" className="text-zinc-500 hover:text-primary transition-colors text-sm">Contact & Delivery</Link>
         </div>
 
         {/* Contact */}
@@ -52,7 +54,8 @@ export default function Footer() {
             <span className="material-symbols-outlined text-[18px]">chat</span>
             WhatsApp Us
           </a>
-          <p className="text-zinc-400 text-xs">Available daily 8am – 10pm</p>
+          <address className="not-italic text-zinc-500 text-sm space-y-2"><p>San Pedro, Ambergris Caye, Belize</p><a href="tel:+5016007672" onClick={() => trackEvent('phone_click', { location: 'footer' })} className="hover:underline">+501 600-7672</a></address>
+          <p className="text-zinc-400 text-xs">Available daily 8am – 10pm (Belize time)</p>
           <div className="pt-1">
             <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Follow Us</p>
             <SocialLinks />

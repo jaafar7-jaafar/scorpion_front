@@ -1,0 +1,37 @@
+# Apache / LiteSpeed (Hostinger): upload with the complete build directory.
+# Keep the existing www canonical host used by the live site's metadata.
+Options -MultiViews
+DirectoryIndex index.html
+RewriteEngine On
+
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\.scorpiongolfcarts\.com$ [NC]
+RewriteRule ^ https://www.scorpiongolfcarts.com%{REQUEST_URI} [R=301,L,NE]
+
+# Redirect explicit index documents and slash variants to one public URL.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L,NE]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)/$ /$1 [R=301,L,NE]
+
+# Serve generated pages directly, with no directory/slash redirect cycle.
+RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide)$ $1/index.html [END]
+
+# Admin routes stay interactive, but get noindex in the initial HTML and header.
+RewriteRule ^admin(?:/.*)?$ admin/index.html [END]
+<IfModule mod_headers.c>
+  SetEnvIf Request_URI "^/admin(?:/|$)" private_page
+  Header always set X-Robots-Tag "noindex, follow" env=private_page
+  <FilesMatch "\.(?:html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(?:js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Missing URLs must return a real 404 instead of the homepage with a 200 status.
+ErrorDocument 404 /404.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ - [R=404,L]

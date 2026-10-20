@@ -1,35 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { initAnalytics } from './utils/analytics';
 
 initAnalytics();
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const app = <React.StrictMode><App /></React.StrictMode>;
 
-function hideSplash() {
-  const el = document.getElementById('splash');
-  if (!el) return;
-  el.classList.add('out');
-  setTimeout(() => el.remove(), 750);
+// Production pages already contain readable HTML. Attach interactions immediately.
+if (container.dataset.prerendered === 'true') {
+  hydrateRoot(container, app);
+} else {
+  createRoot(container).render(app);
 }
-
-// Two conditions must BOTH be met before hiding the splash:
-//   1. Icon font is ready (or 4 s timeout — unblocks visitors in restricted countries)
-//   2. At least 3 seconds have passed so the splash is always visible long enough
-Promise.all([
-  Promise.race([
-    document.fonts.ready,
-    new Promise((resolve) => setTimeout(resolve, 4000)),
-  ]),
-  new Promise((resolve) => setTimeout(resolve, 2000)),
-]).then(() => {
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-  // Let React commit its first frame, then fade the splash out
-  requestAnimationFrame(() => requestAnimationFrame(hideSplash));
-});

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { getCars } from '../api';
-import { MOCK_CARS } from '../utils/mockData';
 import CarCard from '../components/CarCard';
 import Seo from '../components/Seo';
 
 export default function CarsPage({ onBookNow }) {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     getCars()
       .then((r) => setCars(r.data))
-      .catch(() => setCars(MOCK_CARS))
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -39,28 +39,14 @@ export default function CarsPage({ onBookNow }) {
 
   return (
     <div className="pt-20 min-h-screen bg-surface">
-      <Seo
-        title="Golf Cart Fleet & Rental Rates — 4 & 6-Seater | San Pedro, Belize"
-        description="Browse our fleet of 4 and 6-seater golf carts for rent in San Pedro, Belize. Transparent daily rates, free delivery, and easy online booking for your Ambergris Caye trip."
-        path="/cars"
-        keywords="golf cart rental rates San Pedro, 4 seater golf cart Belize, 6 seater golf cart rental, Ambergris Caye golf cart fleet"
-      >
-        <script type="application/ld+json">{JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scorpiongolfcarts.com/' },
-            { '@type': 'ListItem', position: 2, name: 'Carts', item: 'https://www.scorpiongolfcarts.com/cars' },
-          ],
-        })}</script>
-      </Seo>
+      <Seo />
       <div className="max-w-container mx-auto px-6 sm:px-8 py-12">
         {/* Header */}
         <div className="mb-10 space-y-3">
           <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Our Fleet</span>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary">Luxury Cart Gallery</h1>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary">Golf Cart Rentals in San Pedro</h1>
           <p className="text-zinc-500 text-lg max-w-2xl leading-relaxed">
-            Discover our curated collection of high-performance golf carts, designed for the perfect balance of elegance and comfort in San Pedro.
+            Find a golf cart for your stay on Ambergris Caye. Compare seating for your group, then request availability and a quote for your travel dates. Arrange delivery to your hotel, resort, or Airbnb in San Pedro.
           </p>
         </div>
 
@@ -86,6 +72,7 @@ export default function CarsPage({ onBookNow }) {
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-xl">search</span>
             <input
               type="text"
+              aria-label="Search golf carts"
               placeholder="Search cart models..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -112,12 +99,12 @@ export default function CarsPage({ onBookNow }) {
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
             <span className="material-symbols-outlined text-6xl text-zinc-300 block mb-4">search_off</span>
-            <h3 className="font-serif text-xl text-zinc-400 mb-2">No carts found</h3>
-            <p className="text-zinc-400 text-sm">Try adjusting your search or filter.</p>
-            <button onClick={() => { setSearch(''); setFilter('All'); }}
+            <h3 className="font-serif text-xl text-zinc-400 mb-2">{loadError ? 'Contact us for current availability' : 'No carts found'}</h3>
+            <p className="text-zinc-400 text-sm">{loadError ? 'Call or WhatsApp +501 600-7672 for current fleet availability and rental rates.' : 'Try adjusting your search or filter.'}</p>
+            {loadError ? <a href="https://wa.me/5016007672" className="inline-block mt-4 text-secondary font-semibold underline">Ask about available carts</a> : <button onClick={() => { setSearch(''); setFilter('All'); }}
               className="mt-4 text-secondary font-semibold text-sm underline">
               Clear filters
-            </button>
+            </button>}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

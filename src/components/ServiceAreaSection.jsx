@@ -38,8 +38,8 @@ export default function ServiceAreaSection() {
           {/* Map */}
           <div className="rounded-2xl overflow-hidden border border-zinc-100" style={{ boxShadow: '0 16px 40px rgba(1,45,29,0.12)' }}>
             <iframe
-              title="Scorpion Golf Cart Rental — San Pedro, Ambergris Caye, Belize"
-              src="https://www.google.com/maps?q=17.9175,-87.9658&z=13&output=embed"
+              title="San Pedro service area, Ambergris Caye, Belize"
+              src="https://www.google.com/maps?q=San+Pedro+Ambergris+Caye+Belize&z=13&output=embed"
               width="100%"
               height="360"
               style={{ border: 0, display: 'block' }}

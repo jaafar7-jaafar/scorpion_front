@@ -16,6 +16,11 @@ import AdminCarsPage from './pages/admin/AdminCarsPage';
 import AdminReviewsPage from './pages/admin/AdminReviewsPage';
 import AdminAddressesPage from './pages/admin/AdminAddressesPage';
 import AdminSeatsPage from './pages/admin/AdminSeatsPage';
+import RentalGuidePage from './pages/RentalGuidePage';
+import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
+import Seo from './components/Seo';
+import RouteEffects from './components/RouteEffects';
 
 function PublicLayout({ children, onBookNow }) {
   return (
@@ -28,7 +33,7 @@ function PublicLayout({ children, onBookNow }) {
   );
 }
 
-function App() {
+function App({ Router = BrowserRouter, routerProps = {} }) {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
   const openBooking = (car = null) => { setSelectedCar(car); setBookingOpen(true); };
@@ -36,23 +41,26 @@ function App() {
   return (
     <HelmetProvider>
     <AuthProvider>
-      <BrowserRouter>
+      <Router {...routerProps}>
+        <RouteEffects />
         <Routes>
           <Route path="/" element={<PublicLayout onBookNow={() => openBooking()}><HomePage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/cars" element={<PublicLayout onBookNow={() => openBooking()}><CarsPage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/about" element={<PublicLayout onBookNow={() => openBooking()}><AboutPage onBookNow={openBooking} /></PublicLayout>} />
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+          <Route path="/san-pedro-golf-cart-rental-guide" element={<PublicLayout onBookNow={() => openBooking()}><RentalGuidePage onBookNow={openBooking} /></PublicLayout>} />
+          <Route path="/contact" element={<PublicLayout onBookNow={() => openBooking()}><ContactPage onBookNow={openBooking} /></PublicLayout>} />
+          <Route path="/admin/login" element={<><Seo title="Admin Login | Scorpion Golf Cart Rental" noindex /><AdminLoginPage /></>} />
+          <Route path="/admin" element={<><Seo title="Admin | Scorpion Golf Cart Rental" noindex /><ProtectedRoute><AdminLayout /></ProtectedRoute></>}>
             <Route index element={<Navigate to="/admin/cars" replace />} />
             <Route path="cars" element={<AdminCarsPage />} />
             <Route path="reviews" element={<AdminReviewsPage />} />
             <Route path="addresses" element={<AdminAddressesPage />} />
             <Route path="seats" element={<AdminSeatsPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<PublicLayout onBookNow={() => openBooking()}><NotFoundPage /></PublicLayout>} />
         </Routes>
         <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} selectedCar={selectedCar} />
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
     </HelmetProvider>
   );
