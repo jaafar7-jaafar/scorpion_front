@@ -5,6 +5,8 @@
 
 User-agent: *
 Allow: /
+# Content Signals (https://contentsignals.org): how this content may be used.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 # Search engines
 User-agent: Googlebot

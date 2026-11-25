@@ -41,7 +41,7 @@ export default function ReviewsSection() {
   };
 
   return (
-    <section className="section bg-white">
+    <section data-md-skip className="section bg-white">
       <div className="container-page">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">

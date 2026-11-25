@@ -52,6 +52,16 @@ export const SEO_PAGES = {
     name: 'Contact',
     type: 'ContactPage',
   },
+  '/rental-terms': {
+    title: 'Rental Terms & Policies | Scorpion Golf Cart Rental',
+    description: 'Golf cart rental terms for Scorpion in San Pedro, Belize: booking confirmation, starting rates, free delivery, 24-hour free cancellation, drivers, and payment.',
+    name: 'Rental Terms',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | Scorpion Golf Cart Rental',
+    description: 'How Scorpion Golf Cart Rental in San Pedro, Belize collects and uses information from booking requests, reviews, analytics, and WhatsApp or phone contact.',
+    name: 'Privacy Policy',
+  },
 };
 
 const BUSINESS_ID = `${SITE_URL}/#business`;

@@ -26,3 +26,10 @@
 - [Things to do in San Pedro by golf cart](https://www.scorpiongolfcarts.com/things-to-do-in-san-pedro-by-golf-cart): places to visit on Ambergris Caye by golf cart and day-trip tips
 - [About Scorpion](https://www.scorpiongolfcarts.com/about): who we are and how the service works
 - [Contact](https://www.scorpiongolfcarts.com/contact): phone, WhatsApp, hours, booking steps, and service area
+- [Rental terms](https://www.scorpiongolfcarts.com/rental-terms): booking confirmation, rates, delivery, cancellation, drivers, and payment
+- [Privacy policy](https://www.scorpiongolfcarts.com/privacy): what information the site collects and how it is used
+
+## For AI agents
+
+- Every page above is also available as Markdown: send `Accept: text/markdown`, or request `index.md` under the page path (the homepage is https://www.scorpiongolfcarts.com/index.md).
+- In supporting browsers, the site registers WebMCP tools: `get_rental_info` (rates, delivery, hours, contact) and `start_booking_request` (opens the booking form prefilled for the visitor to review and send).

@@ -47,6 +47,10 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Scorpion Golf Cart Rental. All rights reserved.</p>
+          <nav aria-label="Legal" className="flex gap-5">
+            <Link to="/rental-terms" className="hover:text-white hover:underline underline-offset-4">Rental terms</Link>
+            <Link to="/privacy" className="hover:text-white hover:underline underline-offset-4">Privacy</Link>
+          </nav>
           <p>
             Built by{' '}
             <a href="https://www.instagram.com/jaf_aurion" target="_blank" rel="noreferrer" className="font-semibold text-white/90 hover:underline">JAF-AURION</a>

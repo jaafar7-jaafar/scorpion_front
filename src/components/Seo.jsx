@@ -22,6 +22,7 @@ export default function Seo({ title, description, path, noindex = false }) {
       {pageDescription && <meta name="description" content={pageDescription} />}
       <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
       {!noindex && <link rel="canonical" href={url} />}
+      {!noindex && <link rel="alternate" type="text/markdown" href={pagePath === '/' ? '/index.md' : `${pagePath}/index.md`} />}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={BUSINESS_NAME} />

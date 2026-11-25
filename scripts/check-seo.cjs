@@ -31,6 +31,10 @@ for (const [route, page] of Object.entries(SEO_PAGES)) {
   assert.equal(document.querySelector('#splash'), null);
   assert(sitemap.includes(`<loc>${SITE_URL}${route}</loc>`));
   if (route !== '/') assert(htaccess.includes(route.slice(1)), `${route}: served by .htaccess`);
+  const mdPath = route === '/' ? '/index.md' : `${route}/index.md`;
+  const md = fs.readFileSync(path.join(buildDir, mdPath), 'utf8');
+  assert(md.startsWith('# ') && md.length > 800 && !/material-symbols|<\w+[ >]/.test(md), `${route}: clean Markdown twin`);
+  assert.equal(document.querySelector('link[rel="alternate"][type="text/markdown"]')?.getAttribute('href'), mdPath, `${route}: Markdown alternate link`);
 
   const schemas = [...document.querySelectorAll('script[type="application/ld+json"]')].map(node => JSON.parse(node.textContent));
   assert.equal(schemas.length, 1, `${route}: one schema graph`);
@@ -71,6 +75,9 @@ for (const [, date] of sitemap.matchAll(/<lastmod>([^<]*)<\/lastmod>/g)) assert(
 const robots = fs.readFileSync(path.join(buildDir, 'robots.txt'), 'utf8');
 assert(!/^Disallow:\s*\/\s*$/m.test(robots), 'robots.txt does not block the site');
 assert(robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`), 'robots.txt points to the sitemap');
+assert(/^Content-Signal: .*search=yes/m.test(robots), 'robots.txt declares Content Signals');
+assert(/text\/markdown/.test(htaccess) && /Header add Link/.test(htaccess), '.htaccess serves Markdown and Link headers');
+assert(SEO_PAGES['/rental-terms'] && SEO_PAGES['/privacy'], 'legal pages exist');
 
 const llms = fs.readFileSync(path.join(buildDir, 'llms.txt'), 'utf8');
 for (const route of Object.keys(SEO_PAGES)) assert(llms.includes(`(${SITE_URL}${route})`), `llms.txt lists ${route}`);

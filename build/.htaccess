@@ -15,14 +15,34 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)/$ /$1 [R=301,L,NE]
 
 # Serve generated pages directly, with no directory/slash redirect cycle.
-RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart)$ $1/index.html [END]
+# AI agents that ask for Markdown get the generated index.md (no HTML parsing).
+RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+RewriteRule ^$ index.md [END]
+RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart|rental-terms|privacy)$ $1/index.md [END]
+RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart|rental-terms|privacy)$ $1/index.html [END]
 
 # Admin routes stay interactive, but get noindex in the initial HTML and header.
 RewriteRule ^admin(?:/.*)?$ admin/index.html [END]
+AddType text/markdown .md
+AddCharset UTF-8 .md
+
 <IfModule mod_headers.c>
   SetEnvIf Request_URI "^/admin(?:/|$)" private_page
   Header always set X-Robots-Tag "noindex, follow" env=private_page
-  <FilesMatch "\.(?:html|xml|txt)$">
+  # Pages vary by Accept (HTML for browsers, Markdown for agents). RFC 8288 Link
+  # headers advertise llms.txt and the homepage's Markdown alternate.
+  <FilesMatch "\.(?:html|md)$">
+    Header append Vary Accept
+    Header add Link "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+  </FilesMatch>
+  SetEnvIf Request_URI "^/$" home_page
+  Header add Link "</index.md>; rel=\"alternate\"; type=\"text/markdown\"" env=home_page
+  # Markdown copies are for agents; keep search results on the HTML pages.
+  <FilesMatch "\.md$">
+    Header set X-Robots-Tag "noindex, follow"
+  </FilesMatch>
+  <FilesMatch "\.(?:html|xml|txt|md)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
   <FilesMatch "\.(?:js|css|woff2)$">

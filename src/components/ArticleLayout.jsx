@@ -6,7 +6,7 @@ export default function ArticleLayout({ toc, onBookNow, children }) {
   return (
     <div className="container-page py-10 md:py-16 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16">
       <div className="min-w-0">
-        <details className="lg:hidden mb-10 rounded-2xl border border-zinc-200 bg-white">
+        <details data-md-skip className="lg:hidden mb-10 rounded-2xl border border-zinc-200 bg-white">
           <summary className="flex cursor-pointer list-none items-center justify-between p-4 font-bold text-primary">
             On this page
             <span aria-hidden="true" className="material-symbols-outlined text-[24px]">expand_more</span>
@@ -16,7 +16,7 @@ export default function ArticleLayout({ toc, onBookNow, children }) {
         <div className="prose-guide space-y-14">{children}</div>
       </div>
 
-      <aside className="hidden lg:block">
+      <aside data-md-skip className="hidden lg:block">
         <div className="sticky top-28 space-y-6">
           <nav aria-label="On this page" className="rounded-2xl border border-zinc-200 bg-white py-3">
             <p className="px-5 pt-2 pb-1 text-xs font-bold uppercase tracking-[0.16em] text-secondary">On this page</p>

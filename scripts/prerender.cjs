@@ -9,6 +9,7 @@ const { StaticRouter } = require('react-router-dom');
 const { JSDOM } = require('jsdom');
 const App = require('../src/App').default;
 const { SEO_PAGES, SITE_URL } = require('../src/seo/site');
+const pageToMarkdown = require('./markdown.cjs');
 
 const buildDir = path.resolve(__dirname, '../build');
 const template = fs.readFileSync(path.join(buildDir, 'index.html'), 'utf8');
@@ -25,6 +26,8 @@ function renderPage(route, output) {
   root.querySelectorAll('title, meta, link').forEach(node => document.head.appendChild(node));
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(output, dom.serialize());
+  // Markdown twin for AI agents (Accept: text/markdown, or <page>/index.md).
+  if (SEO_PAGES[route]) fs.writeFileSync(output.replace(/index.html$/, 'index.md'), pageToMarkdown(document, `${SITE_URL}${route}`));
   dom.window.close();
   console.log(`Rendered ${route} -> ${path.relative(buildDir, output)}`);
 }
@@ -56,6 +59,8 @@ const PAGE_SOURCES = {
   '/san-pedro-golf-cart-rental-guide': 'src/pages/RentalGuidePage.jsx',
   '/things-to-do-in-san-pedro-by-golf-cart': 'src/pages/ThingsToDoPage.jsx',
   '/contact': 'src/pages/ContactPage.jsx',
+  '/rental-terms': 'src/pages/TermsPage.jsx',
+  '/privacy': 'src/pages/PrivacyPage.jsx',
 };
 const git = args => execFileSync('git', args, { cwd: path.resolve(__dirname, '..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 function lastModified(route) {

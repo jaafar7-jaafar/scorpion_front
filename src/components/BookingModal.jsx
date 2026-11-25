@@ -19,7 +19,7 @@ const initialForm = {
   notes: '',
 };
 
-export default function BookingModal({ isOpen, onClose, selectedCar }) {
+export default function BookingModal({ isOpen, onClose, selectedCar, prefill }) {
   const [form, setForm] = useState(initialForm);
   const [addresses, setAddresses] = useState([]);
   const [seats, setSeats] = useState([]);
@@ -40,7 +40,7 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
 
   useEffect(() => {
     if (isOpen) {
-      setForm(initialForm);
+      setForm({ ...initialForm, ...(prefill || {}) });
       setSuccess(false);
       setError('');
       document.body.style.overflow = 'hidden';
@@ -48,7 +48,7 @@ export default function BookingModal({ isOpen, onClose, selectedCar }) {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [isOpen]);
+  }, [isOpen, prefill]);
 
   if (!isOpen) return null;
 
