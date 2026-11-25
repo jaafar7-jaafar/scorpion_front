@@ -8,6 +8,10 @@ Find a golf cart for your stay on Ambergris Caye. Compare seating for your group
 
 4-seater **from $35/day** 6-seater **from $65/day** Free delivery in San Pedro
 
+Cart finder
+
+### How many of you are riding?
+
 ## 4-seater or 6-seater: which golf cart should you rent?
 
 Pick the cart by how many people will ride together. Both sizes are delivered to your accommodation in San Pedro, and our team confirms availability and your total quote before your rental is booked.

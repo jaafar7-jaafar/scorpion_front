@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAddresses, getSeats, submitBooking } from '../api';
 import { MOCK_ADDRESSES, MOCK_SEATS } from '../utils/mockData';
 import { trackEvent, trackAdsConversion } from '../utils/analytics';
+import { GolfCartIcon } from './BrandIcons';
 
 const initialForm = {
   fullName: '',
@@ -140,9 +141,13 @@ export default function BookingModal({ isOpen, onClose, selectedCar, prefill }) 
           </button>
 
           {success ? (
-            <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center gap-4">
-              <div className="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined text-secondary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+            <div className="relative flex flex-col items-center justify-center h-full min-h-[400px] text-center gap-4">
+              {/* "Beep beep!" — a golf cart drives off with the request, confetti falls. */}
+              <div aria-hidden="true" className="confetti">{Array.from({ length: 18 }, (_, i) => <i key={i} style={{ '--i': i }} />)}</div>
+              <div aria-hidden="true" className="beep-road relative h-20 w-60">
+                <span className="beep-bubble absolute -top-1 left-1/2 rounded-full bg-sun px-3 py-1 text-sm font-extrabold text-primary">Beep beep!</span>
+                <span className="absolute bottom-2 left-0 right-0 h-[3px] rounded bg-[repeating-linear-gradient(90deg,#f2b544_0_10px,transparent_10px_18px)]" />
+                <span className="beep-cart absolute bottom-3 left-0 text-primary"><GolfCartIcon size={48} facing="right" /></span>
               </div>
               <h3 className="font-serif text-2xl font-bold text-primary">Booking Request Sent!</h3>
               <p className="text-zinc-500 max-w-sm">We've received your request and will contact you shortly to confirm your booking.</p>

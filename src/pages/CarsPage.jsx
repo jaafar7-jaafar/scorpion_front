@@ -6,6 +6,7 @@ import Seo from '../components/Seo';
 import PageHero from '../components/PageHero';
 import FaqList from '../components/FaqList';
 import CtaBand from '../components/CtaBand';
+import CrewQuiz from '../components/CrewQuiz';
 import { WhatsAppLink } from '../components/ContactButtons';
 import { FLEET_FAQS } from '../seo/faqs';
 import { WHATSAPP_URL } from '../seo/site';
@@ -119,6 +120,11 @@ export default function CarsPage({ onBookNow }) {
             {filtered.map((car) => <CarCard key={car.id} car={car} onBookNow={onBookNow} />)}
           </div>
         )}
+      </section>
+
+      <section aria-labelledby="quiz-heading" className="container-page pb-16 md:pb-24">
+        <h2 id="quiz-heading" className="sr-only">Find the right golf cart for your group</h2>
+        <CrewQuiz onBookNow={onBookNow} />
       </section>
 
       <section aria-labelledby="sizes-heading" className="section bg-sand">

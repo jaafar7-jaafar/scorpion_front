@@ -78,6 +78,12 @@ Our team checks availability and confirms your cart, quote, and delivery time.
 
 Your golf cart is delivered to your accommodation. We pick it up when you are done.
 
+## Find your perfect island ride in three taps
+
+Cart finder
+
+### How many of you are riding?
+
 ## Golf carts for rent in San Pedro
 
 4-seater and 6-seater golf carts, delivered to your hotel, resort, or Airbnb on Ambergris Caye.
@@ -127,6 +133,14 @@ Scorpion Golf Cart Rental delivers island-wide, free of charge, to any hotel, re
 - San Pedro Airstrip (SPR) pickup
 - Hotels & resorts island-wide
 - Airbnb & vacation rentals
+
+Tap a stop and take a test drive around the island
+
+Illustrated map · not to scale
+
+San Pedro town
+
+The heart of Ambergris Caye, with restaurants, shops, bars, grocery stores, and the beachfront. Streets in town are narrow and busy, so park your cart and explore the waterfront on foot.
 
 ## San Pedro golf cart guides
 

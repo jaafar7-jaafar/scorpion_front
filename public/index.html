@@ -8,11 +8,11 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/scorpionlogo.png" />
     <meta name="google-site-verification" content="Dw8HXYjyERYYduBW27a_QzGW4xMR1FHxEeB11A0a978" />
     <!-- Page metadata and visible content are rendered from React at build time. -->
-    <link rel="preload" href="%PUBLIC_URL%/fonts/material-symbols-b6c8f41e.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/material-symbols-fd769e12.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face {
         font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: 400;
-        font-display: block; src: url('%PUBLIC_URL%/fonts/material-symbols-b6c8f41e.woff2') format('woff2');
+        font-display: block; src: url('%PUBLIC_URL%/fonts/material-symbols-fd769e12.woff2') format('woff2');
       }
     </style>
     <!--
@@ -23,6 +23,9 @@
     <script>
       (function () {
         var d = document.documentElement;
+        // Sunset mode: Belize is UTC-6 all year (no daylight saving time).
+        var h = (new Date().getUTCHours() + 18) % 24;
+        d.setAttribute('data-daypart', h < 5 ? 'night' : h < 11 ? 'morning' : h < 16 ? 'day' : h < 19 ? 'golden' : 'night');
         try {
           var skip = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview/i.test(navigator.userAgent)
             || location.pathname.indexOf('/admin') === 0

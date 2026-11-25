@@ -6,42 +6,12 @@ import FaqList from '../components/FaqList';
 import CtaBand from '../components/CtaBand';
 import { EXPLORE_FAQS } from '../seo/faqs';
 import { WHATSAPP_URL } from '../seo/site';
-import { PalmIcon, WaveIcon, GolfCartIcon } from '../components/BrandIcons';
+import { PLACES as ALL_PLACES } from '../seo/places';
+import PlaceIcon from '../components/PlaceIcon';
+import IslandMap from '../components/IslandMap';
 
-// Owner review: keep every place description accurate for current conditions.
-// Avoid adding distances, prices, opening hours, or rules unless verified.
-const PLACES = [
-  {
-    icon: 'storefront',
-    name: 'San Pedro town',
-    text: 'The heart of Ambergris Caye, with restaurants, shops, bars, grocery stores, and the beachfront. Streets in town are narrow and busy, so park your cart and explore the waterfront on foot.',
-  },
-  {
-    icon: <WaveIcon />,
-    name: 'Boca del Rio',
-    text: 'A neighborhood at the north end of town with a public beach area that is popular with locals and visitors for swimming and sunsets. It is an easy, short drive from most San Pedro accommodations.',
-  },
-  {
-    icon: <GolfCartIcon />,
-    name: 'North Ambergris Caye',
-    text: 'Cross the bridge at the north end of town to reach the northern part of the island, with resorts, beach bars, and restaurants spread along the road. Ask whether a bridge pass is included in your rental before you go.',
-  },
-  {
-    icon: <PalmIcon />,
-    name: 'Secret Beach',
-    text: 'One of the most popular golf cart trips on the island, on the calm west (lagoon) side of Ambergris Caye, north of town, with beach clubs and shallow turquoise water. The road can be rough, so allow plenty of time and check current conditions with our team.',
-  },
-  {
-    icon: <GolfCartIcon facing="right" />,
-    name: 'South Ambergris Caye',
-    text: 'South of town the island is quieter, with residential areas, resorts, and lagoon views. It is a relaxed drive for an afternoon or a meal away from the busiest streets.',
-  },
-  {
-    icon: 'scuba_diving',
-    name: 'Reef and snorkel tour docks',
-    text: 'Snorkeling and diving trips to the Belize Barrier Reef, including Hol Chan Marine Reserve and Shark Ray Alley, leave by boat from docks in San Pedro. Drive your cart to your tour operator, then pick it up when you return.',
-  },
-];
+const PLACES = ALL_PLACES.filter((p) => !p.mapOnly);
+
 
 const TOC = [
   { id: 'places', label: 'Where to go' },
@@ -64,11 +34,12 @@ export default function ThingsToDoPage({ onBookNow }) {
       <ArticleLayout toc={TOC} onBookNow={onBookNow}>
         <section id="places" aria-labelledby="places-heading">
           <h2 id="places-heading">Where to go on Ambergris Caye by golf cart</h2>
+          <div className="!mt-6"><IslandMap onBookNow={onBookNow} stacked /></div>
           <ol className="!mt-6 grid gap-4 sm:grid-cols-2">
             {PLACES.map(({ icon, name, text }, i) => (
               <li key={name} className="reveal card p-6">
                 <div className="flex items-center gap-3">
-                  <span aria-hidden="true" className={`flex h-11 w-11 items-center justify-center rounded-xl bg-sun-soft text-amber-800 ${typeof icon === 'string' ? 'material-symbols-outlined text-[24px]' : ''}`}>{icon}</span>
+                  <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-xl bg-sun-soft text-amber-800"><PlaceIcon icon={icon} /></span>
                   <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Stop {i + 1}</span>
                 </div>
                 <h3 className="mt-4">{name}</h3>

@@ -61,9 +61,10 @@
   .prose-guide > section { @apply space-y-4; }
   .prose-guide h2 { @apply font-serif text-2xl md:text-[1.9rem] md:leading-tight font-bold text-primary pt-2; }
   .prose-guide h3 { @apply font-serif text-xl font-semibold text-primary; }
-  .prose-guide ul { @apply space-y-2.5 pl-0; }
-  .prose-guide ul > li { @apply relative pl-8; }
-  .prose-guide ul > li::before { content: ''; @apply absolute left-2 top-[0.7em] w-2 h-2 rounded-full bg-sun; }
+  /* Only plain content lists get guide bullets; styled UI lists (chips, cards) opt out by having a class. */
+  .prose-guide ul:not([class]) { @apply space-y-2.5 pl-0; }
+  .prose-guide ul:not([class]) > li { @apply relative pl-8; }
+  .prose-guide ul:not([class]) > li::before { content: ''; @apply absolute left-2 top-[0.7em] w-2 h-2 rounded-full bg-sun; }
   .prose-guide a:not([class*='btn']) { @apply link; }
 }
 
@@ -143,6 +144,70 @@ html:not(.no-intro) .hero-underline path { animation-delay: 1.6s; }
 @media (prefers-reduced-motion: reduce) {
   .marquee, .road-cart, .road-cart svg, .header-art { animation: none; }
   .road-cart { transform: translateX(calc(50cqi - 20px)); }
+}
+
+/* ── Island map ── */
+.map-cart { transition: transform 1.3s cubic-bezier(.65,0,.35,1); }
+.map-cart-bump { animation: cart-bump .22s ease-in-out infinite alternate; }
+.map-pulse { transform-box: fill-box; transform-origin: center; animation: map-pulse 1.6s ease-out infinite; }
+@keyframes map-pulse { from { transform: scale(1); opacity: .7; } to { transform: scale(2.6); opacity: 0; } }
+.map-boat { animation: map-boat 3s ease-in-out infinite alternate; }
+@keyframes map-boat { to { transform: translate(-6px, 3px) rotate(-3deg); } }
+.map-plane { animation: map-plane 6s ease-in-out infinite alternate; }
+@keyframes map-plane { to { transform: translate(-10px, -6px); } }
+.map-waves { animation: map-waves 4s ease-in-out infinite alternate; }
+@keyframes map-waves { to { transform: translateX(8px); } }
+.map-palm { transform-box: fill-box; transform-origin: bottom center; animation: palm-sway 4s ease-in-out infinite alternate; }
+@keyframes palm-sway { from { rotate: -3deg; } to { rotate: 3deg; } }
+.map-card { animation: pop-in .45s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes pop-in { from { opacity: 0; translate: 0 12px; scale: .98; } to { opacity: 1; translate: 0 0; scale: 1; } }
+
+/* ── Cart finder quiz ── */
+.quiz-step { animation: quiz-in .45s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes quiz-in { from { opacity: 0; translate: 24px 0; } to { opacity: 1; translate: 0 0; } }
+.result-cart { animation: result-cart .8s cubic-bezier(.2,.9,.3,1.4) both; }
+@keyframes result-cart { from { transform: translateX(-60px) rotate(-8deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ── Confetti (quiz result, booking sent) ── */
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti i { position: absolute; top: -12px; left: calc(var(--i) * 5.5% + 2%); width: 8px; height: 12px; border-radius: 2px;
+  background: hsl(calc(var(--i) * 47 + 30) 85% 60%); animation: confetti 1.8s calc(var(--i) * 45ms) cubic-bezier(.2,.6,.4,1) both; }
+.confetti i:nth-child(3n) { background: #f2b544; }
+.confetti i:nth-child(4n) { background: #25D366; width: 6px; height: 6px; border-radius: 50%; }
+@keyframes confetti { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(380px) rotate(calc(var(--i) * 90deg + 180deg)); opacity: 0; } }
+
+/* ── Booking sent: "Beep beep!" ── */
+.beep-cart { animation: beep-drive 1.6s cubic-bezier(.45,0,.3,1) both; }
+.beep-cart svg { animation: cart-bump .18s ease-in-out infinite alternate; }
+@keyframes beep-drive { from { transform: translateX(-10px); } to { transform: translateX(190px); } }
+.beep-bubble { translate: -50% 0; animation: beep-pop .5s .9s cubic-bezier(.2,.9,.3,1.5) both; }
+@keyframes beep-pop { from { scale: 0; opacity: 0; } to { scale: 1; opacity: 1; } }
+
+/* ── 404: cart stuck in the sand ── */
+.stuck-wheel { animation: wheel-spin .5s linear infinite; }
+@keyframes wheel-spin { to { rotate: 360deg; } }
+.stuck-cart { animation: stuck-shake .25s ease-in-out infinite alternate; }
+@keyframes stuck-shake { from { rotate: -.6deg; } to { rotate: .6deg; } }
+.stuck-palm { animation: palm-sway 3.5s ease-in-out infinite alternate; }
+.sand { animation: sand-fly 1s calc(var(--i) * 160ms) ease-out infinite; }
+@keyframes sand-fly { from { transform: translate(0, 0); opacity: .9; } to { transform: translate(calc(30px + var(--i) * 9px), calc(-34px + var(--i) * 6px)); opacity: 0; } }
+
+/* ── Sunset mode: the hero glow follows Belize time (set on <html> before paint). ── */
+[data-daypart="golden"] .hero-aurora::before { background: #ffd08a; opacity: .7; }
+[data-daypart="golden"] .hero-aurora::after { background: #f07a3a; opacity: .3; }
+[data-daypart="night"] .hero-aurora::before { background: #9cc7ee; opacity: .5; }
+[data-daypart="night"] .hero-aurora::after { background: #7b5cc4; opacity: .2; }
+.daypart-label::after { content: ''; }
+[data-daypart="morning"] .daypart-label::after { content: ' · Good morning ☀️'; }
+[data-daypart="day"] .daypart-label::after { content: ' · Sunny afternoon 🌴'; }
+[data-daypart="golden"] .daypart-label::after { content: ' · Golden hour 🌅'; }
+[data-daypart="night"] .daypart-label::after { content: ' · Island nights 🌙'; }
+
+@media (prefers-reduced-motion: reduce) {
+  .map-cart { transition: none; }
+  .map-cart-bump, .map-pulse, .map-boat, .map-plane, .map-waves, .map-palm, .map-card, .quiz-step, .result-cart,
+  .confetti i, .beep-cart, .beep-cart svg, .beep-bubble, .stuck-wheel, .stuck-cart, .stuck-palm, .sand { animation: none; }
+  .confetti, .sand { display: none; }
 }
 
 /* Soft island backdrop used behind page headers. */

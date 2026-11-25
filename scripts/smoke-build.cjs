@@ -86,7 +86,7 @@ async function checkRoute(route, filename, failedApi = false) {
     const destination = route === '/contact' ? '/about' : '/contact';
     const link = document.querySelector(`a[href="${destination}"]`);
     link.dispatchEvent(new window.MouseEvent('click', { bubbles: true, button: 0 }));
-    await pause(100);
+    await pause(300); // head metadata commits asynchronously after navigation
     assert.equal(window.location.pathname, destination);
     assert.equal(document.title, SEO_PAGES[destination].title);
     assert.equal(document.querySelectorAll('link[rel="canonical"]').length, 1);

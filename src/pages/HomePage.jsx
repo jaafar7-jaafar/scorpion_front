@@ -5,6 +5,7 @@ import { resolveImageUrl } from '../utils/imageUrl';
 import CarCard from '../components/CarCard';
 import ReviewsSection from '../components/ReviewsSection';
 import ServiceAreaSection from '../components/ServiceAreaSection';
+import CrewQuiz from '../components/CrewQuiz';
 import Seo from '../components/Seo';
 import FaqList from '../components/FaqList';
 import CtaBand from '../components/CtaBand';
@@ -77,7 +78,7 @@ export default function HomePage({ onBookNow }) {
           <div>
             <p className="chip mb-6">
               <span aria-hidden="true" className="material-symbols-outlined icon-fill text-[18px] text-secondary">location_on</span>
-              San Pedro · Ambergris Caye · Belize
+              <span className="daypart-label">San Pedro · Ambergris Caye · Belize</span>
             </p>
             <h1 className="font-serif text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-primary">
               Golf Cart Rental in{' '}
@@ -216,6 +217,14 @@ export default function HomePage({ onBookNow }) {
         </div>
       </section>
 
+      {/* ── Cart finder quiz ── */}
+      <section className="section bg-white">
+        <div className="container-page">
+          <SectionHeader eyebrow="Not sure which cart?" title="Find your perfect island ride in three taps" />
+          <div className="reveal"><CrewQuiz onBookNow={onBookNow} /></div>
+        </div>
+      </section>
+
       {/* ── Fleet preview (live inventory, with a static fallback) ── */}
       <section className="section bg-white">
         <div className="container-page">
@@ -295,7 +304,7 @@ export default function HomePage({ onBookNow }) {
         </div>
       </section>
 
-      <ServiceAreaSection />
+      <ServiceAreaSection illustrated onBookNow={onBookNow} />
 
       {/* ── Guides: internal links to long-form content ── */}
       <section className="section bg-white">

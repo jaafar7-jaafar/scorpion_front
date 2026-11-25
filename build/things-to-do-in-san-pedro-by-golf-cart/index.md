@@ -8,6 +8,12 @@ A golf cart turns Ambergris Caye into an easy road trip. Here are the places vis
 
 ## Where to go on Ambergris Caye by golf cart
 
+Illustrated map · not to scale
+
+San Pedro town
+
+The heart of Ambergris Caye, with restaurants, shops, bars, grocery stores, and the beachfront. Streets in town are narrow and busy, so park your cart and explore the waterfront on foot.
+
 Stop 1
 
 ### San Pedro town
