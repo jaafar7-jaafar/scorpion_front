@@ -7,6 +7,8 @@ let initialized = false;
 // No-op if no measurement ID is configured, so this is always safe to call.
 export function initAnalytics() {
   if (initialized || !GA_ID) return;
+  // Only measure the real site: local builds and automated checks must not add fake visits.
+  if (!/(^|\.)scorpiongolfcarts\.com$/.test(window.location.hostname)) return;
   initialized = true;
 
   const script = document.createElement('script');
