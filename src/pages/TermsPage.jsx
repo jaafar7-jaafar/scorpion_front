@@ -43,7 +43,7 @@ export default function TermsPage() {
           </section>
           <section>
             <h2>Questions</h2>
-            <p>Contact us any day from 8am to 10pm (Belize time) at <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a> or <a href={WHATSAPP_URL}>on WhatsApp</a>. See also our <Link to="/privacy">privacy policy</Link> and <Link to="/contact">contact page</Link>.</p>
+            <p>Contact us 24 hours a day at <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a> or <a href={WHATSAPP_URL}>on WhatsApp</a>. See also our <Link to="/privacy">privacy policy</Link> and <Link to="/contact">contact page</Link>.</p>
           </section>
         </div>
       </div>

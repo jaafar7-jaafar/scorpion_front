@@ -12,14 +12,14 @@ Explore Ambergris Caye at your own pace. Choose a 4 or 6-seater golf cart and ge
 
 [Ask on WhatsApp](https://wa.me/5016007672?text=Hi!%20I%20am%20interested%20in%20renting%20a%20golf%20cart%20in%20San%20Pedro.)
 
-Free cancellation up to 24 hours before · Open daily 8am–10pm
+Free cancellation up to 24 hours before · Open 24/7
 
 **Delivered to your door** Hotels, resorts & Airbnbs in San Pedro
 
 - **Free delivery** To your hotel, resort, or Airbnb in San Pedro
 - **4 & 6 seats** A cart sized for couples, families, and groups
 - **Free cancellation** Up to 24 hours before your rental starts
-- **Local team** Phone and WhatsApp, daily 8am–10pm
+- **Open 24/7** Local team on phone and WhatsApp, day and night
 
 - San Pedro Town
 - Secret Beach

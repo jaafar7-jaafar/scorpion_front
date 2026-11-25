@@ -32,4 +32,4 @@ We accept cash and major credit and debit cards.
 
 ## Questions
 
-Contact us any day from 8am to 10pm (Belize time) at [+501 600-7672](tel:+5016007672) or [on WhatsApp](https://wa.me/5016007672). See also our [privacy policy](https://www.scorpiongolfcarts.com/privacy) and [contact page](https://www.scorpiongolfcarts.com/contact).
+Contact us 24 hours a day at [+501 600-7672](tel:+5016007672) or [on WhatsApp](https://wa.me/5016007672). See also our [privacy policy](https://www.scorpiongolfcarts.com/privacy) and [contact page](https://www.scorpiongolfcarts.com/contact).

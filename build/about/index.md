@@ -19,7 +19,7 @@ Choose from 4 and 6-seater options and tell us your arrival dates and accommodat
 - **Location:** San Pedro, Ambergris Caye, Belize
 - **Carts:** 4-seater and 6-seater golf carts
 - **Delivery:** Free delivery and pickup at hotels, resorts, and Airbnbs in San Pedro
-- **Hours:** Daily, 8am to 10pm (Belize time)
+- **Hours:** Open 24 hours, every day
 - **Phone & WhatsApp:** +501 600-7672
 
 Planning your trip? Read our [San Pedro golf cart rental guide](https://www.scorpiongolfcarts.com/san-pedro-golf-cart-rental-guide) or see [things to do in San Pedro by golf cart](https://www.scorpiongolfcarts.com/things-to-do-in-san-pedro-by-golf-cart).

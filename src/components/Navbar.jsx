@@ -87,7 +87,7 @@ export default function Navbar({ onBookNow }) {
               <CallLink location="mobile_menu" className="btn-outline">Call</CallLink>
               <WhatsAppLink location="mobile_menu">WhatsApp</WhatsAppLink>
             </div>
-            <p className="pt-5 text-center text-sm text-zinc-500">Open daily 8am–10pm · San Pedro, Belize</p>
+            <p className="pt-5 text-center text-sm text-zinc-500">Open 24/7 · San Pedro, Belize</p>
             <div className="flex justify-center pt-5 pb-10">
               <SocialLinks className="gap-4" size="lg" />
             </div>

@@ -24,7 +24,7 @@ const TRUST = [
   { icon: <DeliveryIcon />, title: 'Free delivery', text: 'To your hotel, resort, or Airbnb in San Pedro' },
   { icon: <GolfCartIcon />, title: '4 & 6 seats', text: 'A cart sized for couples, families, and groups' },
   { icon: 'event_available', title: 'Free cancellation', text: 'Up to 24 hours before your rental starts' },
-  { icon: 'support_agent', title: 'Local team', text: 'Phone and WhatsApp, daily 8am–10pm' },
+  { icon: 'support_agent', title: 'Open 24/7', text: 'Local team on phone and WhatsApp, day and night' },
 ];
 
 const RATES = [
@@ -107,7 +107,7 @@ export default function HomePage({ onBookNow }) {
             </div>
             <p className="mt-5 flex items-center gap-2 text-sm text-zinc-600">
               <span aria-hidden="true" className="material-symbols-outlined icon-fill text-[18px] text-secondary">verified</span>
-              Free cancellation up to 24 hours before · Open daily 8am–10pm
+              Free cancellation up to 24 hours before · Open 24/7
             </p>
           </div>
 

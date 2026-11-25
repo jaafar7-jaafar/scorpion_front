@@ -33,7 +33,7 @@ New to the island? Read our [San Pedro golf cart rental guide](https://www.scorp
 - Pickup at the San Pedro airstrip (SPR) by arrangement
 - Free cancellation up to 24 hours before your rental starts
 - Cash and major credit and debit cards accepted
-- Local support by phone and WhatsApp, daily 8am to 10pm
+- Local support by phone and WhatsApp, 24 hours a day
 
 ## Golf cart rental questions
 

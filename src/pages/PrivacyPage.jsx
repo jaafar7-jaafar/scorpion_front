@@ -35,7 +35,7 @@ export default function PrivacyPage() {
           </section>
           <section>
             <h2>Your choices</h2>
-            <p>To ask about, correct, or delete information you have given us, including a review, contact us at <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a> or <a href={WHATSAPP_URL}>on WhatsApp</a>, daily from 8am to 10pm (Belize time).</p>
+            <p>To ask about, correct, or delete information you have given us, including a review, contact us at <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a> or <a href={WHATSAPP_URL}>on WhatsApp</a>, 24 hours a day.</p>
           </section>
           <section>
             <h2>Related pages</h2>

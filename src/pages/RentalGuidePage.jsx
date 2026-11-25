@@ -13,7 +13,7 @@ const QUICK_FACTS = [
   ['Starting rates', 'From $35/day (4-seater) and $65/day (6-seater)'],
   ['Delivery', 'Free delivery and pickup at hotels, resorts, and Airbnbs in San Pedro'],
   ['Cancellation', 'Free cancellation up to 24 hours before your rental starts'],
-  ['Booking', 'Online request, phone, or WhatsApp, daily 8am to 10pm'],
+  ['Booking', 'Online request, phone, or WhatsApp, 24 hours a day'],
 ];
 
 const TOC = [

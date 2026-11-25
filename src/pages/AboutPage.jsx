@@ -10,7 +10,7 @@ const FACTS = [
   ['Location', 'San Pedro, Ambergris Caye, Belize'],
   ['Carts', '4-seater and 6-seater golf carts'],
   ['Delivery', 'Free delivery and pickup at hotels, resorts, and Airbnbs in San Pedro'],
-  ['Hours', 'Daily, 8am to 10pm (Belize time)'],
+  ['Hours', 'Open 24 hours, every day'],
   ['Phone & WhatsApp', '+501 600-7672'],
 ];
 

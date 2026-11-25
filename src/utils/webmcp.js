@@ -11,7 +11,7 @@ const RENTAL_INFO = {
   delivery: 'Free delivery and pickup at hotels, resorts, and Airbnbs in San Pedro; San Pedro airstrip (SPR) pickup by arrangement',
   cancellation: 'Free cancellation up to 24 hours before the rental starts',
   payment: 'Cash and major credit and debit cards',
-  hours: 'Daily, 8am to 10pm (Belize time)',
+  hours: 'Open 24 hours, every day',
   phone_and_whatsapp: PHONE_DISPLAY,
   whatsapp_url: WHATSAPP_URL,
   pages: {

@@ -29,7 +29,7 @@ export default function ContactPage({ onBookNow }) {
             <ul className="mt-6 space-y-4 text-white/85">
               <li className="flex items-center gap-3"><span aria-hidden="true" className="material-symbols-outlined text-[24px] text-sun">location_on</span>San Pedro, Ambergris Caye, Belize</li>
               <li className="flex items-center gap-3"><span aria-hidden="true" className="material-symbols-outlined text-[24px] text-sun">call</span><CallLink location="contact" icon={false} className="font-bold text-white underline underline-offset-4" /></li>
-              <li className="flex items-center gap-3"><span aria-hidden="true" className="material-symbols-outlined text-[24px] text-sun">schedule</span>Available daily, 8am–10pm (Belize time)</li>
+              <li className="flex items-center gap-3"><span aria-hidden="true" className="material-symbols-outlined text-[24px] text-sun">schedule</span>Open 24 hours, every day</li>
             </ul>
             <div className="mt-8 grid gap-3">
               <WhatsAppLink location="contact">Message Us on WhatsApp</WhatsAppLink>

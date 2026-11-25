@@ -10,7 +10,7 @@ Scorpion Golf Cart Rental
 
 - San Pedro, Ambergris Caye, Belize
 - [+501 600-7672](tel:+5016007672)
-- Available daily, 8am–10pm (Belize time)
+- Open 24 hours, every day
 
 [Message Us on WhatsApp](https://wa.me/5016007672?text=Hi!%20I%20am%20interested%20in%20renting%20a%20golf%20cart%20in%20San%20Pedro.) [Call now](tel:+5016007672)
 

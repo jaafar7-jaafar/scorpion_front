@@ -22,7 +22,7 @@ This website may use Google Analytics to count page views and clicks on booking,
 
 ## Your choices
 
-To ask about, correct, or delete information you have given us, including a review, contact us at [+501 600-7672](tel:+5016007672) or [on WhatsApp](https://wa.me/5016007672), daily from 8am to 10pm (Belize time).
+To ask about, correct, or delete information you have given us, including a review, contact us at [+501 600-7672](tel:+5016007672) or [on WhatsApp](https://wa.me/5016007672), 24 hours a day.
 
 ## Related pages
 

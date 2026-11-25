@@ -39,7 +39,7 @@ export default function Footer() {
           <address className="not-italic space-y-3">
             <p className="font-semibold text-white">Scorpion Golf Cart Rental</p>
             <p>San Pedro, Ambergris Caye, Belize</p>
-            <p>Open daily, 8am–10pm (Belize time)</p>
+            <p>Open 24 hours, every day</p>
             <div className="flex flex-wrap gap-2 pt-2">
               <WhatsAppLink location="footer" className="btn-whatsapp !px-4 !py-2.5 text-sm">WhatsApp</WhatsAppLink>
               <CallLink location="footer" className="btn-ghost-light !px-4 !py-2.5 text-sm" />

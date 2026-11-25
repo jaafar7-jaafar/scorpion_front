@@ -16,7 +16,7 @@ Open https://business.google.com, choose the profile, then **Edit profile**.
 | **Phone** | `+501 600-7672` |
 | **Website** | `https://www.scorpiongolfcarts.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp` (the tag lets Google Analytics show visits that came from the profile) |
 | **Booking / appointment link** | `https://www.scorpiongolfcarts.com/cars` |
-| **Hours** | Monday–Sunday, 8:00 AM – 10:00 PM |
+| **Hours** | Open 24 hours, every day |
 | **Opening date** | **CONFIRM** the real month and year, or leave blank |
 
 ### Location: choose ONE option
@@ -28,7 +28,7 @@ Open https://business.google.com, choose the profile, then **Edit profile**.
 ## 2. Business description (paste as-is; under 750 characters, no links)
 
 ```
-Scorpion Golf Cart Rental offers 4-seater and 6-seater golf carts for visitors to San Pedro, Ambergris Caye, Belize. We deliver your cart free of charge to your hotel, resort, or Airbnb in San Pedro and pick it up when your rental ends, and pickup at the San Pedro airstrip (SPR) can be arranged. Golf carts are one of the easiest ways to explore the island, from San Pedro town and Boca del Rio to Secret Beach and the north of the caye. Send your dates, group size, and where you are staying online, by phone, or on WhatsApp, and our local team will confirm availability and your quote. Free cancellation up to 24 hours before your rental starts. We accept cash and major credit and debit cards. Open daily, 8am to 10pm.
+Scorpion Golf Cart Rental offers 4-seater and 6-seater golf carts for visitors to San Pedro, Ambergris Caye, Belize. We deliver your cart free of charge to your hotel, resort, or Airbnb in San Pedro and pick it up when your rental ends, and pickup at the San Pedro airstrip (SPR) can be arranged. Golf carts are one of the easiest ways to explore the island, from San Pedro town and Boca del Rio to Secret Beach and the north of the caye. Send your dates, group size, and where you are staying online, by phone, or on WhatsApp, and our local team will confirm availability and your quote. Free cancellation up to 24 hours before your rental starts. We accept cash and major credit and debit cards. Open 24 hours, every day.
 ```
 
 ---
