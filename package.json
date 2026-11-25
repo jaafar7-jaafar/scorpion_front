@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "icons": "node scripts/subset-icons.cjs",
-    "indexnow": "node scripts/indexnow.cjs"
+    "indexnow": "node scripts/indexnow.cjs",
+    "check:mobile": "node scripts/check-mobile.cjs"
   },
   "eslintConfig": {
     "extends": [

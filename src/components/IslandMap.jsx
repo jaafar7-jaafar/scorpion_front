@@ -39,9 +39,10 @@ export default function IslandMap({ onBookNow, initial = 'town', stacked = false
   };
 
   return (
-    <div className={`grid gap-6 ${stacked ? '' : 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-10'}`}>
-      <div className="relative overflow-hidden rounded-[2rem] border-4 border-white bg-[linear-gradient(135deg,#c6efe9,#7fcfcf)] shadow-[0_30px_60px_-25px_rgba(1,45,29,0.35)]">
-        <svg aria-hidden="true" viewBox="0 0 320 540" className="mx-auto block h-[440px] w-auto md:h-[540px]">
+    // minmax(0,1fr) + min-w-0: the swipeable chip row must never widen the page on phones.
+    <div className={`grid grid-cols-[minmax(0,1fr)] gap-6 ${stacked ? '' : 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-10'}`}>
+      <div className="relative min-w-0 overflow-hidden rounded-[2rem] border-4 border-white bg-[linear-gradient(135deg,#c6efe9,#7fcfcf)] shadow-[0_30px_60px_-25px_rgba(1,45,29,0.35)]">
+        <svg aria-hidden="true" viewBox="0 0 320 540" className="mx-auto block h-[380px] w-auto sm:h-[460px] md:h-[540px]">
           <defs>
             <linearGradient id="map-land" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0" stopColor="#e9f0d4" /><stop offset=".55" stopColor="#f4e7c8" /><stop offset="1" stopColor="#f1dfb7" />
@@ -106,7 +107,7 @@ export default function IslandMap({ onBookNow, initial = 'town', stacked = false
         <p className="absolute bottom-3 left-4 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-zinc-600 backdrop-blur">Illustrated map · not to scale</p>
       </div>
 
-      <div>
+      <div className="min-w-0">
         <ul className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0 [scrollbar-width:none]" aria-label="Choose a stop on Ambergris Caye">
           {PLACES.map((p) => (
             <li key={p.id} className="shrink-0">

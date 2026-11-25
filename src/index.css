@@ -202,6 +202,13 @@ html:not(.no-intro) .hero-underline path { animation-delay: 1.6s; }
 [data-daypart="day"] .daypart-label::after { content: ' · Sunny afternoon 🌴'; }
 [data-daypart="golden"] .daypart-label::after { content: ' · Golden hour 🌅'; }
 [data-daypart="night"] .daypart-label::after { content: ' · Island nights 🌙'; }
+/* Phones: keep the chip on one line — emoji only. */
+@media (max-width: 639px) {
+  [data-daypart="morning"] .daypart-label::after { content: ' ☀️'; }
+  [data-daypart="day"] .daypart-label::after { content: ' 🌴'; }
+  [data-daypart="golden"] .daypart-label::after { content: ' 🌅'; }
+  [data-daypart="night"] .daypart-label::after { content: ' 🌙'; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .map-cart { transition: none; }
