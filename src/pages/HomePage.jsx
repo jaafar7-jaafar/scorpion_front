@@ -10,6 +10,7 @@ import FaqList from '../components/FaqList';
 import CtaBand from '../components/CtaBand';
 import { WhatsAppLink } from '../components/ContactButtons';
 import { HOME_FAQS } from '../seo/faqs';
+import { DeliveryIcon, GolfCartIcon, GolfCartLongIcon, PalmIcon } from '../components/BrandIcons';
 
 const PARTNERS = [
   { name: 'Tropic Air', url: 'https://www.tropicair.com', img: 'uploads/partners/tropicair.jpg', icon: 'flight' },
@@ -19,16 +20,18 @@ const PARTNERS = [
 ];
 
 const TRUST = [
-  { icon: 'local_shipping', title: 'Free delivery', text: 'To your hotel, resort, or Airbnb in San Pedro' },
-  { icon: 'groups', title: '4 & 6 seats', text: 'A cart sized for couples, families, and groups' },
+  { icon: <DeliveryIcon />, title: 'Free delivery', text: 'To your hotel, resort, or Airbnb in San Pedro' },
+  { icon: <GolfCartIcon />, title: '4 & 6 seats', text: 'A cart sized for couples, families, and groups' },
   { icon: 'event_available', title: 'Free cancellation', text: 'Up to 24 hours before your rental starts' },
   { icon: 'support_agent', title: 'Local team', text: 'Phone and WhatsApp, daily 8am–10pm' },
 ];
 
 const RATES = [
-  { seats: '4-Seater', price: '$35', bestFor: 'Couples, small families, and groups of up to four' },
-  { seats: '6-Seater', price: '$65', bestFor: 'Larger families and groups who want to ride together', featured: true },
+  { seats: '4-Seater', price: '$35', bestFor: 'Couples, small families, and groups of up to four', Icon: GolfCartIcon },
+  { seats: '6-Seater', price: '$65', bestFor: 'Larger families and groups who want to ride together', featured: true, Icon: GolfCartLongIcon },
 ];
+
+const DESTINATIONS = ['San Pedro Town', 'Secret Beach', 'Boca del Rio', 'North Ambergris Caye', 'San Pedro Airstrip', 'Hotels & resorts', 'Airbnb delivery', 'South Ambergris Caye'];
 
 const RATE_INCLUDES = ['Free delivery & pickup in San Pedro', 'Free cancellation up to 24h before', 'Local support by phone & WhatsApp'];
 
@@ -119,7 +122,7 @@ export default function HomePage({ onBookNow }) {
               />
             </div>
             <div className="float-badge absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-auto flex items-center gap-3 rounded-2xl border border-white/70 bg-white/90 p-3 pr-5 shadow-xl backdrop-blur-md">
-              <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sun text-primary material-symbols-outlined text-[24px] icon-fill">local_shipping</span>
+              <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sun text-primary"><DeliveryIcon /></span>
               <span className="text-sm leading-snug"><strong className="block text-primary">Delivered to your door</strong><span className="text-zinc-600">Hotels, resorts &amp; Airbnbs in San Pedro</span></span>
             </div>
           </div>
@@ -131,11 +134,27 @@ export default function HomePage({ onBookNow }) {
         <ul className="container-page flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible [scrollbar-width:none]">
           {TRUST.map(({ icon, title, text }) => (
             <li key={title} className="flex min-w-[78%] snap-start items-start gap-3 rounded-2xl bg-sand/70 p-4 sm:min-w-[45%] md:min-w-0 md:bg-transparent md:p-0">
-              <span aria-hidden="true" className="material-symbols-outlined text-[24px] flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-fixed/60 text-primary">{icon}</span>
+              <span aria-hidden="true" className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-fixed/60 text-primary ${typeof icon === 'string' ? 'material-symbols-outlined text-[24px]' : ''}`}>{icon}</span>
               <span><strong className="block text-primary">{title}</strong><span className="text-sm text-zinc-600">{text}</span></span>
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* ── Destination marquee: where Scorpion delivers ── */}
+      <section aria-label="Places we deliver golf carts" className="marquee-wrap overflow-hidden bg-primary py-4 text-white">
+        <div className="marquee">
+          {[false, true].map((clone) => (
+            <ul key={String(clone)} aria-hidden={clone || undefined} className="flex shrink-0 items-center">
+              {DESTINATIONS.map((place, i) => (
+                <li key={place} className="flex items-center gap-4 whitespace-nowrap px-4 font-serif text-lg font-semibold md:text-xl">
+                  {place}
+                  <span aria-hidden="true" className="text-sun">{i % 2 ? <PalmIcon size={20} /> : <GolfCartIcon size={20} />}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </section>
 
       {/* ── Rates ── */}
@@ -143,9 +162,10 @@ export default function HomePage({ onBookNow }) {
         <div className="container-page">
           <SectionHeader eyebrow="Rates" title="Simple daily golf cart rates" lead="Starting daily rates for San Pedro golf cart rentals. We confirm the total for your dates before you book." />
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {RATES.map(({ seats, price, bestFor, featured }) => (
+            {RATES.map(({ seats, price, bestFor, featured, Icon }) => (
               <article key={seats} className={`reveal relative rounded-[1.75rem] p-7 md:p-8 ${featured ? 'bg-primary text-white' : 'card'}`}>
                 {featured && <span className="absolute right-6 top-6 rounded-full bg-sun px-3 py-1 text-xs font-bold text-primary">Groups</span>}
+                <span aria-hidden="true" className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl ${featured ? 'bg-white/10 text-sun' : 'bg-primary-fixed/60 text-primary'}`}><Icon size={30} /></span>
                 <h3 className={`font-serif text-2xl font-bold ${featured ? 'text-white' : 'text-primary'}`}>{seats} golf cart</h3>
                 <p className={`mt-1 text-sm ${featured ? 'text-white/70' : 'text-zinc-600'}`}>{bestFor}</p>
                 <p className="mt-6 flex items-end gap-1.5">
@@ -164,6 +184,7 @@ export default function HomePage({ onBookNow }) {
               </article>
             ))}
             <article className="reveal flex flex-col rounded-[1.75rem] border-2 border-dashed border-sun/60 bg-sun-soft/60 p-7 md:col-span-2 md:p-8 lg:col-span-1">
+              <span aria-hidden="true" className="material-symbols-outlined mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-[28px] text-amber-700">calendar_month</span>
               <h3 className="font-serif text-2xl font-bold text-primary">Weekly &amp; longer stays</h3>
               <p className="mt-1 text-sm text-zinc-600">Staying on Ambergris Caye for a week or more</p>
               <p className="mt-6 flex-1 leading-relaxed text-zinc-700">Rentals are priced by the day. Send your dates and group size and we will reply with a quote for your whole stay, including delivery and pickup.</p>
@@ -177,6 +198,10 @@ export default function HomePage({ onBookNow }) {
       <section className="section bg-sand">
         <div className="container-page">
           <SectionHeader eyebrow="How it works" title="Book your golf cart in three steps" />
+          <div aria-hidden="true" className="road mb-6 md:mb-8">
+            <span className="road-line" />
+            <span className="road-cart"><GolfCartIcon size={40} facing="right" /></span>
+          </div>
           <ol className="grid gap-4 md:grid-cols-3 md:gap-6">
             {STEPS.map(({ title, text }, i) => (
               <li key={title} className="reveal card flex gap-4 p-6 md:flex-col md:p-8">
@@ -208,9 +233,9 @@ export default function HomePage({ onBookNow }) {
             </div>
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
-              {RATES.map(({ seats, price, bestFor }) => (
+              {RATES.map(({ seats, price, bestFor, Icon }) => (
                 <Link key={seats} to="/cars" className="reveal card card-hover flex items-center gap-5 p-6">
-                  <span aria-hidden="true" className="material-symbols-outlined flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-fixed/60 text-[28px] text-primary">airline_seat_recline_normal</span>
+                  <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-fixed/60 text-primary"><Icon size={30} /></span>
                   <span className="min-w-0">
                     <strong className="block font-serif text-xl text-primary">{seats} golf carts</strong>
                     <span className="block text-sm text-zinc-600">{bestFor} · from {price}/day</span>
@@ -228,18 +253,18 @@ export default function HomePage({ onBookNow }) {
           <SectionHeader eyebrow="Why Scorpion" title="A San Pedro golf cart rental that comes to you" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 md:gap-5">
             <div className="reveal relative overflow-hidden rounded-[1.75rem] bg-primary p-8 text-white sm:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-end min-h-[260px]">
-              <span aria-hidden="true" className="material-symbols-outlined absolute -right-6 -top-6 text-[180px] text-white/5">local_shipping</span>
+              <span aria-hidden="true" className="absolute -right-8 -top-4 text-white/10"><GolfCartIcon size={200} /></span>
               <h3 className="font-serif text-2xl md:text-3xl font-bold">Free delivery &amp; pickup</h3>
               <p className="mt-3 leading-relaxed text-white/75">We bring your golf cart to your hotel, resort, or Airbnb anywhere in San Pedro and collect it when your rental ends. Pickup at the San Pedro airstrip (SPR) can be arranged.</p>
             </div>
             {[
-              { icon: 'groups', title: 'Seats for every group', text: 'Choose a 4-seater for couples and small groups or a 6-seater for families and friends.' },
+              { icon: <GolfCartLongIcon />, title: 'Seats for every group', text: 'Choose a 4-seater for couples and small groups or a 6-seater for families and friends.' },
               { icon: 'chat', title: 'Easy booking', text: 'Send a request online or message us on WhatsApp. We confirm the details with you.', sun: true },
               { icon: 'build', title: 'Maintained carts', text: 'Our golf carts are regularly serviced and cleaned between rentals.' },
               { icon: 'event_available', title: 'Flexible plans', text: 'Free cancellation up to 24 hours before your rental begins.' },
             ].map(({ icon, title, text, sun }) => (
               <div key={title} className={`reveal flex gap-4 rounded-[1.75rem] p-5 sm:block sm:p-7 ${sun ? 'bg-sun-soft border border-sun/30' : 'bg-white border border-zinc-200/70'}`}>
-                <span aria-hidden="true" className="material-symbols-outlined text-[24px] flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-primary shadow-sm">{icon}</span>
+                <span aria-hidden="true" className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-primary shadow-sm ${typeof icon === 'string' ? 'material-symbols-outlined text-[24px]' : ''}`}>{icon}</span>
                 <div>
                   <h3 className="font-serif text-xl font-bold text-primary sm:mt-5">{title}</h3>
                   <p className="mt-1 text-zinc-600 leading-relaxed sm:mt-2">{text}</p>

@@ -104,6 +104,47 @@ html:not(.no-intro) .hero-underline path { animation-delay: 1.6s; }
   .hero-aurora::before, .hero-aurora::after, .ken-burns, .float-badge { animation: none; }
 }
 
+/* Destination marquee: two identical sets slide left forever; pauses on hover. */
+.marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.marquee-wrap:hover .marquee { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* "How it works" road: a golf cart drives across the steps (container units keep it responsive). */
+.road { container-type: inline-size; position: relative; height: 44px; }
+.road-line { position: absolute; left: 0; right: 0; bottom: 6px; height: 3px; border-radius: 3px;
+  background: repeating-linear-gradient(90deg, #f2b544 0 14px, transparent 14px 26px); }
+.road-cart { position: absolute; left: 0; bottom: 9px; color: #012d1d; animation: road-drive 7s cubic-bezier(.45,0,.4,1) infinite; }
+.road-cart svg { animation: cart-bump .2s ease-in-out infinite alternate; }
+@keyframes road-drive {
+  0% { transform: translateX(0); opacity: 0; }
+  6% { opacity: 1; }
+  88% { transform: translateX(calc(100cqi - 40px)); opacity: 1; }
+  100% { transform: translateX(calc(100cqi - 40px)); opacity: 0; }
+}
+@keyframes cart-bump { to { transform: translateY(-1.5px); } }
+
+/* Reading progress for long guides (scroll-driven, no JavaScript). */
+.reading-progress { display: none; }
+@supports (animation-timeline: scroll()) {
+  .reading-progress { display: block; position: fixed; left: 0; right: 0; top: 64px; height: 3px; z-index: 49; background: #f2b544;
+    transform-origin: left; transform: scaleX(0); animation: reading linear both; animation-timeline: scroll(root); }
+  @media (min-width: 768px) { .reading-progress { top: 72px; } }
+}
+@keyframes reading { to { transform: scaleX(1); } }
+
+/* Large line-art golf cart drifting behind inner page headers. */
+.header-art { animation: header-art 9s ease-in-out infinite alternate; }
+@keyframes header-art { from { translate: 0 0; rotate: -2deg; } to { translate: -18px -10px; rotate: 1deg; } }
+
+/* Arrow icons nudge forward when their button or card is hovered. */
+[class*='btn-'] .material-symbols-outlined:last-child, .group .nudge { transition: translate .25s ease; }
+[class*='btn-']:hover .material-symbols-outlined:last-child, .group:hover .nudge { translate: 4px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .road-cart, .road-cart svg, .header-art { animation: none; }
+  .road-cart { transform: translateX(calc(50cqi - 20px)); }
+}
+
 /* Soft island backdrop used behind page headers. */
 .bg-island {
   background-color: #f6f1e6;

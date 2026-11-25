@@ -5,6 +5,7 @@ import { CallLink, WhatsAppLink } from './ContactButtons';
 export default function ArticleLayout({ toc, onBookNow, children }) {
   return (
     <div className="container-page py-10 md:py-16 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16">
+      <div aria-hidden="true" className="reading-progress" />
       <div className="min-w-0">
         <details data-md-skip className="lg:hidden mb-10 rounded-2xl border border-zinc-200 bg-white">
           <summary className="flex cursor-pointer list-none items-center justify-between p-4 font-bold text-primary">

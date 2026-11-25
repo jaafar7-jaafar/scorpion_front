@@ -1,10 +1,14 @@
 import Breadcrumbs from './Breadcrumbs';
+import { GolfCartIcon } from './BrandIcons';
 
 // Shared header for inner pages: breadcrumb, H1, and a short answer-first intro.
 export default function PageHero({ crumb, eyebrow, title, lead, children }) {
   return (
     <header className="relative overflow-hidden bg-island pt-24 pb-12 md:pt-32 md:pb-16">
       <div aria-hidden="true" className="hero-aurora" />
+      <div aria-hidden="true" className="header-art pointer-events-none absolute -right-10 bottom-0 hidden text-primary/[0.07] md:block lg:right-[6%]">
+        <GolfCartIcon size={340} />
+      </div>
       <div className="relative container-page">
         <Breadcrumbs current={crumb} />
         {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}

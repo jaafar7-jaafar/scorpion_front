@@ -10,7 +10,11 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white/75 pb-28 md:pb-0">
+    <footer className="relative bg-primary text-white/75 pb-28 md:pb-0">
+      {/* Island wave rolling into the footer. */}
+      <svg aria-hidden="true" className="absolute bottom-full left-0 block h-8 w-full text-primary md:h-14" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="currentColor">
+        <path d="M0 38c120-26 240-26 360 0s240 26 360 0 240-26 360 0 240 26 360 0v22H0z" />
+      </svg>
       <div className="container-page grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:py-20">
         <div className="col-span-2 space-y-4 lg:col-span-1">
           <Link to="/" className="inline-flex items-center gap-3">

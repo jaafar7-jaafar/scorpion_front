@@ -21,6 +21,15 @@ Free cancellation up to 24 hours before · Open daily 8am–10pm
 - **Free cancellation** Up to 24 hours before your rental starts
 - **Local team** Phone and WhatsApp, daily 8am–10pm
 
+- San Pedro Town
+- Secret Beach
+- Boca del Rio
+- North Ambergris Caye
+- San Pedro Airstrip
+- Hotels & resorts
+- Airbnb delivery
+- South Ambergris Caye
+
 ## Simple daily golf cart rates
 
 Starting daily rates for San Pedro golf cart rentals. We confirm the total for your dates before you book.
