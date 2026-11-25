@@ -9,6 +9,7 @@ export function initAnalytics() {
   if (initialized || !GA_ID) return;
   // Only measure the real site: local builds and automated checks must not add fake visits.
   if (!/(^|\.)scorpiongolfcarts\.com$/.test(window.location.hostname)) return;
+  if (window.location.pathname.startsWith('/admin')) return; // staff pages are not visitor traffic
   initialized = true;
 
   const script = document.createElement('script');
@@ -21,8 +22,9 @@ export function initAnalytics() {
   window.gtag = gtag;
 
   gtag('js', new Date());
-  // RouteEffects sends one initial and subsequent SPA page view.
-  gtag('config', GA_ID, { send_page_view: false });
+  // GA4 counts the initial page load; RouteEffects reports later in-app navigations
+  // (GA's history-based page views are disabled in the web stream settings).
+  gtag('config', GA_ID);
   if (ADS_ID) gtag('config', ADS_ID);
 }
 

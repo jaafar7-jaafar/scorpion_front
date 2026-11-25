@@ -7,9 +7,12 @@ export default function RouteEffects() {
   const previousPath = useRef(null);
   useEffect(() => {
     if (previousPath.current === pathname) return;
+    const isFirstLoad = previousPath.current === null;
     previousPath.current = pathname;
     window.scrollTo(0, 0);
-    if (!pathname.startsWith('/admin')) trackPageView(pathname);
+    // GA4 records the initial page load itself; only report in-app navigations
+    // (GA's history-based page views are off), so every page counts exactly once.
+    if (!isFirstLoad && !pathname.startsWith('/admin')) trackPageView(pathname);
   }, [pathname]);
   return null;
 }
