@@ -5,11 +5,14 @@ export const BUSINESS_NAME = 'Scorpion Golf Cart Rental';
 export const PHONE = '+5016007672';
 export const PHONE_DISPLAY = '+501 600-7672';
 export const WHATSAPP_URL = 'https://wa.me/5016007672';
+// Google Business Profile, by its permanent Maps customer ID (survives name changes).
+export const GOOGLE_MAPS_URL = 'https://maps.google.com/?cid=16527417127535337220';
 export const SOCIAL_PROFILES = [
+  GOOGLE_MAPS_URL,
   'https://www.instagram.com/scorpiongolfcarts',
   'https://www.tiktok.com/@scorpiongolfcarts',
-  // Add the Google Business Profile, Tripadvisor, and Facebook URLs here once
-  // they exist: they help search and AI engines connect the brand to this site.
+  // Add Tripadvisor and Facebook URLs here once they exist: they help search
+  // and AI engines connect the brand to this site.
 ];
 
 // One source for page metadata, the sitemap, build-time rendering, and schema.
@@ -79,6 +82,9 @@ function businessNode() {
     image: `${SITE_URL}/og-image.jpg`,
     logo: { '@type': 'ImageObject', url: `${SITE_URL}/scorpionlogo.png` },
     address: { '@type': 'PostalAddress', addressLocality: 'San Pedro', addressRegion: 'Belize District', addressCountry: 'BZ' },
+    // Same point as the verified Google Business Profile pin, so the site and profile match.
+    geo: { '@type': 'GeoCoordinates', latitude: 17.9211527, longitude: -87.961338 },
+    hasMap: GOOGLE_MAPS_URL,
     areaServed: [
       { '@type': 'City', name: 'San Pedro, Belize' },
       { '@type': 'Place', name: 'Ambergris Caye, Belize' },
