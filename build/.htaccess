@@ -34,12 +34,13 @@ AddCharset UTF-8 .md
   # headers advertise llms.txt and the homepage's Markdown alternate.
   <FilesMatch "\.(?:html|md)$">
     Header append Vary Accept
-    Header add Link "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+    Header add Link '</llms.txt>; rel="describedby"; type="text/plain"'
   </FilesMatch>
   SetEnvIf Request_URI "^/$" home_page
-  Header add Link "</index.md>; rel=\"alternate\"; type=\"text/markdown\"" env=home_page
+  Header add Link '</index.md>; rel="alternate"; type="text/markdown"' env=home_page
   # Markdown copies are for agents; keep search results on the HTML pages.
   <FilesMatch "\.md$">
+    Header set Content-Type "text/markdown; charset=utf-8"
     Header set X-Robots-Tag "noindex, follow"
   </FilesMatch>
   <FilesMatch "\.(?:html|xml|txt|md)$">
