@@ -21,6 +21,8 @@ RewriteRule ^$ index.md [END]
 RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
 RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart|rental-terms|privacy)$ $1/index.md [END]
 RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart|rental-terms|privacy)$ $1/index.html [END]
+# Short links for QR codes and messages (noindex helper pages that forward to Google).
+RewriteRule ^(review|google)$ $1/index.html [END]
 
 # Admin routes stay interactive, but get noindex in the initial HTML and header.
 RewriteRule ^admin(?:/.*)?$ admin/index.html [END]

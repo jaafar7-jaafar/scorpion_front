@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#012d1d">
+<title>Review Scorpion Golf Cart Rental on Google</title>
+<link rel="icon" href="/scorpionlogo.png" type="image/png">
+<!--
+  Short, permanent review link for QR codes and messages:
+  https://www.scorpiongolfcarts.com/review
+  Sends each phone the most reliable way to Google's "write a review" form.
+  The QR code never needs reprinting if Google's own links change: update only this file.
+-->
+<script>
+  var LINKS = {
+    // Opens the Google Maps app (or Maps web) on the business with the review form open.
+    maps: 'https://www.google.com/maps/place//data=!4m3!3m2!1s0x8f5c9bf34d17717b:0xe55d2e4fbd735f04!12e1',
+    // Google's review dialog (best on computers and in signed-in browsers).
+    web: 'https://search.google.com/local/writereview?placeid=ChIJe3EXTfObXI8RBF9zvU8uXeU'
+  };
+  // Decide where to send this visitor. Kept pure so it can be tested.
+  function reviewTarget(ua) {
+    var android = /Android/i.test(ua);
+    var ios = /iPhone|iPad|iPod/i.test(ua);
+    // In-app browsers (Instagram, Facebook, TikTok, Snapchat, LINE, X) are not signed in to Google.
+    var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Snapchat|TikTok|musical_ly|BytedanceWebview|Line\/|Twitter/i.test(ua);
+    if (android && inApp) return 'intent://' + LINKS.web.replace(/^https:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(LINKS.maps) + ';end';
+    if (ios && inApp) return null; // iOS in-app browsers cannot be escaped: show the buttons below.
+    if (android || ios) return LINKS.maps;
+    return LINKS.web;
+  }
+  var target = reviewTarget(navigator.userAgent);
+  if (target) location.replace(target);
+</script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { min-height: 100vh; display: grid; place-items: center; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: radial-gradient(80% 50% at 80% 0%, #1f5a40 0%, rgba(31,90,64,0) 70%), #012d1d; color: #fff; text-align: center; }
+  .card { width: 100%; max-width: 420px; background: #fff; color: #012d1d; border-radius: 28px; padding: 32px 24px 26px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); }
+  img { width: 84px; height: 84px; border-radius: 50%; border: 3px solid #ece3d1; }
+  h1 { margin-top: 14px; font-family: Georgia, 'Times New Roman', serif; font-size: 26px; line-height: 1.2; }
+  .stars { margin-top: 10px; font-size: 34px; letter-spacing: 6px; color: #f2b544; }
+  p { margin-top: 10px; font-size: 16px; line-height: 1.5; color: #3f4a43; }
+  .btn { display: block; margin-top: 14px; padding: 16px; border-radius: 16px; font-weight: 700; font-size: 17px; text-decoration: none; }
+  .primary { background: #012d1d; color: #fff; margin-top: 22px; }
+  .secondary { background: #f6f1e6; color: #012d1d; }
+  .tip { margin-top: 18px; padding: 12px; border-radius: 12px; background: #fdf0d5; font-size: 14px; color: #6b4e16; display: none; }
+  .tip.show { display: block; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <img src="/scorpionlogo.png" alt="Scorpion Golf Cart Rental logo" width="84" height="84">
+    <h1>Review Scorpion Golf Cart Rental</h1>
+    <div class="stars" aria-hidden="true">★★★★★</div>
+    <p>Thank you for riding with us! Tap below to leave your Google review. It takes 30 seconds.</p>
+    <a class="btn primary" id="maps" href="https://www.google.com/maps/place//data=!4m3!3m2!1s0x8f5c9bf34d17717b:0xe55d2e4fbd735f04!12e1">⭐ Write a review in Google Maps</a>
+    <a class="btn secondary" id="web" href="https://search.google.com/local/writereview?placeid=ChIJe3EXTfObXI8RBF9zvU8uXeU">Write a review in the browser</a>
+    <div class="tip" id="tip">Page not opening? Tap <strong>⋯</strong> (top right) and choose <strong>Open in Safari</strong>, or <strong>Open in browser</strong>.</div>
+  </main>
+  <script>if (!target) document.getElementById('tip').className = 'tip show';</script>
+</body>
+</html>
