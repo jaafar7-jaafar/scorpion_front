@@ -1,29 +1,50 @@
+import { HOME_FAQS, FLEET_FAQS, GUIDE_FAQS, EXPLORE_FAQS } from './faqs';
+
 export const SITE_URL = 'https://www.scorpiongolfcarts.com';
 export const BUSINESS_NAME = 'Scorpion Golf Cart Rental';
+export const PHONE = '+5016007672';
+export const PHONE_DISPLAY = '+501 600-7672';
 export const WHATSAPP_URL = 'https://wa.me/5016007672';
+export const SOCIAL_PROFILES = [
+  'https://www.instagram.com/scorpiongolfcarts',
+  'https://www.tiktok.com/@scorpiongolfcarts',
+  // Add the Google Business Profile, Tripadvisor, and Facebook URLs here once
+  // they exist: they help search and AI engines connect the brand to this site.
+];
 
-// One source for page metadata, the sitemap, and build-time rendering.
+// One source for page metadata, the sitemap, build-time rendering, and schema.
 export const SEO_PAGES = {
   '/': {
     title: 'Golf Cart Rental San Pedro, Belize | Scorpion Golf Carts',
-    description: 'Explore San Pedro, Ambergris Caye with Scorpion Golf Cart Rental. Choose a 4 or 6-seater, arrange hotel or Airbnb delivery, and request your booking online.',
+    description: 'Golf cart rental in San Pedro, Ambergris Caye. 4-seaters from $35/day and 6-seaters from $65/day, with free delivery to your hotel or Airbnb. Book online or on WhatsApp.',
     name: 'Golf Cart Rental San Pedro, Belize',
+    faqs: HOME_FAQS,
   },
   '/cars': {
     title: '4 & 6-Seater Golf Cart Rentals in San Pedro | Scorpion',
-    description: 'Compare golf cart options for your San Pedro, Belize stay. Choose seating for your group and request availability, rental rates, and delivery with Scorpion.',
+    description: 'Compare 4-seater and 6-seater golf carts for rent in San Pedro, Belize. See rates, what is included, and request availability with delivery to your accommodation.',
     name: 'Golf Cart Rentals',
+    faqs: FLEET_FAQS,
+  },
+  '/san-pedro-golf-cart-rental-guide': {
+    title: 'San Pedro Golf Cart Rental Guide (Ambergris Caye) | Scorpion',
+    description: 'How to rent a golf cart in San Pedro, Belize: choosing seating, comparing quotes, hotel and airstrip pickup, what to bring, and driving tips for Ambergris Caye.',
+    name: 'San Pedro Golf Cart Rental Guide',
+    article: true,
+    faqs: GUIDE_FAQS,
+  },
+  '/things-to-do-in-san-pedro-by-golf-cart': {
+    title: 'Things to Do in San Pedro by Golf Cart | Ambergris Caye Guide',
+    description: 'Where to go on Ambergris Caye by golf cart: San Pedro town, Boca del Rio, Secret Beach, the north and south of the island, tour docks, and practical driving tips.',
+    name: 'Things to Do in San Pedro by Golf Cart',
+    article: true,
+    faqs: EXPLORE_FAQS,
   },
   '/about': {
     title: 'About Scorpion Golf Cart Rental | San Pedro, Belize',
     description: 'Get to know Scorpion Golf Cart Rental in San Pedro, Ambergris Caye. Learn about our rental service, maintained carts, and delivery to your accommodation.',
     name: 'About Scorpion',
     type: 'AboutPage',
-  },
-  '/san-pedro-golf-cart-rental-guide': {
-    title: 'San Pedro Golf Cart Rental Guide | Scorpion Golf Carts',
-    description: 'Plan your San Pedro golf cart rental: compare seating, prepare your travel dates, arrange pickup, and ask the right questions before booking on Ambergris Caye.',
-    name: 'San Pedro Golf Cart Rental Guide',
   },
   '/contact': {
     title: 'Contact Scorpion Golf Cart Rental | San Pedro, Belize',
@@ -33,21 +54,57 @@ export const SEO_PAGES = {
   },
 };
 
+const BUSINESS_ID = `${SITE_URL}/#business`;
+
+function businessNode() {
+  return {
+    // AutoRental is the closest schema.org type and is itself a LocalBusiness.
+    '@type': 'AutoRental',
+    '@id': BUSINESS_ID,
+    name: BUSINESS_NAME,
+    alternateName: 'Scorpion Golf Carts',
+    description: 'Golf cart rental in San Pedro, Ambergris Caye, Belize, offering 4-seater and 6-seater carts with delivery to hotels, resorts, and Airbnb rentals.',
+    url: `${SITE_URL}/`,
+    telephone: PHONE,
+    image: `${SITE_URL}/og-image.jpg`,
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/scorpionlogo.png` },
+    address: { '@type': 'PostalAddress', addressLocality: 'San Pedro', addressRegion: 'Belize District', addressCountry: 'BZ' },
+    areaServed: [
+      { '@type': 'City', name: 'San Pedro, Belize' },
+      { '@type': 'Place', name: 'Ambergris Caye, Belize' },
+    ],
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:00', closes: '22:00',
+    }],
+    contactPoint: [{
+      '@type': 'ContactPoint', telephone: PHONE, contactType: 'reservations',
+      areaServed: 'BZ', availableLanguage: ['English'],
+    }],
+    paymentAccepted: 'Cash, Credit Card, Debit Card',
+    knowsAbout: ['Golf cart rental', 'San Pedro, Belize', 'Ambergris Caye'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog', name: 'Golf cart rentals',
+      itemListElement: ['4-seater golf cart rental', '6-seater golf cart rental'].map(name => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name, areaServed: { '@type': 'Place', name: 'San Pedro, Ambergris Caye, Belize' }, provider: { '@id': BUSINESS_ID } },
+      })),
+    },
+    sameAs: SOCIAL_PROFILES,
+  };
+}
+
 export function pageSchema(path, title, description) {
   const url = `${SITE_URL}${path}`;
   const page = SEO_PAGES[path];
   const graph = [
-    {
-      '@type': 'LocalBusiness', '@id': `${SITE_URL}/#business`, name: BUSINESS_NAME,
-      url: `${SITE_URL}/`, telephone: '+5016007672', image: `${SITE_URL}/og-image.jpg`, logo: `${SITE_URL}/scorpionlogo.png`,
-      address: { '@type': 'PostalAddress', addressLocality: 'San Pedro', addressRegion: 'Belize District', addressCountry: 'BZ' },
-      areaServed: { '@type': 'Place', name: 'San Pedro, Ambergris Caye, Belize' },
-      openingHours: 'Mo-Su 08:00-22:00', sameAs: ['https://www.instagram.com/scorpiongolfcarts'],
-    },
-    { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: BUSINESS_NAME, publisher: { '@id': `${SITE_URL}/#business` } },
+    businessNode(),
+    { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: BUSINESS_NAME, alternateName: 'Scorpion Golf Carts', inLanguage: 'en', publisher: { '@id': BUSINESS_ID } },
     {
       '@type': page?.type || 'WebPage', '@id': `${url}#webpage`, url, name: title, description,
-      inLanguage: 'en', isPartOf: { '@id': `${SITE_URL}/#website` }, about: { '@id': `${SITE_URL}/#business` },
+      inLanguage: 'en', isPartOf: { '@id': `${SITE_URL}/#website` }, about: { '@id': BUSINESS_ID },
+      primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/og-image.jpg` },
       ...(path !== '/' && { breadcrumb: { '@id': `${url}#breadcrumb` } }),
     },
   ];
@@ -57,6 +114,16 @@ export function pageSchema(path, title, description) {
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
       { '@type': 'ListItem', position: 2, name: page?.name || title, item: url },
     ],
+  });
+  if (page?.article) graph.push({
+    '@type': 'Article', '@id': `${url}#article`, headline: page.name, description,
+    inLanguage: 'en', mainEntityOfPage: { '@id': `${url}#webpage` },
+    image: `${SITE_URL}/og-image.jpg`, author: { '@id': BUSINESS_ID }, publisher: { '@id': BUSINESS_ID },
+    about: { '@type': 'Place', name: 'San Pedro, Ambergris Caye, Belize' },
+  });
+  if (page?.faqs?.length) graph.push({
+    '@type': 'FAQPage', '@id': `${url}#faq`, isPartOf: { '@id': `${url}#webpage` },
+    mainEntity: page.faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
   });
   return { '@context': 'https://schema.org', '@graph': graph };
 }

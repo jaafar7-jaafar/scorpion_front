@@ -15,7 +15,7 @@ npm run check:smoke
 
 The build compiles React, renders public pages from the same components used in the browser, generates a sitemap, and checks metadata, headings, local links, images, structured data, and excluded pages. It makes no backend requests at build time. Inventory and reviews continue to load from the API after hydration.
 
-Implementation validation on October 20, 2026: production compilation and all SEO checks passed. The production bundle also passed ten DOM-based smoke scenarios: all five public pages, home/fleet API failures, the missing-page screen, admin login, and a protected admin route. Checks cover hydration, metadata updates on navigation, booking opening and response handling, and review save success/failure. APIs are mocked; these checks do not establish live server behavior, actual booking delivery, visual layout, or measured browser performance. The existing toolchain reports a deprecated Node filesystem API and an older Browserslist dataset; compilation succeeds.
+Implementation validation on November 25, 2026: production compilation and all SEO checks passed for six public pages. The production bundle also passed eleven DOM-based smoke scenarios: all six public pages, home/fleet API failures, the missing-page screen, admin login, and a protected admin route. APIs are mocked; these checks do not establish live server behavior, actual booking delivery, visual layout, or measured browser performance.
 
 Deploy **the complete contents of `build/`**, including hidden `.htaccess`, public route directories, `404.html`, `admin/index.html`, assets, sitemap, robots, and both existing Google verification methods. Do not upload just the homepage and static JS. Rebuild whenever service content, metadata, public routes, or environment configuration changes. `public/index.html` is an input template, not a deployment artifact.
 
@@ -32,14 +32,18 @@ Hashed JS/CSS get long-lived caching; HTML, sitemap, and robots must refresh on 
 Do not use a universal `try_files ... /index.html` fallback: it would serve homepage HTML for other public routes and unknown URLs. Configure your host to:
 
 1. Redirect HTTP/apex to the canonical HTTPS www host, preserving path and query.
-2. Serve `/cars`, `/about`, `/contact`, and `/san-pedro-golf-cart-rental-guide` from the matching generated `index.html` with a 200 status.
+2. Serve `/cars`, `/about`, `/contact`, `/san-pedro-golf-cart-rental-guide`, and `/things-to-do-in-san-pedro-by-golf-cart` from the matching generated `index.html` with a 200 status.
 3. Redirect public slash variants to the extensionless canonical path.
 4. Serve `/admin` and its child paths from `admin/index.html`, and apply `X-Robots-Tag: noindex, follow` to them.
 5. Serve real assets normally; respond to all other nonexistent paths with status 404 and the generated `404.html` body.
 
+## After every deploy
+
+Run `npm run indexnow` once the new build is live. It checks that the IndexNow key file is reachable on the live site, then submits every sitemap URL to Bing and the other IndexNow engines. Also confirm that `/llms.txt` and `/robots.txt` load on the live site.
+
 ## Post-deployment acceptance checks
 
-- Open each of the five sitemap URLs directly and refresh it. View source: confirm one correct title, one self-referencing canonical, one description, visible page heading and service copy before JavaScript runs.
+- Open each of the six sitemap URLs directly and refresh it. View source: confirm one correct title, one self-referencing canonical, one description, visible page heading and service copy before JavaScript runs.
 - Repeat with JavaScript disabled: page information, phone, WhatsApp, and navigation must remain usable. Fleet filters and the booking form require JavaScript; this is stated in the fallback contact message.
 - Check that HTTP and apex redirect to HTTPS www, and that slash/index-document variants converge without loops. Unknown paths and nonexistent assets must return real 404 responses.
 - Open `/admin/login` and a protected route. Verify the noindex HTML/header and existing authentication behavior. Robots directives are not authentication.

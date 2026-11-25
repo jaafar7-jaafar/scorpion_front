@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder only: npm run build regenerates this file from src/seo/site.js. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.scorpiongolfcarts.com/</loc>
-  </url>
-  <url>
-    <loc>https://www.scorpiongolfcarts.com/cars</loc>
-  </url>
-  <url>
-    <loc>https://www.scorpiongolfcarts.com/about</loc>
-  </url>
+  <url><loc>https://www.scorpiongolfcarts.com/</loc></url>
+  <url><loc>https://www.scorpiongolfcarts.com/cars</loc></url>
   <url><loc>https://www.scorpiongolfcarts.com/san-pedro-golf-cart-rental-guide</loc></url>
+  <url><loc>https://www.scorpiongolfcarts.com/things-to-do-in-san-pedro-by-golf-cart</loc></url>
+  <url><loc>https://www.scorpiongolfcarts.com/about</loc></url>
   <url><loc>https://www.scorpiongolfcarts.com/contact</loc></url>
 </urlset>

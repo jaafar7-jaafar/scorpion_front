@@ -51,6 +51,11 @@ module.exports = {
         'inverse-surface': '#2d3132',
         'inverse-on-surface': '#eef1f2',
         outline: '#717973',
+        sand: '#f6f1e6',
+        'sand-deep': '#ece3d1',
+        sun: '#f2b544',
+        'sun-soft': '#fdf0d5',
+        ink: '#1f2a24',
         'outline-variant': '#c1c8c2',
       },
       borderRadius: {

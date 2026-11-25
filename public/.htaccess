@@ -15,7 +15,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)/$ /$1 [R=301,L,NE]
 
 # Serve generated pages directly, with no directory/slash redirect cycle.
-RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide)$ $1/index.html [END]
+RewriteRule ^(cars|about|contact|san-pedro-golf-cart-rental-guide|things-to-do-in-san-pedro-by-golf-cart)$ $1/index.html [END]
 
 # Admin routes stay interactive, but get noindex in the initial HTML and header.
 RewriteRule ^admin(?:/.*)?$ admin/index.html [END]

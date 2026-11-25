@@ -21,7 +21,9 @@
     "check:seo": "node scripts/check-seo.cjs",
     "check:smoke": "node scripts/smoke-build.cjs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "icons": "node scripts/subset-icons.cjs",
+    "indexnow": "node scripts/indexnow.cjs"
   },
   "eslintConfig": {
     "extends": [

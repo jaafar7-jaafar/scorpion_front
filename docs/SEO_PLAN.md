@@ -1,6 +1,47 @@
 # Scorpion Golf Cart Rental: SEO audit and 90-day plan
 
-Prepared October 20, 2026. Canonical website: https://www.scorpiongolfcarts.com/.
+Prepared October 20, 2026; updated November 25, 2026. Canonical website: https://www.scorpiongolfcarts.com/.
+
+## November 25, 2026 update: why the site still is not showing, and what changed
+
+**Live checks (Nov 25):** the Oct 20 prerendered build is live. HTTPS, apex/HTTP redirects to www, real 404s, robots.txt, and sitemap all respond correctly. The site is therefore crawlable in principle. However:
+
+- A web search index from the Bing family (which also powers ChatGPT search, Copilot, and DuckDuckGo) returned **no pages** from scorpiongolfcarts.com, and the brand name returned no results. Search results for "golf cart rental San Pedro" are dominated by Expedia, Marriott Activities, Booking.com, and Viator-style listings of competing operators.
+- Hostinger's CDN (`hcdn`) returned **429 Too Many Requests to the GPTBot user agent** and **403 to requests claiming to be Googlebot/Bingbot**. The 403 is probably Hostinger's fake-bot filter (the test did not come from Google or Bing IP addresses), but it must be confirmed with Search Console's live URL test and Bing's URL inspection. The 429 suggests AI crawlers are being blocked or rate-limited at the hosting level.
+- The site is new, has no known backlinks, and has no verified Google Business Profile linked to it. For a local rental search, the Google map pack and travel marketplaces win far more clicks than a new website's organic listing.
+
+**Code changes in this update:**
+
+| Area | Change |
+| --- | --- |
+| Performance | Replaced the 3.9 MB Material Symbols font (preloaded on every page with `font-display: block`) with a 22 KB content-hashed subset. `npm run icons` regenerates it. |
+| AI engines | robots.txt explicitly allows search and AI crawlers. Added `/llms.txt` with key facts and page list. Added answer-first "quick facts" blocks. |
+| Bing / IndexNow | Added an IndexNow key file and `npm run indexnow` to submit all URLs to Bing, Yandex, and other engines after each deploy. |
+| Structured data | Business is now `AutoRental` (a LocalBusiness subtype) with opening hours, contact point, payment methods, services, and Instagram + TikTok `sameAs`. FAQPage on four pages (generated from the same text shown on the page) and Article markup on both guides. |
+| Content | New page `/things-to-do-in-san-pedro-by-golf-cart`. Rental guide roughly doubled (costs, delivery/airstrip, driving tips, FAQ). Fleet page now has static size comparison, inclusions, and FAQ (it previously relied on the API alone). Contact page adds booking steps and service area. About page adds a facts block. |
+| Snippets | Homepage description now shows starting rates and free delivery; guide title adds "Ambergris Caye". |
+| Sitemap | Real `lastmod` dates from git history. |
+| Fixes | Broken partner link (`mayaaislandair.com` → `mayaislandair.com`). Nav now links to both guides. |
+| Build checks | Build fails if a page lacks substantial content, FAQ markup does not match visible text, a route is missing from .htaccess/llms.txt, robots blocks the site, or the icon font is not subset. |
+
+**Design refresh (same update):** mobile-first redesign built for search and conversions. Every page answers the query above the fold (H1, prices, booking actions). Photos no longer carry the layout, so stock or missing images don't hurt it. Phones get a sticky Call / WhatsApp / Book bar. Guides have "On this page" jump links. Motion is restrained and never hides content from crawlers: a CSS-only intro shown once per session (skipped for bots and reduced-motion users, outside the React root, under 2 s; the build fails otherwise), CSS scroll reveals, and a drifting hero light. The misleading sports-car "fleet" image and the 512px stretched hero were removed. Replace the remaining stock images with real photos when possible.
+
+**Owner review before deploy:** `/things-to-do-in-san-pedro-by-golf-cart` describes Secret Beach, Boca del Rio, the north (bridge), the south, and reef-tour docks in general terms. Confirm each description is accurate and adjust anything that is out of date. The `$35` / `$65` starting rates now appear in the homepage meta description and fleet FAQ; confirm the currency (USD or BZD) and add it.
+
+### Actions only the owner / account holder can do (highest impact first)
+
+1. **Google Business Profile.** Create or claim and verify it (category "Golf cart rental service" or closest), with the same name, phone, website, hours, service area, and at least 10 original photos. Add its URL to `SOCIAL_PROFILES` in `src/seo/site.js`. This is the single biggest lever for "golf cart rental San Pedro" searches and for Google Maps/Gemini answers.
+2. **Hostinger bot settings.** In hPanel, check the CDN / Security / "AI crawlers" (bot protection) settings and allow verified search engine bots and AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot). Then confirm in Search Console that Googlebot is not getting 403s.
+3. **Google Search Console.** Submit `/sitemap.xml` again. Use URL Inspection → "Test live URL" on all six pages, then "Request indexing". Check the Pages report for "Blocked due to access forbidden (403)" or "Crawled – currently not indexed".
+4. **Bing Webmaster Tools.** Sign in and use "Import from Google Search Console" (no code needed). Submit the sitemap. After each deploy run `npm run indexnow`. Bing feeds ChatGPT search, Copilot, and DuckDuckGo.
+5. **Bing Places for Business.** Import the Google Business Profile. Apple Business Connect (Apple Maps / Siri) is the same idea.
+6. **Marketplace and directory listings that rank today.** Tripadvisor (business listing), Viator / GetYourGuide (they feed Marriott, Expedia, and Booking activity listings, which currently dominate results), the Belize Tourism Board directory, Facebook page, and local San Pedro directories. Use identical name, phone, and website everywhere, and link back to the site.
+7. **Reviews.** Ask every customer for an honest Google review using the profile's review link, and reply to all reviews. Review count and recency drive map-pack ranking and AI recommendations.
+8. **Local links and mentions.** Ask partner hotels, Airbnb hosts, and tour operators to link to the site from their "getting around" pages. Pitch the things-to-do guide to local travel blogs and the San Pedro Sun.
+9. **Real photos.** The current hero and story images are 512×512 stock-style images stretched full-screen. Replace them with original photos of the carts, team, and deliveries (1600px wide or more, compressed).
+10. **GA4.** Set `REACT_APP_GA_MEASUREMENT_ID` in the private production environment and rebuild, so search traffic and bookings can be measured.
+
+Realistic timing: after the deploy and the account actions, expect the site to be indexed in days to weeks. The Business Profile can appear in Maps within days of verification. Competitive non-brand rankings usually build over two to four months as reviews and links accumulate. No ranking can be guaranteed.
 
 ## Objective and measurement limits
 
@@ -42,7 +83,7 @@ Avoid making many nearly identical location pages or separate pages for keyword 
 
 1. Deploy the complete validated `build/` output using [DEPLOYMENT.md](DEPLOYMENT.md). Confirm the host serves the generated files, not a universal homepage fallback.
 2. Check HTTPS, www/apex redirects, direct deep links, missing URLs returning 404, admin noindex, robots, sitemap, canonical consistency, and API/booking behavior. Preserve a copy of the current hosting configuration for rollback.
-3. In the existing verified Google Search Console property, submit `/sitemap.xml`. Inspect all five public URLs using the live test; confirm rendered headings and Google-selected canonical. Request indexing after deployment. The existing verification meta and verification file are preserved.
+3. In the existing verified Google Search Console property, submit `/sitemap.xml`. Inspect all six public URLs using the live test; confirm rendered headings and Google-selected canonical. Request indexing after deployment. The existing verification meta and verification file are preserved.
 4. Connect GA4 by setting `REACT_APP_GA_MEASUREMENT_ID` in the private production environment and rebuilding. In the web stream's enhanced measurement settings, turn off history-based page-change detection because the application sends page views explicitly. Verify in DebugView/Realtime that each navigation yields one `page_view`.
 5. Validate `booking_submit` only on successful API response. Mark it as a key event. Report WhatsApp and phone clicks separately as contact intent; a click is not a confirmed sale. Reconcile inquiries with actual bookings offline.
 6. Export the previous 28 days and previous three months from Search Console: clicks, impressions, CTR, position, queries, landing pages, country, device, and branded/nonbranded splits. Record organic sessions and booking requests in GA4 once available. Record missing historical data as unknown rather than zero.
@@ -76,7 +117,7 @@ Avoid making many nearly identical location pages or separate pages for keyword 
 
 | Metric | Source | Success criterion |
 | --- | --- | --- |
-| Public page delivery | HTTP checks / URL Inspection | All five public routes return 200 with readable content and matching canonical; missing URLs return 404 |
+| Public page delivery | HTTP checks / URL Inspection | All six public routes return 200 with readable content and matching canonical; missing URLs return 404 |
 | Indexing | Search Console | Intended canonical URLs indexed; investigate exclusions rather than promising a fixed indexing deadline |
 | Nonbrand organic discovery | Search Console | Relevant impressions and clicks trend upward from the recorded baseline |
 | Search CTR | Search Console | Compare by query, position, device, and page; improve weak relevant snippets |

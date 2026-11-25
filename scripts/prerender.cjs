@@ -45,6 +45,30 @@ fs.mkdirSync(path.join(buildDir, 'admin'), { recursive: true });
 fs.writeFileSync(path.join(buildDir, 'admin/index.html'), adminDom.serialize());
 adminDom.window.close();
 
-// Omit lastmod rather than publishing an invented update date.
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(SEO_PAGES).map(route => `  <url><loc>${SITE_URL}${route}</loc></url>`).join('\n')}\n</urlset>\n`;
+// lastmod comes from git: the last commit touching the page's own source, or the
+// build date when that source has uncommitted edits (the deploy is new content).
+// If git is unavailable, lastmod is omitted rather than invented.
+const { execFileSync } = require('node:child_process');
+const PAGE_SOURCES = {
+  '/': 'src/pages/HomePage.jsx',
+  '/cars': 'src/pages/CarsPage.jsx',
+  '/about': 'src/pages/AboutPage.jsx',
+  '/san-pedro-golf-cart-rental-guide': 'src/pages/RentalGuidePage.jsx',
+  '/things-to-do-in-san-pedro-by-golf-cart': 'src/pages/ThingsToDoPage.jsx',
+  '/contact': 'src/pages/ContactPage.jsx',
+};
+const git = args => execFileSync('git', args, { cwd: path.resolve(__dirname, '..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+function lastModified(route) {
+  if (!PAGE_SOURCES[route]) throw new Error(`Add ${route} to PAGE_SOURCES in scripts/prerender.cjs`);
+  const files = [PAGE_SOURCES[route], 'src/seo/faqs.js'];
+  try {
+    if (git(['status', '--porcelain', '--', ...files])) return new Date().toISOString().slice(0, 10);
+    return git(['log', '-1', '--format=%cs', '--', ...files]) || null;
+  } catch { return null; }
+}
+const urls = Object.keys(SEO_PAGES).map(route => {
+  const lastmod = lastModified(route);
+  return `  <url><loc>${SITE_URL}${route}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`;
+});
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
 fs.writeFileSync(path.join(buildDir, 'sitemap.xml'), sitemap);

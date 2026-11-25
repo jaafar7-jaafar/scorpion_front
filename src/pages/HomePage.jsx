@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCars } from '../api';
 import { resolveImageUrl } from '../utils/imageUrl';
@@ -6,405 +6,299 @@ import CarCard from '../components/CarCard';
 import ReviewsSection from '../components/ReviewsSection';
 import ServiceAreaSection from '../components/ServiceAreaSection';
 import Seo from '../components/Seo';
+import FaqList from '../components/FaqList';
+import CtaBand from '../components/CtaBand';
+import { WhatsAppLink } from '../components/ContactButtons';
+import { HOME_FAQS } from '../seo/faqs';
 
 const PARTNERS = [
-  {
-    name: 'Tropic Air',
-    url: 'https://www.tropicair.com',
-    img: 'uploads/partners/tropicair.jpg',
-  },
-  {
-    name: 'Maya Island Air',
-    url: 'https://mayaaislandair.com',
-    img: 'uploads/partners/mayaislandair.jpg',
-  },
-  {
-    name: 'Sprinter',
-    url: 'https://sprinter.bz',
-    img: 'uploads/partners/sprinter.jpg',
-  },
-  {
-    name: 'Belize Water Taxi',
-    url: 'https://belizewatertaxi.com',
-    img: 'uploads/partners/belizewatertaxi.jpg',
-  },
+  { name: 'Tropic Air', url: 'https://www.tropicair.com', img: 'uploads/partners/tropicair.jpg', icon: 'flight' },
+  { name: 'Maya Island Air', url: 'https://mayaislandair.com', img: 'uploads/partners/mayaislandair.jpg', icon: 'flight' },
+  { name: 'Sprinter', url: 'https://sprinter.bz', img: 'uploads/partners/sprinter.jpg', icon: 'luggage' },
+  { name: 'Belize Water Taxi', url: 'https://belizewatertaxi.com', img: 'uploads/partners/belizewatertaxi.jpg', icon: 'directions_boat' },
 ];
 
-const FAQS = [
-  {
-    q: "Do I need a driver's license to rent a golf cart in San Pedro, Belize?",
-    a: "Bring a valid driver's license and confirm driver eligibility and rental requirements with our team before booking.",
-  },
-  {
-    q: 'Do you deliver golf carts to hotels or Airbnbs for free?',
-    a: 'Yes. Every Scorpion Golf Cart rental includes free delivery and pickup anywhere in San Pedro, including hotels, resorts, and Airbnb accommodations.',
-  },
-  {
-    q: 'How does the online booking process work?',
-    a: 'Simply submit your booking request through our website. We will confirm availability and contact you via WhatsApp or email to finalize your reservation.',
-  },
-  {
-    q: 'What happens if my travel plans change or I need to cancel?',
-    a: 'We offer free cancellation up to 24 hours before your rental begins. Just reach out to our team and we\'ll take care of the rest.',
-  },
-  {
-    q: 'Are the golf carts safe and well maintained?',
-    a: 'Absolutely. All our golf carts are regularly serviced, cleaned, and inspected to ensure a reliable and comfortable experience while exploring San Pedro.',
-  },
-  {
-    q: 'What payment methods do you accept?',
-    a: 'We accept cash and all major credit and debit cards for your convenience.',
-  },
+const TRUST = [
+  { icon: 'local_shipping', title: 'Free delivery', text: 'To your hotel, resort, or Airbnb in San Pedro' },
+  { icon: 'groups', title: '4 & 6 seats', text: 'A cart sized for couples, families, and groups' },
+  { icon: 'event_available', title: 'Free cancellation', text: 'Up to 24 hours before your rental starts' },
+  { icon: 'support_agent', title: 'Local team', text: 'Phone and WhatsApp, daily 8am–10pm' },
 ];
+
+const RATES = [
+  { seats: '4-Seater', price: '$35', bestFor: 'Couples, small families, and groups of up to four' },
+  { seats: '6-Seater', price: '$65', bestFor: 'Larger families and groups who want to ride together', featured: true },
+];
+
+const RATE_INCLUDES = ['Free delivery & pickup in San Pedro', 'Free cancellation up to 24h before', 'Local support by phone & WhatsApp'];
+
+const STEPS = [
+  { title: 'Send your dates', text: 'Request online or on WhatsApp with your dates, group size, and where you are staying.' },
+  { title: 'We confirm', text: 'Our team checks availability and confirms your cart, quote, and delivery time.' },
+  { title: 'Start exploring', text: 'Your golf cart is delivered to your accommodation. We pick it up when you are done.' },
+];
+
+const GUIDES = [
+  { to: '/san-pedro-golf-cart-rental-guide', tag: 'Rental guide', title: 'How to rent a golf cart in San Pedro', text: 'Choosing seating, comparing quotes, hotel and airstrip pickup, what to bring, and driving tips.' },
+  { to: '/things-to-do-in-san-pedro-by-golf-cart', tag: 'Explore', title: 'Things to do in San Pedro by golf cart', text: 'Secret Beach, Boca del Rio, the north and south of the island, tour docks, and day-trip tips.' },
+];
+
+function SectionHeader({ eyebrow, title, lead, action }) {
+  return (
+    <div className="reveal mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
+      <div className="max-w-2xl">
+        <p className="eyebrow mb-3">{eyebrow}</p>
+        <h2 className="section-title">{title}</h2>
+        {lead && <p className="section-lead mt-4">{lead}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
 
 export default function HomePage({ onBookNow }) {
   const [cars, setCars] = useState([]);
-  const [faqOpen, setFaqOpen] = useState(null);
-  const answerRefs = useRef([]);
 
   useEffect(() => {
-    getCars()
-      .then((r) => setCars(r.data.slice(0, 3)))
-      .catch(() => setCars([]));
-
+    getCars().then((r) => setCars(r.data.slice(0, 3))).catch(() => setCars([]));
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <Seo />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-home.jpg"
-            alt="Golf cart ready for an island rental"
-            width="512"
-            height="512"
-            fetchPriority="high"
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.82)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/65 via-primary/20 to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-container mx-auto px-6 sm:px-8 w-full py-20">
-          <div className="max-w-2xl text-white">
-            <p className="text-primary-fixed font-semibold mb-5">San Pedro, Ambergris Caye, Belize</p>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Golf Cart Rental in<br />San Pedro, Belize
+      {/* ── Hero: answer-first copy, prices, and actions above the fold ── */}
+      <section className="relative bg-island overflow-hidden pt-24 pb-12 md:pt-32 md:pb-20">
+        <div aria-hidden="true" className="hero-aurora" />
+        <div className="relative container-page grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
+          <div>
+            <p className="chip mb-6">
+              <span aria-hidden="true" className="material-symbols-outlined icon-fill text-[18px] text-secondary">location_on</span>
+              San Pedro · Ambergris Caye · Belize
+            </p>
+            <h1 className="font-serif text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-primary">
+              Golf Cart Rental in{' '}
+              <span className="whitespace-nowrap">
+                <span className="relative inline-block">
+                  San Pedro
+                  <svg aria-hidden="true" className="hero-underline absolute -bottom-2 left-0 h-3 w-full md:-bottom-3 md:h-4" viewBox="0 0 300 16" preserveAspectRatio="none" fill="none">
+                    <path d="M3 11c55-7 120-9 180-6 40 2 78 5 114 1" stroke="#f2b544" strokeWidth="6" strokeLinecap="round" />
+                  </svg>
+                </span>,
+              </span>{' '}Belize
             </h1>
-            <p className="text-lg text-white/85 mb-10 max-w-lg leading-relaxed">
-              Explore Ambergris Caye at your own pace. Choose a 4 or 6-seater golf cart and arrange delivery to your hotel, resort, or Airbnb with Scorpion Golf Cart Rental.
+            <p className="mt-5 max-w-xl text-lg md:text-xl leading-relaxed text-zinc-700">
+              Explore Ambergris Caye at your own pace. Choose a 4 or 6-seater golf cart and get free delivery to your hotel, resort, or Airbnb.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={onBookNow}
-                className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-base hover:bg-secondary transition-all duration-200 shadow-xl shadow-black/20 hover:-translate-y-0.5 active:scale-95"
-              >
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="chip">4-seater <strong className="text-secondary">from $35/day</strong></span>
+              <span className="chip">6-seater <strong className="text-secondary">from $65/day</strong></span>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:flex">
+              <button onClick={onBookNow} className="btn-primary">
                 Book Now
-                <span className="material-symbols-outlined">arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-[20px]">arrow_forward</span>
               </button>
-              <Link
-                to="/cars"
-                className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-base hover:bg-white/20 transition-all duration-200 active:scale-95"
-              >
-                View Our Fleet
-              </Link>
+              <WhatsAppLink location="hero">Ask on WhatsApp</WhatsAppLink>
+            </div>
+            <p className="mt-5 flex items-center gap-2 text-sm text-zinc-600">
+              <span aria-hidden="true" className="material-symbols-outlined icon-fill text-[18px] text-secondary">verified</span>
+              Free cancellation up to 24 hours before · Open daily 8am–10pm
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-hidden rounded-[2rem] bg-sand-deep shadow-[0_30px_60px_-20px_rgba(1,45,29,0.35)]">
+              <img
+                src="/og-image.jpg"
+                alt="White golf cart available to rent in San Pedro"
+                width="1200"
+                height="630"
+                fetchPriority="high"
+                className="ken-burns aspect-[4/3] w-full object-cover lg:aspect-[5/4]"
+              />
+            </div>
+            <div className="float-badge absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-auto flex items-center gap-3 rounded-2xl border border-white/70 bg-white/90 p-3 pr-5 shadow-xl backdrop-blur-md">
+              <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sun text-primary material-symbols-outlined text-[24px] icon-fill">local_shipping</span>
+              <span className="text-sm leading-snug"><strong className="block text-primary">Delivered to your door</strong><span className="text-zinc-600">Hotels, resorts &amp; Airbnbs in San Pedro</span></span>
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/60">
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <span className="material-symbols-outlined animate-bounce">keyboard_arrow_down</span>
-        </div>
       </section>
 
-      {/* ── Feature Bento Grid ────────────────────────────────────────────── */}
-      <section className="py-20 bg-surface">
-        <div className="max-w-container mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Large card */}
-            <div className="md:col-span-7 bg-white p-6 md:p-10 rounded-2xl border border-zinc-100 flex flex-col justify-between group overflow-hidden relative"
-              style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
-              <div className="relative z-10">
-                <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-3">Premium Performance</span>
-                <h2 className="font-serif text-3xl font-bold text-primary mb-4">Quiet. Powerful. Efficient.</h2>
-                <p className="text-zinc-500 max-w-md leading-relaxed">
-                  Our meticulously maintained fleet is built for smooth, reliable performance — ready to take you anywhere in San Pedro in comfort and style.
+      {/* ── Trust strip: swipe on phones, grid on larger screens ── */}
+      <section aria-label="Why renters choose Scorpion" className="border-b border-zinc-100 bg-white pt-14 pb-8 md:py-12">
+        <ul className="container-page flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible [scrollbar-width:none]">
+          {TRUST.map(({ icon, title, text }) => (
+            <li key={title} className="flex min-w-[78%] snap-start items-start gap-3 rounded-2xl bg-sand/70 p-4 sm:min-w-[45%] md:min-w-0 md:bg-transparent md:p-0">
+              <span aria-hidden="true" className="material-symbols-outlined text-[24px] flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-fixed/60 text-primary">{icon}</span>
+              <span><strong className="block text-primary">{title}</strong><span className="text-sm text-zinc-600">{text}</span></span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ── Rates ── */}
+      <section id="rates" className="section bg-white">
+        <div className="container-page">
+          <SectionHeader eyebrow="Rates" title="Simple daily golf cart rates" lead="Starting daily rates for San Pedro golf cart rentals. We confirm the total for your dates before you book." />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {RATES.map(({ seats, price, bestFor, featured }) => (
+              <article key={seats} className={`reveal relative rounded-[1.75rem] p-7 md:p-8 ${featured ? 'bg-primary text-white' : 'card'}`}>
+                {featured && <span className="absolute right-6 top-6 rounded-full bg-sun px-3 py-1 text-xs font-bold text-primary">Groups</span>}
+                <h3 className={`font-serif text-2xl font-bold ${featured ? 'text-white' : 'text-primary'}`}>{seats} golf cart</h3>
+                <p className={`mt-1 text-sm ${featured ? 'text-white/70' : 'text-zinc-600'}`}>{bestFor}</p>
+                <p className="mt-6 flex items-end gap-1.5">
+                  <span className={`text-xs font-bold uppercase tracking-widest mb-2 ${featured ? 'text-sun' : 'text-secondary'}`}>From</span>
+                  <span className={`font-serif text-6xl font-bold leading-none ${featured ? 'text-white' : 'text-primary'}`}>{price}</span>
+                  <span className={`mb-1.5 ${featured ? 'text-white/70' : 'text-zinc-500'}`}>/day</span>
                 </p>
-              </div>
-              <div className="absolute bottom-[-10%] right-[-5%] w-1/2 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
-                <span className="material-symbols-outlined text-primary" style={{ fontSize: '240px' }}>directions_car</span>
-              </div>
-            </div>
-
-            {/* Dark card */}
-            <div className="md:col-span-5 bg-primary-container p-6 md:p-10 rounded-2xl flex flex-col justify-center">
-              <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center mb-5">
-                <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-              </div>
-              <h3 className="font-serif text-2xl font-semibold text-primary mb-3">Fleet Standards</h3>
-              <p className="text-primary/70 leading-relaxed mb-3">
-                Our carts are regularly serviced and checked to help you explore San Pedro comfortably. Ask our team which option suits your plans.
-              </p>
-              <Link to="/about" className="text-secondary font-semibold text-sm hover:underline">
-                Learn about our story →
-              </Link>
-            </div>
-
-            {/* Three feature cards */}
-            {[
-              { icon: 'chair', title: 'Seating for Your Group', desc: 'Choose a 4 or 6-seater for your island stay.' },
-              { icon: 'chat', title: 'Easy Booking Requests', desc: 'Send your dates online or ask us on WhatsApp.' },
-              { icon: 'map', title: 'Accommodation Delivery', desc: 'Arrange pickup at your hotel, resort, or Airbnb.' },
-            ].map(({ icon, title, desc }) => (
-              <div key={icon} className="md:col-span-4 bg-white p-5 md:p-8 rounded-2xl border border-zinc-100 text-center"
-                style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.06)' }}>
-                <span className="material-symbols-outlined text-primary block mb-4" style={{ fontSize: '48px', fontVariationSettings: "'FILL' 0" }}>{icon}</span>
-                <h3 className="font-serif text-lg font-semibold text-primary mb-1">{title}</h3>
-                <p className="text-zinc-400 text-sm">{desc}</p>
-              </div>
+                <ul className="mt-6 space-y-2.5">
+                  {RATE_INCLUDES.map((item) => (
+                    <li key={item} className={`flex items-center gap-2 text-sm ${featured ? 'text-white/85' : 'text-zinc-700'}`}>
+                      <span aria-hidden="true" className={`material-symbols-outlined icon-fill text-[20px] ${featured ? 'text-sun' : 'text-secondary'}`}>check_circle</span>{item}
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={onBookNow} className={`${featured ? 'btn-sun' : 'btn-primary'} mt-8 w-full`}>Book Now</button>
+              </article>
             ))}
+            <article className="reveal flex flex-col rounded-[1.75rem] border-2 border-dashed border-sun/60 bg-sun-soft/60 p-7 md:col-span-2 md:p-8 lg:col-span-1">
+              <h3 className="font-serif text-2xl font-bold text-primary">Weekly &amp; longer stays</h3>
+              <p className="mt-1 text-sm text-zinc-600">Staying on Ambergris Caye for a week or more</p>
+              <p className="mt-6 flex-1 leading-relaxed text-zinc-700">Rentals are priced by the day. Send your dates and group size and we will reply with a quote for your whole stay, including delivery and pickup.</p>
+              <WhatsAppLink location="rates_long_stay" className="btn-whatsapp mt-8 w-full">Get a quote on WhatsApp</WhatsAppLink>
+            </article>
           </div>
         </div>
       </section>
 
-      {/* ── Fleet Preview ─────────────────────────────────────────────────── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-container mx-auto px-6 sm:px-8">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Our Fleet</span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">Featured Carts</h2>
-            <p className="text-zinc-500 max-w-xl mx-auto leading-relaxed">
-              Discover our curated selection of premium golf carts designed for the perfect ride around San Pedro.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            {cars.map((car) => (
-              <CarCard key={car.id} car={car} onBookNow={onBookNow} />
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              to="/cars"
-              className="inline-flex items-center gap-2 border-2 border-primary text-primary px-8 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-200"
-            >
-              View Full Fleet
-              <span className="material-symbols-outlined">arrow_forward</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats Banner ─────────────────────────────────────────────────── */}
-      <section className="py-16 bg-primary">
-        <div className="max-w-container mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center text-white">
-            {[
-              { value: '4 & 6', label: 'Passenger Seat Options' },
-              { value: 'San Pedro', label: 'Ambergris Caye, Belize' },
-              { value: 'Delivery', label: 'To Your Accommodation' },
-              { value: 'WhatsApp', label: 'Booking & Rental Questions' },
-            ].map(({ value, label }) => (
-              <div key={label}>
-                <div className="font-serif text-3xl md:text-4xl font-bold text-primary-fixed mb-1">{value}</div>
-                <div className="text-white/70 text-sm font-medium">{label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Our Rates ─────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-container mx-auto px-6 sm:px-8">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Pricing</span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">Our Rates</h2>
-            <p className="text-zinc-500 mt-3 max-w-sm mx-auto text-sm leading-relaxed">
-              Simple, transparent pricing with no hidden fees.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {[
-              { seats: '4-Seater', price: '$35' },
-              { seats: '6-Seater', price: '$65' },
-            ].map(({ seats, price }) => (
-              <div
-                key={seats}
-                className="bg-white rounded-2xl border border-zinc-100 p-8 flex flex-col items-center text-center gap-5 transition-all duration-300 hover:-translate-y-1"
-                style={{ boxShadow: '0 4px 24px rgba(1,45,29,0.07)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 12px 36px rgba(1,45,29,0.13)')}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 4px 24px rgba(1,45,29,0.07)')}
-              >
-                <div className="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: '30px', fontVariationSettings: "'FILL' 1" }}>
-                    airline_seat_recline_normal
-                  </span>
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-primary">{seats}</h3>
+      {/* ── How it works ── */}
+      <section className="section bg-sand">
+        <div className="container-page">
+          <SectionHeader eyebrow="How it works" title="Book your golf cart in three steps" />
+          <ol className="grid gap-4 md:grid-cols-3 md:gap-6">
+            {STEPS.map(({ title, text }, i) => (
+              <li key={title} className="reveal card flex gap-4 p-6 md:flex-col md:p-8">
+                <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary font-serif text-xl font-bold text-sun">{i + 1}</span>
                 <div>
-                  <p className="text-xs text-secondary font-semibold uppercase tracking-widest mb-1">Starting from</p>
-                  <div className="flex items-end justify-center gap-1">
-                    <span className="font-serif text-5xl font-bold text-primary">{price}</span>
-                    <span className="text-zinc-400 text-base mb-1.5">/day</span>
-                  </div>
+                  <h3 className="font-serif text-xl font-bold text-primary">{title}</h3>
+                  <p className="mt-2 text-zinc-600 leading-relaxed">{text}</p>
                 </div>
-                <button
-                  onClick={onBookNow}
-                  className="mt-1 w-full py-3 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-secondary transition-all duration-200 active:scale-95"
-                >
-                  Book Now
-                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── Fleet preview (live inventory, with a static fallback) ── */}
+      <section className="section bg-white">
+        <div className="container-page">
+          <SectionHeader
+            eyebrow="Our fleet"
+            title="Golf carts for rent in San Pedro"
+            lead="4-seater and 6-seater golf carts, delivered to your hotel, resort, or Airbnb on Ambergris Caye."
+            action={<Link to="/cars" className="btn-outline self-start">See all carts &amp; rates</Link>}
+          />
+          {cars.length > 0 ? (
+            <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 [scrollbar-width:none]">
+              {cars.map((car) => (
+                <div key={car.id} className="w-[85%] shrink-0 snap-start md:w-auto"><CarCard car={car} onBookNow={onBookNow} /></div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2">
+              {RATES.map(({ seats, price, bestFor }) => (
+                <Link key={seats} to="/cars" className="reveal card card-hover flex items-center gap-5 p-6">
+                  <span aria-hidden="true" className="material-symbols-outlined flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-fixed/60 text-[28px] text-primary">airline_seat_recline_normal</span>
+                  <span className="min-w-0">
+                    <strong className="block font-serif text-xl text-primary">{seats} golf carts</strong>
+                    <span className="block text-sm text-zinc-600">{bestFor} · from {price}/day</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── Why Scorpion: bento grid ── */}
+      <section className="section bg-sand">
+        <div className="container-page">
+          <SectionHeader eyebrow="Why Scorpion" title="A San Pedro golf cart rental that comes to you" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 md:gap-5">
+            <div className="reveal relative overflow-hidden rounded-[1.75rem] bg-primary p-8 text-white sm:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-end min-h-[260px]">
+              <span aria-hidden="true" className="material-symbols-outlined absolute -right-6 -top-6 text-[180px] text-white/5">local_shipping</span>
+              <h3 className="font-serif text-2xl md:text-3xl font-bold">Free delivery &amp; pickup</h3>
+              <p className="mt-3 leading-relaxed text-white/75">We bring your golf cart to your hotel, resort, or Airbnb anywhere in San Pedro and collect it when your rental ends. Pickup at the San Pedro airstrip (SPR) can be arranged.</p>
+            </div>
+            {[
+              { icon: 'groups', title: 'Seats for every group', text: 'Choose a 4-seater for couples and small groups or a 6-seater for families and friends.' },
+              { icon: 'chat', title: 'Easy booking', text: 'Send a request online or message us on WhatsApp. We confirm the details with you.', sun: true },
+              { icon: 'build', title: 'Maintained carts', text: 'Our golf carts are regularly serviced and cleaned between rentals.' },
+              { icon: 'event_available', title: 'Flexible plans', text: 'Free cancellation up to 24 hours before your rental begins.' },
+            ].map(({ icon, title, text, sun }) => (
+              <div key={title} className={`reveal flex gap-4 rounded-[1.75rem] p-5 sm:block sm:p-7 ${sun ? 'bg-sun-soft border border-sun/30' : 'bg-white border border-zinc-200/70'}`}>
+                <span aria-hidden="true" className="material-symbols-outlined text-[24px] flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-primary shadow-sm">{icon}</span>
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-primary sm:mt-5">{title}</h3>
+                  <p className="mt-1 text-zinc-600 leading-relaxed sm:mt-2">{text}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Supported Locations / Partner Slider ─────────────────────────── */}
-      <section className="py-14 bg-surface">
-        <div className="max-w-container mx-auto px-6 sm:px-8 text-center mb-8">
-          <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Supported Locations</span>
-          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary">Our Trusted Partners</h2>
-          <p className="text-zinc-500 text-sm mt-2 max-w-md mx-auto">
-            Conveniently located near Belize's top travel hubs.
-          </p>
-        </div>
-
-        {/* marquee-viewport clips overflow and acts as hover target */}
-        <div className="marquee-viewport relative w-full overflow-hidden">
-          {/* Soft fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 z-10 bg-gradient-to-r from-surface to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 z-10 bg-gradient-to-l from-surface to-transparent" />
-
-          {/*
-            Two identical sets placed side by side.
-            Each set animates translateX(-100%) — its own full width.
-            When set A exits left, set B has scrolled into view seamlessly.
-            The reset back to 0 happens off-screen → no visible jump.
-          */}
-          <div className="flex py-3">
-            {[false, true].map((isClone) => (
-              <div key={isClone ? 'b' : 'a'} className="marquee-set" aria-hidden={isClone || undefined}>
-                {PARTNERS.map(({ name, url, img }) => (
-                  <a
-                    key={name}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="marquee-card rounded-2xl overflow-hidden border border-zinc-100 bg-white hover:border-secondary/40 hover:shadow-xl transition-all duration-300 group"
-                    style={{ boxShadow: '0 2px 12px rgba(1,45,29,0.06)' }}
-                  >
-                    <div className="w-full overflow-hidden bg-zinc-100" style={{ height: '148px' }}>
-                      <img
-                        src={resolveImageUrl(img)}
-                        alt={name}
-                        loading="lazy"
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between px-3 py-2.5 bg-white">
-                      <span className="text-xs font-semibold text-primary truncate">{name}</span>
-                      <span
-                        className="material-symbols-outlined text-zinc-300 group-hover:text-secondary transition-colors shrink-0"
-                        style={{ fontSize: '15px' }}
-                      >open_in_new</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
+      {/* ── Getting to San Pedro ── */}
+      <section className="section bg-white">
+        <div className="container-page">
+          <SectionHeader eyebrow="Getting here" title="Arriving by plane or water taxi?" lead="Most visitors reach San Pedro on a short flight or a water taxi. Send us your arrival details and we will arrange your golf cart." />
+          <ul className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
+            {PARTNERS.map(({ name, url, img, icon }) => (
+              <li key={name} className="reveal">
+                <a href={url} target="_blank" rel="noreferrer" className="card card-hover block overflow-hidden">
+                  <div className="relative aspect-[16/10] bg-primary-fixed/40">
+                    <span aria-hidden="true" className="material-symbols-outlined absolute inset-0 m-auto flex h-12 w-12 items-center justify-center !text-[36px] text-secondary/60">{icon}</span>
+                    <img src={resolveImageUrl(img)} alt={`${name} logo`} loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="relative h-full w-full object-cover" />
+                  </div>
+                  <span className="flex items-center justify-between px-4 py-3 text-sm font-bold text-primary">{name}<span aria-hidden="true" className="material-symbols-outlined text-[16px] text-zinc-400">open_in_new</span></span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       <ServiceAreaSection />
-      <section className="py-12 bg-white"><div className="max-w-container mx-auto px-6 sm:px-8"><h2 className="font-serif text-2xl font-bold text-primary mb-3">Planning your Ambergris Caye stay?</h2><p className="text-zinc-500 leading-relaxed">Read our <Link to="/san-pedro-golf-cart-rental-guide" className="text-secondary font-semibold underline">San Pedro golf cart rental guide</Link> for help choosing seating, arranging pickup, and preparing your booking. For availability and delivery questions, <Link to="/contact" className="text-secondary font-semibold underline">contact our local rental team</Link>.</p></div></section>
 
-      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-container mx-auto px-6 sm:px-8">
-
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div>
-              <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">FAQ</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary leading-tight">
-                Frequently Asked<br className="hidden sm:block" /> Questions
-              </h2>
-            </div>
-            <p className="text-zinc-500 text-sm leading-relaxed max-w-sm md:text-right">
-              Everything you need to know before renting. Can't find an answer?{' '}
-              <button onClick={onBookNow} className="text-secondary font-semibold hover:underline">
-                Contact us directly.
-              </button>
-            </p>
-          </div>
-
-          {/* Accordion grid — 1 col mobile, 2 col desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {FAQS.map((item, i) => {
-              const isOpen = faqOpen === i;
-              return (
-                <div
-                  key={i}
-                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? 'border-secondary/30 bg-primary-container/30'
-                      : 'border-zinc-100 bg-zinc-50/60 hover:border-zinc-200 hover:bg-zinc-50'
-                  }`}
-                  style={{ boxShadow: isOpen ? '0 4px 20px rgba(1,45,29,0.08)' : 'none' }}
-                >
-                  <button
-                    onClick={() => setFaqOpen(isOpen ? null : i)}
-                    className="w-full flex items-start justify-between gap-4 px-6 py-5 text-left"
-                  >
-                    <span className={`font-semibold text-sm leading-relaxed transition-colors ${
-                      isOpen ? 'text-primary' : 'text-zinc-700'
-                    }`}>
-                      {item.q}
-                    </span>
-                    <span
-                      className={`material-symbols-outlined shrink-0 mt-0.5 transition-all duration-300 ${
-                        isOpen ? 'text-secondary rotate-45' : 'text-zinc-400'
-                      }`}
-                      style={{ fontSize: '20px' }}
-                    >
-                      add
-                    </span>
-                  </button>
-
-                  {/* Smooth height animation */}
-                  <div
-                    ref={(el) => (answerRefs.current[i] = el)}
-                    style={{
-                      maxHeight: isOpen
-                        ? `${answerRefs.current[i]?.scrollHeight ?? 200}px`
-                        : '0px',
-                      transition: 'max-height 0.3s ease',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <p className="px-6 pb-5 text-sm text-zinc-500 leading-relaxed border-t border-zinc-100/80 pt-4">
-                      {item.a}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+      {/* ── Guides: internal links to long-form content ── */}
+      <section className="section bg-white">
+        <div className="container-page">
+          <SectionHeader eyebrow="Plan your trip" title="San Pedro golf cart guides" />
+          <div className="grid gap-5 md:grid-cols-2">
+            {GUIDES.map(({ to, tag, title, text }) => (
+              <Link key={to} to={to} className="reveal group card card-hover flex flex-col p-7 md:p-9">
+                <span className="self-start rounded-full bg-sun-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-800">{tag}</span>
+                <h3 className="mt-5 font-serif text-2xl md:text-3xl font-bold text-primary">{title}</h3>
+                <p className="mt-3 flex-1 text-zinc-600 leading-relaxed">{text}</p>
+                <span className="mt-6 inline-flex items-center gap-2 font-bold text-secondary">Read the guide<span aria-hidden="true" className="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Reviews ───────────────────────────────────────────────────────── */}
+      {/* ── FAQ ── */}
+      <section className="section bg-sand">
+        <div className="container-page">
+          <FaqList faqs={HOME_FAQS} title="Golf cart rental FAQ" id="faq" columns intro="Quick answers about renting a golf cart in San Pedro, Belize. Still unsure? Message us on WhatsApp." />
+        </div>
+      </section>
+
       <ReviewsSection />
-    </div>
+
+      <CtaBand onBookNow={onBookNow} location="home_cta" />
+    </>
   );
 }

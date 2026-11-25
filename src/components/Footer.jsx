@@ -1,70 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { trackEvent, trackAdsConversion } from '../utils/analytics';
 import SocialLinks from './SocialLinks';
+import { CallLink, WhatsAppLink } from './ContactButtons';
+
+const COLUMNS = [
+  { title: 'Rentals', links: [['/cars', 'Golf carts & rates'], ['/contact', 'Delivery & booking'], ['/about', 'About Scorpion']] },
+  { title: 'Plan your trip', links: [['/san-pedro-golf-cart-rental-guide', 'San Pedro rental guide'], ['/things-to-do-in-san-pedro-by-golf-cart', 'Things to do by golf cart'], ['/', 'Golf cart rental San Pedro']] },
+];
 
 export default function Footer() {
-  const handleWhatsAppClick = () => {
-    trackEvent('whatsapp_click', { location: 'footer' });
-    trackAdsConversion(process.env.REACT_APP_GADS_CONVERSION_LABEL_WHATSAPP);
-  };
-
   return (
-    <footer className="bg-zinc-50 border-t border-zinc-200 mt-auto">
-      <div className="max-w-container mx-auto px-6 sm:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Brand */}
-        <div className="space-y-4">
-          <div className="text-lg font-bold text-primary font-serif">Scorpion Golf Cart Rental</div>
-          <p className="text-zinc-500 text-sm leading-relaxed">
-            Golf cart rentals in San Pedro, Ambergris Caye, Belize. Choose a cart for your group and arrange delivery to your accommodation.
-          </p>
-          <p className="text-xs text-zinc-400">
-            Built by{' '}
-            <a
-              href="https://www.instagram.com/jaf_aurion"
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold hover:underline transition-colors"
-            >
-              <span style={{ color: '#1a2a6c' }}>JAF</span>-AURION
-            </a>
-          </p>
+    <footer className="bg-primary text-white/75 pb-28 md:pb-0">
+      <div className="container-page grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:py-20">
+        <div className="col-span-2 space-y-4 lg:col-span-1">
+          <Link to="/" className="inline-flex items-center gap-3">
+            <img src="/scorpionlogo.png" alt="" width="44" height="44" loading="lazy" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
+            <span className="font-serif text-xl font-bold text-white">Scorpion Golf Cart Rental</span>
+          </Link>
+          <p className="max-w-sm leading-relaxed">4 and 6-seater golf cart rentals in San Pedro, Ambergris Caye, Belize, delivered free to your hotel, resort, or Airbnb.</p>
+          <SocialLinks />
         </div>
 
-        {/* Navigation */}
-        <div className="flex flex-col space-y-3">
-          <h4 className="font-bold text-primary font-serif text-sm uppercase tracking-wider">Navigation</h4>
-          <Link to="/" className="text-zinc-500 hover:text-primary transition-colors text-sm">Home</Link>
-          <Link to="/cars" className="text-zinc-500 hover:text-primary transition-colors text-sm">Our Fleet</Link>
-          <Link to="/about" className="text-zinc-500 hover:text-primary transition-colors text-sm">About Us</Link>
-          <Link to="/san-pedro-golf-cart-rental-guide" className="text-zinc-500 hover:text-primary transition-colors text-sm">San Pedro Rental Guide</Link>
-          <Link to="/contact" className="text-zinc-500 hover:text-primary transition-colors text-sm">Contact & Delivery</Link>
-        </div>
-
-        {/* Contact */}
-        <div className="space-y-4">
-          <h4 className="font-bold text-primary font-serif text-sm uppercase tracking-wider">Contact</h4>
-          <a
-            href="https://wa.me/5016007672?text=Hi%20I%20am%20interested%20in%20renting%20a%20golf%20car"
-            target="_blank"
-            rel="noreferrer"
-            onClick={handleWhatsAppClick}
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
-          >
-            <span className="material-symbols-outlined text-[18px]">chat</span>
-            WhatsApp Us
-          </a>
-          <address className="not-italic text-zinc-500 text-sm space-y-2"><p>San Pedro, Ambergris Caye, Belize</p><a href="tel:+5016007672" onClick={() => trackEvent('phone_click', { location: 'footer' })} className="hover:underline">+501 600-7672</a></address>
-          <p className="text-zinc-400 text-xs">Available daily 8am – 10pm (Belize time)</p>
-          <div className="pt-1">
-            <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Follow Us</p>
-            <SocialLinks />
+        {COLUMNS.map(({ title, links }) => (
+          <div key={title}>
+            <p className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.16em] text-sun">{title}</p>
+            <ul className="space-y-3">
+              {links.map(([to, label]) => <li key={label}><Link to={to} className="hover:text-white hover:underline underline-offset-4">{label}</Link></li>)}
+            </ul>
           </div>
+        ))}
+
+        <div className="col-span-2 lg:col-span-1">
+          <p className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.16em] text-sun">Contact</p>
+          <address className="not-italic space-y-3">
+            <p className="font-semibold text-white">Scorpion Golf Cart Rental</p>
+            <p>San Pedro, Ambergris Caye, Belize</p>
+            <p>Open daily, 8am–10pm (Belize time)</p>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <WhatsAppLink location="footer" className="btn-whatsapp !px-4 !py-2.5 text-sm">WhatsApp</WhatsAppLink>
+              <CallLink location="footer" className="btn-ghost-light !px-4 !py-2.5 text-sm" />
+            </div>
+          </address>
         </div>
       </div>
 
-      <div className="border-t border-zinc-200 py-4 text-center text-xs text-zinc-400">
-        © {new Date().getFullYear()} Scorpion Golf Cart Rental. All rights reserved.
+      <div className="border-t border-white/10">
+        <div className="container-page flex flex-col gap-2 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Scorpion Golf Cart Rental. All rights reserved.</p>
+          <p>
+            Built by{' '}
+            <a href="https://www.instagram.com/jaf_aurion" target="_blank" rel="noreferrer" className="font-semibold text-white/90 hover:underline">JAF-AURION</a>
+          </p>
+        </div>
       </div>
     </footer>
   );

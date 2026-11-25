@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import MobileActionBar from './components/MobileActionBar';
 import BookingModal from './components/BookingModal';
 import HomePage from './pages/HomePage';
 import CarsPage from './pages/CarsPage';
@@ -18,6 +19,7 @@ import AdminAddressesPage from './pages/admin/AdminAddressesPage';
 import AdminSeatsPage from './pages/admin/AdminSeatsPage';
 import RentalGuidePage from './pages/RentalGuidePage';
 import ContactPage from './pages/ContactPage';
+import ThingsToDoPage from './pages/ThingsToDoPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Seo from './components/Seo';
 import RouteEffects from './components/RouteEffects';
@@ -29,6 +31,7 @@ function PublicLayout({ children, onBookNow }) {
       <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <MobileActionBar onBookNow={onBookNow} />
     </>
   );
 }
@@ -48,6 +51,7 @@ function App({ Router = BrowserRouter, routerProps = {} }) {
           <Route path="/cars" element={<PublicLayout onBookNow={() => openBooking()}><CarsPage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/about" element={<PublicLayout onBookNow={() => openBooking()}><AboutPage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/san-pedro-golf-cart-rental-guide" element={<PublicLayout onBookNow={() => openBooking()}><RentalGuidePage onBookNow={openBooking} /></PublicLayout>} />
+          <Route path="/things-to-do-in-san-pedro-by-golf-cart" element={<PublicLayout onBookNow={() => openBooking()}><ThingsToDoPage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/contact" element={<PublicLayout onBookNow={() => openBooking()}><ContactPage onBookNow={openBooking} /></PublicLayout>} />
           <Route path="/admin/login" element={<><Seo title="Admin Login | Scorpion Golf Cart Rental" noindex /><AdminLoginPage /></>} />
           <Route path="/admin" element={<><Seo title="Admin | Scorpion Golf Cart Rental" noindex /><ProtectedRoute><AdminLayout /></ProtectedRoute></>}>

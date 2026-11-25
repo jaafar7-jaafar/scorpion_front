@@ -41,13 +41,13 @@ export default function ReviewsSection() {
   };
 
   return (
-    <section className="py-20 bg-surface">
-      <div className="max-w-container mx-auto px-6 sm:px-8">
+    <section className="section bg-white">
+      <div className="container-page">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
           <div>
-            <span className="text-secondary font-semibold text-sm uppercase tracking-widest block mb-2">Testimonials</span>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary">What Our Guests Say</h2>
+            <p className="eyebrow mb-3">Reviews</p>
+            <h2 className="section-title">What our guests say</h2>
             {reviews.length > 0 && <div className="flex items-center gap-3 mt-4">
               <div className="flex">
                 {[1,2,3,4,5].map((s) => (
@@ -63,7 +63,7 @@ export default function ReviewsSection() {
           </div>
           <button
             onClick={() => setShowForm((o) => !o)}
-            className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-secondary transition-all whitespace-nowrap self-start sm:self-auto"
+            className="btn-outline self-start sm:self-auto"
           >
             <span className="material-symbols-outlined text-sm">edit</span>
             Write a Review
@@ -127,7 +127,7 @@ export default function ReviewsSection() {
 
         {/* Reviews Grid */}
         {reviews.length === 0 ? (
-          <div className="text-center py-16 text-zinc-400">
+          <div className="text-center rounded-[1.75rem] bg-sand py-14 px-6 text-zinc-500">
             <span className="material-symbols-outlined text-5xl block mb-3">rate_review</span>
             <p>{loadError ? 'Reviews are temporarily unavailable. Please try again later.' : 'No reviews yet. Be the first!'}</p>
           </div>
@@ -149,8 +149,7 @@ function ReviewCard({ review }) {
   });
 
   return (
-    <div className="bg-white rounded-xl p-6 border border-zinc-100"
-      style={{ boxShadow: '0 4px 16px rgba(1,45,29,0.05)' }}>
+    <div className="card p-6">
       <div className="flex items-start justify-between mb-3">
         <div className="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center shrink-0">
           <span className="font-bold text-on-primary-container text-sm">

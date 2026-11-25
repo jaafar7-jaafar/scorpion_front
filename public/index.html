@@ -8,12 +8,47 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/scorpionlogo.png" />
     <meta name="google-site-verification" content="Dw8HXYjyERYYduBW27a_QzGW4xMR1FHxEeB11A0a978" />
     <!-- Page metadata and visible content are rendered from React at build time. -->
-    <link rel="preload" href="%PUBLIC_URL%/fonts/material-symbols-outlined.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/material-symbols-2625c58f.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face {
-        font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: 100 700;
-        font-display: block; src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
+        font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: 400;
+        font-display: block; src: url('%PUBLIC_URL%/fonts/material-symbols-2625c58f.woff2') format('woff2');
       }
+    </style>
+    <!--
+      Premium intro: pure HTML/CSS outside the React root, so page content is
+      already rendered underneath (no SEO or LCP delay). Shown once per session,
+      skipped for crawlers, admin pages, and reduced-motion users.
+    -->
+    <script>
+      (function () {
+        var d = document.documentElement;
+        try {
+          var skip = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview/i.test(navigator.userAgent)
+            || location.pathname.indexOf('/admin') === 0
+            || sessionStorage.getItem('scorpion-intro');
+          if (skip) d.classList.add('no-intro'); else sessionStorage.setItem('scorpion-intro', '1');
+        } catch (e) { d.classList.add('no-intro'); }
+      })();
+    </script>
+    <style>
+      #intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; pointer-events: none;
+        background: radial-gradient(40rem 30rem at 50% 42%, #1b4332 0%, #012d1d 62%); color: #fff;
+        clip-path: inset(0 0 0 0); animation: intro-out .75s cubic-bezier(.76,0,.24,1) 1.05s forwards; }
+      .no-intro #intro { display: none; }
+      #intro .i-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+      #intro .i-logo { width: 88px; height: 88px; border-radius: 50%; background: #fff; padding: 4px; object-fit: contain;
+        animation: i-pop .7s cubic-bezier(.2,.9,.3,1.35) both, i-ring 1.3s .35s ease-out both; }
+      #intro .i-name { font: 700 30px/1.1 'Noto Serif', Georgia, serif; letter-spacing: .01em; margin-top: 6px; animation: i-rise .7s .2s cubic-bezier(.2,.8,.2,1) both; }
+      #intro .i-tag { font: 700 11px/1 Manrope, system-ui, sans-serif; letter-spacing: .32em; text-transform: uppercase; color: #f2b544; animation: i-rise .7s .32s cubic-bezier(.2,.8,.2,1) both; }
+      #intro .i-bar { width: 132px; height: 2px; margin-top: 10px; border-radius: 2px; background: rgba(255,255,255,.14); overflow: hidden; }
+      #intro .i-bar::after { content: ''; display: block; height: 100%; background: #f2b544; transform-origin: left; animation: i-load .9s .15s cubic-bezier(.65,0,.35,1) both; }
+      @keyframes i-pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+      @keyframes i-ring { from { box-shadow: 0 0 0 0 rgba(242,181,68,.55); } to { box-shadow: 0 0 0 28px rgba(242,181,68,0); } }
+      @keyframes i-rise { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+      @keyframes i-load { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+      @keyframes intro-out { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+      @media (prefers-reduced-motion: reduce) { #intro { display: none; } }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,6 +56,14 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
   </head>
   <body>
+    <div id="intro" aria-hidden="true">
+      <div class="i-wrap">
+        <img class="i-logo" src="%PUBLIC_URL%/scorpionlogo.png" alt="" width="88" height="88" />
+        <div class="i-name">Scorpion</div>
+        <div class="i-tag">Golf Cart Rental · San Pedro</div>
+        <div class="i-bar"></div>
+      </div>
+    </div>
     <div id="root"></div>
     <noscript><p>To request a golf cart without JavaScript, call <a href="tel:+5016007672">+501 600-7672</a> or <a href="https://wa.me/5016007672">message Scorpion Golf Cart Rental on WhatsApp</a>.</p></noscript>
   </body>

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SocialLinks from './SocialLinks';
+import { CallLink, WhatsAppLink } from './ContactButtons';
 
 const navLinks = [
   { label: 'Home', to: '/' },
-  { label: 'Carts', to: '/cars' },
+  { label: 'Carts & Rates', to: '/cars' },
+  { label: 'Rental Guide', to: '/san-pedro-golf-cart-rental-guide' },
+  { label: 'Things to Do', to: '/things-to-do-in-san-pedro-by-golf-cart' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ];
@@ -15,95 +18,82 @@ export default function Navbar({ onBookNow }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => setMenuOpen(false), [location]);
 
+  const isActive = (to) => location.pathname === to || (to !== '/' && location.pathname.startsWith(to));
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-nav' : 'bg-white/95 backdrop-blur-sm'
-      } border-b border-zinc-100`}
-    >
-      <div className="max-w-container mx-auto px-6 sm:px-8 flex items-center justify-between py-3">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 select-none min-w-0">
-          <img
-            src="/scorpionlogo.png"
-            alt="Scorpion Golf Cart Rental"
-            className="h-10 w-auto object-contain shrink-0"
-          />
-          <span className="hidden md:block text-xl font-bold font-serif text-primary leading-tight whitespace-nowrap">
-            Scorpion Golf Cart Rental
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled || menuOpen ? 'bg-white/90 backdrop-blur-xl shadow-[0_1px_0_rgba(1,45,29,0.08)]' : 'bg-white/70 backdrop-blur-md'}`}>
+      <nav aria-label="Main" className="container-page flex h-16 md:h-[72px] items-center justify-between gap-4">
+        <Link to="/" className="flex items-center gap-2.5 min-w-0 select-none" aria-label="Scorpion Golf Cart Rental home">
+          <img src="/scorpionlogo.png" alt="" width="40" height="40" className="h-10 w-10 object-contain shrink-0" />
+          <span className="leading-none">
+            <span className="block font-serif text-[17px] font-bold text-primary">Scorpion</span>
+            <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-secondary">Golf Cart Rental</span>
           </span>
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => {
-            const active = location.pathname === l.to || (l.to !== '/' && location.pathname.startsWith(l.to));
-            return (
-              <Link
-                key={l.to}
-                to={l.to}
-                className={`font-sans font-medium transition-colors duration-200 ${
-                  active
-                    ? 'text-primary border-b-2 border-primary pb-0.5 font-semibold'
-                    : 'text-zinc-500 hover:text-primary'
-                }`}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
+        <div className="hidden lg:flex items-center gap-1">
+          {navLinks.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              aria-current={isActive(l.to) ? 'page' : undefined}
+              className={`whitespace-nowrap rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${isActive(l.to) ? 'bg-primary-fixed/60 text-primary' : 'text-zinc-600 hover:text-primary hover:bg-zinc-100'}`}
+            >
+              {l.label}
+            </Link>
+          ))}
         </div>
 
-        {/* CTA + Mobile Toggle */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={onBookNow}
-            className="bg-primary text-white px-4 py-2 md:px-5 rounded-lg font-sans font-semibold text-sm tracking-wide hover:bg-secondary transition-all duration-200 shadow-md shadow-primary/20 hover:-translate-y-0.5 active:scale-95"
-          >
+        <div className="flex items-center gap-2">
+          <CallLink location="navbar" className="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 font-bold text-primary hover:text-secondary" />
+          <button onClick={onBookNow} className="btn-primary !px-4 !py-2.5 text-sm md:!px-5">
             Book Now
           </button>
           <button
-            className="md:hidden text-primary p-1"
+            className="lg:hidden flex h-11 w-11 items-center justify-center rounded-xl text-primary hover:bg-zinc-100"
             onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            <span className="material-symbols-outlined text-2xl">{menuOpen ? 'close' : 'menu'}</span>
+            <span className="material-symbols-outlined text-[28px]">{menuOpen ? 'close' : 'menu'}</span>
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-zinc-100 px-6 pb-5 flex flex-col gap-3">
-          {navLinks.map((l) => {
-            const active = location.pathname === l.to;
-            return (
+        <div id="mobile-menu" className="lg:hidden h-[calc(100dvh-4rem)] md:h-[calc(100dvh-72px)] overflow-y-auto bg-white border-t border-zinc-100">
+          <div className="container-page py-4 flex flex-col">
+            {navLinks.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className={`font-sans py-2 border-b border-zinc-100 last:border-0 ${
-                  active ? 'text-primary font-semibold' : 'text-zinc-500'
-                }`}
+                aria-current={isActive(l.to) ? 'page' : undefined}
+                className={`flex items-center justify-between border-b border-zinc-100 py-4 font-serif text-2xl font-bold ${isActive(l.to) ? 'text-secondary' : 'text-primary'}`}
               >
                 {l.label}
+                <span aria-hidden="true" className="material-symbols-outlined text-[24px] text-zinc-300">chevron_right</span>
               </Link>
-            );
-          })}
-
-          {/* Socials — centered pill row, visually distinct from the link list above */}
-          <div className="flex flex-col items-center gap-2.5 pt-4 mt-1">
-            <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-widest">Follow Us</span>
-            <SocialLinks className="gap-4" size="lg" />
+            ))}
+            <div className="grid grid-cols-2 gap-3 pt-6">
+              <CallLink location="mobile_menu" className="btn-outline">Call</CallLink>
+              <WhatsAppLink location="mobile_menu">WhatsApp</WhatsAppLink>
+            </div>
+            <p className="pt-5 text-center text-sm text-zinc-500">Open daily 8am–10pm · San Pedro, Belize</p>
+            <div className="flex justify-center pt-5 pb-10">
+              <SocialLinks className="gap-4" size="lg" />
+            </div>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }
