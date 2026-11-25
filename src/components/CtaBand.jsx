@@ -1,4 +1,5 @@
 import { CallLink, WhatsAppLink } from './ContactButtons';
+import { ReviewLink } from './GoogleLinks';
 
 export default function CtaBand({ onBookNow, title = 'Ready to explore Ambergris Caye?', text = 'Tell us your dates, group size, and where you are staying. We confirm availability and deliver your golf cart.', location = 'cta_band' }) {
   return (
@@ -17,6 +18,10 @@ export default function CtaBand({ onBookNow, title = 'Ready to explore Ambergris
             <WhatsAppLink location={location} />
             <CallLink location={location} className="btn-ghost-light" />
           </div>
+          <p className="mt-7 text-white/70">
+            <span className="text-sun" aria-hidden="true">★★★★★ </span>Rode with us?{' '}
+            <ReviewLink location={`${location}_review`} icon={false} className="font-bold text-white underline decoration-sun decoration-2 underline-offset-4 hover:text-sun">Leave a Google review</ReviewLink>
+          </p>
         </div>
       </div>
     </section>

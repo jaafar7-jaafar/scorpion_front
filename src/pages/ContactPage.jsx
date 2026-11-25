@@ -3,6 +3,7 @@ import Seo from '../components/Seo';
 import PageHero from '../components/PageHero';
 import ServiceAreaSection from '../components/ServiceAreaSection';
 import { CallLink, WhatsAppLink } from '../components/ContactButtons';
+import { ProfileLink, ReviewLink } from '../components/GoogleLinks';
 
 const STEPS = [
   'Send your pickup and return dates, group size, and where you are staying, using the booking form, WhatsApp, or a phone call.',
@@ -34,6 +35,10 @@ export default function ContactPage({ onBookNow }) {
             <div className="mt-8 grid gap-3">
               <WhatsAppLink location="contact">Message Us on WhatsApp</WhatsAppLink>
               <CallLink location="contact_button" className="btn-ghost-light">Call now</CallLink>
+            </div>
+            <div className="mt-6 grid gap-3 border-t border-white/10 pt-6">
+              <ReviewLink location="contact" className="btn-sun">Review us on Google</ReviewLink>
+              <ProfileLink location="contact" className="btn-ghost-light" />
             </div>
           </address>
 

@@ -14,6 +14,8 @@ Scorpion Golf Cart Rental
 
 [Message Us on WhatsApp](https://wa.me/5016007672?text=Hi!%20I%20am%20interested%20in%20renting%20a%20golf%20cart%20in%20San%20Pedro.) [Call now](tel:+5016007672)
 
+[Review us on Google](https://www.scorpiongolfcarts.com/review) [Find us on Google Maps](https://www.scorpiongolfcarts.com/google)
+
 ## What to include in your inquiry
 
 Send your pickup and return dates, the number of passengers, and the name or location of your hotel, resort, or Airbnb. We will confirm availability and delivery arrangements with you.

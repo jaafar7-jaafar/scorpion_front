@@ -58,3 +58,5 @@ Yes. Rentals are priced by the day. For a week or a longer stay on Ambergris Cay
 Tell us your dates, group size, and where you are staying. We confirm availability and deliver your golf cart.
 
 [WhatsApp Us](https://wa.me/5016007672?text=Hi!%20I%20am%20interested%20in%20renting%20a%20golf%20cart%20in%20San%20Pedro.) [+501 600-7672](tel:+5016007672)
+
+Rode with us? [Leave a Google review](https://www.scorpiongolfcarts.com/review)

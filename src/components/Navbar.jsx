@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SocialLinks from './SocialLinks';
 import { CallLink, WhatsAppLink } from './ContactButtons';
+import { ProfileLink, ReviewLink } from './GoogleLinks';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -86,6 +87,11 @@ export default function Navbar({ onBookNow }) {
             <div className="grid grid-cols-2 gap-3 pt-6">
               <CallLink location="mobile_menu" className="btn-outline">Call</CallLink>
               <WhatsAppLink location="mobile_menu">WhatsApp</WhatsAppLink>
+            </div>
+            <div className="mt-3 rounded-2xl bg-sand p-4 text-center">
+              <p className="text-sm font-bold text-primary"><span className="text-sun">★★★★★</span> Rode with us?</p>
+              <ReviewLink location="mobile_menu" className="btn-primary mt-3 w-full">Review us on Google</ReviewLink>
+              <ProfileLink location="mobile_menu" className="btn-outline mt-2 w-full" />
             </div>
             <p className="pt-5 text-center text-sm text-zinc-500">Open 24/7 · San Pedro, Belize</p>
             <div className="flex justify-center pt-5 pb-10">

@@ -1,4 +1,5 @@
 import { CallLink, WhatsAppLink } from './ContactButtons';
+import { ReviewLink } from './GoogleLinks';
 
 // Guide layout: readable column + "On this page" jump links (eligible for
 // Google "Jump to" links) + a sticky booking card on large screens.
@@ -31,6 +32,10 @@ export default function ArticleLayout({ toc, onBookNow, children }) {
               <WhatsAppLink location="article_sidebar" className="btn-whatsapp w-full" />
               <CallLink location="article_sidebar" className="btn-ghost-light w-full" />
             </div>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 text-center">
+            <p className="font-bold text-primary"><span className="text-amber-500">★★★★★</span><br />Rode with Scorpion?</p>
+            <ReviewLink location="article_sidebar" className="btn-outline mt-3 w-full">Review us on Google</ReviewLink>
           </div>
         </div>
       </aside>

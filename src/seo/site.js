@@ -10,6 +10,8 @@ export const GOOGLE_MAPS_URL = 'https://maps.google.com/?cid=1652741712753533722
 // Short review link on our own domain (public/review/index.html): it forwards each
 // phone or computer to the most reliable Google review form, including in-app browsers.
 export const GOOGLE_REVIEW_URL = 'https://www.scorpiongolfcarts.com/review';
+// Short Google Business Profile link (public/google/index.html opens it in Google Maps).
+export const GOOGLE_PROFILE_SHORT_URL = 'https://www.scorpiongolfcarts.com/google';
 export const SOCIAL_PROFILES = [
   GOOGLE_MAPS_URL,
   'https://www.instagram.com/scorpiongolfcarts',
