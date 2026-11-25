@@ -7,6 +7,8 @@ export const PHONE_DISPLAY = '+501 600-7672';
 export const WHATSAPP_URL = 'https://wa.me/5016007672';
 // Google Business Profile, by its permanent Maps customer ID (survives name changes).
 export const GOOGLE_MAPS_URL = 'https://maps.google.com/?cid=16527417127535337220';
+// Official "write a review" link from the Business Profile (Ask for reviews).
+export const GOOGLE_REVIEW_URL = 'https://g.page/r/CQRfc71PLl3lEBM/review';
 export const SOCIAL_PROFILES = [
   GOOGLE_MAPS_URL,
   'https://www.instagram.com/scorpiongolfcarts',

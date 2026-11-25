@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SocialLinks from './SocialLinks';
 import { CallLink, WhatsAppLink } from './ContactButtons';
+import { GOOGLE_REVIEW_URL } from '../seo/site';
 
 const COLUMNS = [
   { title: 'Rentals', links: [['/cars', 'Golf carts & rates'], ['/contact', 'Delivery & booking'], ['/about', 'About Scorpion']] },
@@ -23,6 +24,9 @@ export default function Footer() {
           </Link>
           <p className="max-w-sm leading-relaxed">4 and 6-seater golf cart rentals in San Pedro, Ambergris Caye, Belize, delivered free to your hotel, resort, or Airbnb.</p>
           <SocialLinks />
+          <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-semibold text-sun hover:underline underline-offset-4">
+            <span aria-hidden="true">★★★★★</span> Review us on Google
+          </a>
         </div>
 
         {COLUMNS.map(({ title, links }) => (

@@ -93,9 +93,9 @@ File names help a little, for example `scorpion-golf-cart-rental-san-pedro-6-sea
 
 ## 7. Reviews: the #1 ranking factor you control
 
-1. Profile → **Ask for reviews** → copy your review link.
+1. Your review link is **https://g.page/r/CQRfc71PLl3lEBM/review** (from Profile → **Ask for reviews**, where you can also download a QR code to print for the carts). It is on the website too: the "Review us on Google" button and the footer.
 2. After **every** rental, send it on WhatsApp:
-   > Thanks for riding with Scorpion! 🛺 If you enjoyed your golf cart, a quick Google review would mean a lot to our small team: [review link]
+   > Thanks for riding with Scorpion! 🛺 If you enjoyed your golf cart, a quick Google review would mean a lot to our small team: https://g.page/r/CQRfc71PLl3lEBM/review
 3. Ask everyone. Don't offer discounts for reviews, and don't only ask happy customers; Google forbids both.
 4. **Reply to every review** within a day or two:
    - Positive: *"Thank you, [name]! We're so glad the cart made your San Pedro trip easy. Hope to see you on the island again. — The Scorpion team"*
